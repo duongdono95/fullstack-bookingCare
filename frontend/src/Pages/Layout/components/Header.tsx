@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react'
 import '../PageLayout.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { LANGUAGES }  from '../../../utils/constants';
 import { RootState } from "../../../redux/store";
 import { switchLanguage } from "../../../redux/appSlice";
+import { FormattedMessage } from 'react-intl';
 const Header = () => {
-  const language = useSelector((state: RootState) => state.app.languages)
-
+  const language = useSelector((state: RootState) => state.languages)
+  console.log(language)
   const dispatch = useDispatch()
   const languageArr = Object.values(LANGUAGES)
   const sectionTags = [
@@ -32,9 +33,21 @@ const Header = () => {
       <div className='header-bottom'>
         <div className="logo"></div>
         <div className="tags">
+          <div className="tag">
+            <div className="title"><FormattedMessage id="homeheader.specialty"/></div>
+            <div className="des"><FormattedMessage id="homeheader.searchdoctor"/></div>
+          </div>
+          <div className="tag">
+          <div className="title"><FormattedMessage id="homeheader.health-facility"/></div>
+          <div className="des"><FormattedMessage id="homeheader.selecting-facility"/></div>
+        </div>
         <div className="tag">
-          <div className="title"><FormattedMessage id="homeheader.welcome"/></div>
-          <div className="des"><FormattedMessage id="homeheader.welcome"/></div>
+          <div className="title"><FormattedMessage id="homeheader.doctor"/></div>
+          <div className="des"><FormattedMessage id="homeheader.select-doctor"/></div>
+        </div>
+        <div className="tag">
+          <div className="title"><FormattedMessage id="homeheader.package"/></div>
+          <div className="des"><FormattedMessage id="homeheader.select-package"/></div>
         </div>
 
 

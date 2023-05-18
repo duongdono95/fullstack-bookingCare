@@ -2,24 +2,27 @@
     "homeheader": {
         "specialty": "Medical Specialties",
         "searchdoctor": "Find doctors by specialty",
-        "health-facility": "Healthcare Facility",
-        "selecting-facility": "Selecting Facility",
-        "doctor": "Doctor",
+        "health-facility": "Medical Facilities",
+        "selecting-facility": "Select Medical Facility",
+        "doctor": "Doctors",
         "select-doctor": "Select Doctor",
-        "package": "Medical Check-up package",
-        "select-package": "Select Package",
+        "package": "Medical Package",
+        "select-package": "Select Medical Package",
         "support": "Support",
-        "welcome": "Welcome "
+        "welcome": "Welcome"
     },
     "banner": {
         "title1": "HEALTHCARE PLATFORM",
         "title2": "COMPREHENSIVE HEALTHCARE",
-        "child1": "Specialty Examination",
-        "child2": "Remote Healthcare Examination",
-        "child3": "Overall Healthcare Examination",
-        "child4": "Medical Examination",
-        "child5": "Mental Health",
-        "child6": "Dental Examination"
+        "specialist-consultation": "Specialty Examination",
+        "remote-consultation": "Remote Healthcare Examination",
+        "general-checkup": "Overall Healthcare Examination",
+        "medical-laboratory-testing": "Medical Examination",
+        "mental-health": "Mental Health",
+        "dental-examination": "Dental Examination"
+    },
+    "promotion-section": {
+
     },
     "menu": {
         "admin": {
