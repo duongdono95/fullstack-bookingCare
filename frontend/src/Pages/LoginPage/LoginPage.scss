@@ -24,6 +24,11 @@
     font-size: 40px;
     z-index: 100;
     color: var(--secondary);
+    cursor: pointer;
+    border-radius: 50%;
+    &:hover {
+      box-shadow: 0px 0px 10px var(--black05);
+    }
   }
   .login-form--top,
   .login-form--bottom {
@@ -82,5 +87,12 @@
     gap: 20px;
     font-size: 36px;
     color: var(--primary);
+    i {
+      cursor: pointer;
+      border-radius: 50%;
+      &:hover {
+        box-shadow: 2px 2px 5px var(--black02);
+      }
+    }
   }
 }

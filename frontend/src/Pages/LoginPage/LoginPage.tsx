@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { initialLoginInputs } from '../../utils/constants';
-import { initialLoginInputsType } from '../../utils/types';
 import './LoginPage.scss';
 const LoginPage = () => {
   const [loginInputs, setLoginInputs] = useState(initialLoginInputs);
