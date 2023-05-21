@@ -1,0 +1,12 @@
+const path = require('path');
+// following MVC Model
+module.exports = {
+  // to show how to connect to database
+  'config': path.resolve('./src/config', 'config.json'),
+  //
+  'migrations-path': path.resolve('./src', 'migrations'),
+  // look up to Model in src/models
+  'models-path': path.resolve('./src', 'models'),
+  // create fake data
+  'seeders-path': path.resolve('./src', 'seeders')
+}

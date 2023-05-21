@@ -1,4 +1,5 @@
-import { languageArr } from "./types";
+import { languageArr } from './types';
+import { initialLoginInputsType } from './types';
 export const paths = {
   HOME: '/',
   HOMEPAGE: '/home',
@@ -6,19 +7,19 @@ export const paths = {
   LOG_OUT: '/logout',
   SYSTEM: '/system',
   DETAIL_DOCTOR: '/detail-doctor/:id',
-  VERIFY_EMAIL_BOOKING: '/verify-booking'
-}
+  VERIFY_EMAIL_BOOKING: '/verify-booking',
+};
 
-export const LANGUAGES:languageArr = {
+export const LANGUAGES: languageArr = {
   VI: 'vi',
-  EN: 'en'
+  EN: 'en',
 };
 
 export const CRUD_ACTIONS = {
-  CREATE: "CREATE",
-  EDIT: "EDIT",
-  DELETE: "DELETE",
-  READ: "READ"
+  CREATE: 'CREATE',
+  EDIT: 'EDIT',
+  DELETE: 'DELETE',
+  READ: 'READ',
 };
 
 export const bannerFeatures = [
@@ -45,5 +46,10 @@ export const bannerFeatures = [
   {
     title: 'banner.dental-examination',
     img: 'fa-solid fa-tooth',
-  }
-]
+  },
+];
+
+export const initialLoginInputs: initialLoginInputsType = {
+  email: '',
+  password: '',
+};

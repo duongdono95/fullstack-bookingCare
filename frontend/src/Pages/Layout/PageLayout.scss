@@ -11,27 +11,9 @@
   width: 100%;
   height: 100px;
   .header {
-    width: var(--default-layout-width);;
+    width: var(--default-layout-width);
   }
-  .header-top {
-    height: 30px;
-    width: 100%;
-    display: flex;
-    .language {
-      width: 50%;
-      text-align: center;
-      padding-right: 10px;
-      opacity: 0.5;
-      font-weight: 800;
-      cursor: pointer;
-      &.active {
-        opacity: 1;
-        background-color: var(--primary05);
-        color: white;
-      }
 
-    }
-  }
   .header-bottom {
     height: 70px;
     width: var(--default-layout-width);
@@ -82,4 +64,16 @@
       color: blue;
     }
   }
+}
+.home-section {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
 }
