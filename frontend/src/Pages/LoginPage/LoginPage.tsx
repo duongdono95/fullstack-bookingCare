@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { initialLoginInputs } from '../../utils/constants';
 import './LoginPage.scss';
+import { handleUserLogin } from '../../services/userServices';
 const LoginPage = () => {
   const [loginInputs, setLoginInputs] = useState(initialLoginInputs);
-  console.log(loginInputs);
-  useEffect(() => {
-    setLoginInputs(loginInputs);
-  }, [loginInputs]);
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const handleLoginRequest = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    const userEmail = loginInputs.email;
+    const userPassword = loginInputs.password;
+    try {
+      let data = await handleUserLogin(userEmail, userPassword);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className="login-page">
       <form action="" className="login-form">
@@ -25,18 +34,25 @@ const LoginPage = () => {
           </div>
           <div className="form-group password">
             <label htmlFor="">password:</label>
-            <input
-              type="password"
-              required
-              value={loginInputs.password}
-              onChange={(e) => setLoginInputs({ ...loginInputs, password: e.target.value })}
-            />
+            <div className="password-input-field">
+              <input
+                type={isShowPassword ? 'text' : 'password'}
+                required
+                value={loginInputs.password}
+                onChange={(e) => setLoginInputs({ ...loginInputs, password: e.target.value })}
+              />
+              <span onClick={() => setIsShowPassword(!isShowPassword)}>
+                {isShowPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+              </span>
+            </div>
           </div>
           <div className="form-item">
             <p className="forgot-password-link">Forgot password?</p>
           </div>
           <div className="form-item">
-            <button className="primary-btn">LOGIN</button>
+            <button className="primary-btn" onClick={(e) => handleLoginRequest(e)}>
+              LOGIN
+            </button>
           </div>
         </div>
         <div className="divider"></div>

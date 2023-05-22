@@ -3,7 +3,8 @@ import userController from '../nodeControllers/userController';
 let router = express.Router();
 
 let initWebRoutes = (app) => {
-  router.get('/', userController.getuser);
+  // router.get('/', userController.getuser);
+  router.get('/login', userController.handleLogin);
   // router.get('/', homeController.getHomePage);
   // router.get('/about', homeController.getAboutPage);
   // router.get('/crud', homeController.getCRUD);

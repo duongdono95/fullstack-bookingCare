@@ -1,22 +1,22 @@
+import { request } from 'express';
 import userService from '../nodeServices/userService';
 
-const getuser = async (req, res) => {
-  let id = req.query.id;
-  if (!id) {
+const handleLogin = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
     return res.status(200).json({
       errCode: 1,
-      errMessage: 'Missing required parameter',
-      users: [],
+      message: 'Missing required parameters',
     });
   }
-  let users = await userService.getuser(id);
+  let userData = await userService.handleLogin(email, password);
   return res.status(200).json({
-    errCode: 0,
-    errMessage: 'Data is fetched successfully',
-    users,
+    errCode: userData.errCode,
+    message: userData.message,
+    user: userData.user ? userData.user : {},
   });
 };
 
 module.exports = {
-  getuser: getuser,
+  handleLogin: handleLogin,
 };
