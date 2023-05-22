@@ -12,7 +12,7 @@ const handleLogin = async (req, res) => {
   let userData = await userService.handleLogin(email, password);
   return res.status(200).json({
     errCode: userData.errCode,
-    message: userData.message,
+    message: userData.errMessage,
     user: userData.user ? userData.user : {},
   });
 };

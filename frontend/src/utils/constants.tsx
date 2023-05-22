@@ -53,3 +53,9 @@ export const initialLoginInputs: initialLoginInputsType = {
   email: '',
   password: '',
 };
+
+export const ROLES = {
+  R1: 'admin',
+  R2: 'doctor',
+  R3: 'patient',
+};

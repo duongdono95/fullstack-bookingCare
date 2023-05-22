@@ -1,6 +1,6 @@
-import axios from './axios';
+import axios from '../axios';
 
 export const handleUserLogin = (email: string, password: string) => {
-  console.log(email, password);
-  // return axios.post('/login', { email, password });
+  console.log(handleUserLogin);
+  return axios.post('/login', { email, password });
 };

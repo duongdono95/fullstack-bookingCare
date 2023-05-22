@@ -5,13 +5,13 @@ import { handleUserLogin } from '../../services/userServices';
 const LoginPage = () => {
   const [loginInputs, setLoginInputs] = useState(initialLoginInputs);
   const [isShowPassword, setIsShowPassword] = useState(false);
-
   const handleLoginRequest = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const userEmail = loginInputs.email;
     const userPassword = loginInputs.password;
     try {
       let data = await handleUserLogin(userEmail, userPassword);
+      console.log(data);
     } catch (e) {
       console.log(e);
     }
