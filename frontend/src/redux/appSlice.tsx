@@ -6,11 +6,13 @@ import { languageType } from '../utils/types';
 export interface initialState {
   languages: languageType;
   isLoggedIn: boolean;
+  // userData: {};
 }
 
 const initialState: initialState = {
   languages: 'en',
   isLoggedIn: false,
+  // userData: null,
 };
 
 export const appSlice = createSlice({
