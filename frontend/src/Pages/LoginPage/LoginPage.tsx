@@ -15,10 +15,17 @@ type userLoginResponse = {
 
 const LoginPage = () => {
   const [loginInputs, setLoginInputs] = useState(initialLoginInputs);
+  const { email, password } = loginInputs;
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
-  const handleLoginRequest = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginInputs((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleLoginRequest = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userEmail = loginInputs.email;
     const userPassword = loginInputs.password;
@@ -33,9 +40,10 @@ const LoginPage = () => {
       console.log(e);
     }
   };
+  console.log(loginInputs);
   return (
     <div className="login-page">
-      <form action="" className="login-form">
+      <form action="" className="login-form" onSubmit={handleLoginRequest}>
         <i className="fa-solid fa-circle-xmark"></i>
         <div className="login-form--top">
           <h2>User Login</h2>
@@ -44,10 +52,11 @@ const LoginPage = () => {
             <label htmlFor="">Email:</label>
             <input
               type="email"
+              name="email"
               required
               placeholder="Eg: abc@gmail.com"
-              value={loginInputs.email}
-              onChange={(e) => setLoginInputs({ ...loginInputs, email: e.target.value })}
+              value={email}
+              onChange={inputOnChange}
               onFocus={() => setLoginError(false)}
             />
           </div>
@@ -56,10 +65,11 @@ const LoginPage = () => {
             <div className="password-input-field">
               <input
                 type={isShowPassword ? 'text' : 'password'}
+                name="password"
                 required
-                value={loginInputs.password}
+                value={password}
                 onFocus={() => setLoginError(false)}
-                onChange={(e) => setLoginInputs({ ...loginInputs, password: e.target.value })}
+                onChange={inputOnChange}
               />
               <span onClick={() => setIsShowPassword(!isShowPassword)}>
                 {isShowPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
@@ -70,7 +80,7 @@ const LoginPage = () => {
             <p className="forgot-password-link">Forgot password?</p>
           </div>
           <div className="form-item">
-            <button className="primary-btn" onClick={(e) => handleLoginRequest(e)}>
+            <button className="primary-btn" type="submit">
               LOGIN
             </button>
           </div>
