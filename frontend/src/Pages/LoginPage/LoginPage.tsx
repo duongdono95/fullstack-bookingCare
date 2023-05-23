@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { initialLoginInputs } from '../../utils/constants';
 import './LoginPage.scss';
-import { handleUserLogin } from '../../services/userServices';
+import { userLogin } from '../../services/userServices';
 const LoginPage = () => {
   const [loginInputs, setLoginInputs] = useState(initialLoginInputs);
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -10,8 +10,8 @@ const LoginPage = () => {
     const userEmail = loginInputs.email;
     const userPassword = loginInputs.password;
     try {
-      let data = await handleUserLogin(userEmail, userPassword);
-      console.log(data);
+      let data = await userLogin(userEmail, userPassword);
+      console.log(data.data.errCode);
     } catch (e) {
       console.log(e);
     }

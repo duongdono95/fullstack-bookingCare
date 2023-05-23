@@ -1,12 +1,16 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
-const instance = axios.create({
+const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
+  timeout: 5000,
 });
 
-instance.interceptors.response.use((response) => {
-  const { data } = response;
-  return response.data;
-});
-
-export default instance;
+export const apiRequest = async <T,>(config: AxiosRequestConfig): Promise<T> => {
+  try {
+    const response = await api(config);
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};

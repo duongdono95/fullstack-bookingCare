@@ -1,6 +1,16 @@
-import axios from '../axios';
+import { AxiosRequestConfig } from 'axios';
+import { apiRequest } from '../axios';
 
-export const handleUserLogin = (email: string, password: string) => {
-  console.log(handleUserLogin);
-  return axios.post('/login', { email, password });
+type userLoginResponse = {
+  errCode: number;
+  errMessage: string;
+  data?: any;
+};
+
+export const userLogin = async (userEmail: string, userPassword: string): Promise<userLoginResponse> => {
+  const config: AxiosRequestConfig = {
+    method: 'POST',
+    url: '/login',
+  };
+  return await apiRequest<userLoginResponse>(config);
 };
