@@ -2,16 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { initialLoginInputs } from '../../utils/constants';
 import './LoginPage.scss';
 import { userLogin } from '../../services/userServices';
+import { redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { loginSuccess } from '../../redux/appSlice';
+
+type userLoginResponse = {
+  errCode: number;
+  errMessage: string;
+  data?: any;
+};
+
 const LoginPage = () => {
   const [loginInputs, setLoginInputs] = useState(initialLoginInputs);
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+  const dispatch = useDispatch();
   const handleLoginRequest = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const userEmail = loginInputs.email;
     const userPassword = loginInputs.password;
     try {
       let data = await userLogin(userEmail, userPassword);
-      console.log(data.data.errCode);
+      if (data.errCode === 0) {
+        dispatch(loginSuccess());
+      } else {
+        setLoginError(true);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -22,6 +39,7 @@ const LoginPage = () => {
         <i className="fa-solid fa-circle-xmark"></i>
         <div className="login-form--top">
           <h2>User Login</h2>
+          <p className="error-message">{loginError && 'Incorrect Username or Password'}</p>
           <div className="form-group email">
             <label htmlFor="">Email:</label>
             <input
@@ -30,6 +48,7 @@ const LoginPage = () => {
               placeholder="Eg: abc@gmail.com"
               value={loginInputs.email}
               onChange={(e) => setLoginInputs({ ...loginInputs, email: e.target.value })}
+              onFocus={() => setLoginError(false)}
             />
           </div>
           <div className="form-group password">
@@ -39,6 +58,7 @@ const LoginPage = () => {
                 type={isShowPassword ? 'text' : 'password'}
                 required
                 value={loginInputs.password}
+                onFocus={() => setLoginError(false)}
                 onChange={(e) => setLoginInputs({ ...loginInputs, password: e.target.value })}
               />
               <span onClick={() => setIsShowPassword(!isShowPassword)}>

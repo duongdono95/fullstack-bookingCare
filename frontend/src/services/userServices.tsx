@@ -1,5 +1,4 @@
-import { AxiosRequestConfig } from 'axios';
-import { apiRequest } from '../axios';
+import axios from 'axios';
 
 type userLoginResponse = {
   errCode: number;
@@ -7,10 +6,7 @@ type userLoginResponse = {
   data?: any;
 };
 
-export const userLogin = async (userEmail: string, userPassword: string): Promise<userLoginResponse> => {
-  const config: AxiosRequestConfig = {
-    method: 'POST',
-    url: '/login',
-  };
-  return await apiRequest<userLoginResponse>(config);
+export const userLogin = async (email: string, password: string) => {
+  const response = await axios.post<userLoginResponse>('http://localhost:8080/login', { email, password });
+  return response.data;
 };

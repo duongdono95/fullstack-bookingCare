@@ -9,9 +9,6 @@ import { FormattedMessage } from 'react-intl';
 import LanguageOptions from './LanguageOptions';
 const Header = () => {
   const language = useSelector((state: RootState) => state.languages);
-  console.log(language);
-  const dispatch = useDispatch();
-  const languageArr = Object.values(LANGUAGES);
   return (
     <div id="header">
       <LanguageOptions />
