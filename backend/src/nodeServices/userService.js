@@ -1,4 +1,5 @@
 import db from '../models/index';
+import { checkUserEmail } from "../helper/helper";
 const handleLogin = (email, password) => {
   console.log(email, password);
   return new Promise(async (resolve, reject) => {
@@ -43,23 +44,33 @@ const handleLogin = (email, password) => {
   });
 };
 
-let checkUserEmail = (providedEmail) => {
+const getUsers = (userId) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let user = await db.User.findOne({
-        where: { email: providedEmail },
-      });
-      if (user) {
-        resolve(true);
-      } else {
-        resolve(false);
+      let users = '';
+      if (userId && userId === 'ALL') {
+        users = await db.User.findAll({
+          attributes: {
+            exclude: ['password'],
+          }
+        })
       }
+      if (userId && userId !== 'ALL') {
+        users = await db.User.findOne({
+          where: { id: userId },
+          attributes: {
+            exclude: ['password']
+          }
+        })
+      }
+      resolve(users)
     } catch (e) {
-      reject(e);
+      reject(e)
     }
-  });
-};
+  })
+}
 
 module.exports = {
   handleLogin: handleLogin,
+  getUsers: getUsers
 };

@@ -8,15 +8,12 @@ export type initialLoginInputsType = {
   email: string;
   password: string;
 };
-export type loginResponse = {
+export type userLoginResponse = {
   errCode: number;
   errMessage: string;
   data?: any;
 };
 
-export type handleLogin = {
-  data: loginResponse;
-};
 export type AdminMenu = (
   | {
       name: string;
@@ -35,3 +32,20 @@ export type AdminMenu = (
       menus?: undefined;
     }
 )[];
+
+ export type User = {
+  id: number,
+  email: string,
+  firstName: string,
+  lastName: string,
+  address: string,
+  phoneNumber: string,
+  gender: number,
+  image: string,
+  roleId: string,
+  positionId: string,
+  createAt: string,
+  updateAt: string
+} | []
+
+export type AllUser = User[] | []

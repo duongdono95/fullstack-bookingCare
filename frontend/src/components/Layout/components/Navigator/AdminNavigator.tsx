@@ -20,46 +20,51 @@ const AdminNavigator: React.FC<Props> = ({ menu }) => {
       <div className="main-menu">
         {menu.map((item, index) => {
           return (
-            <div
-              key={index}
-              onMouseEnter={() => setOnHover({ isHover: true, index: index })}
-              onMouseLeave={() => setOnHover({ isHover: false, index: index })}
-              onClick={() => setDefaultActiveMenu(index)}
-              className={
-                defaultActiveMenu === index ? 'menu-item active' : 'menu-item'
-              }
-            >
-              <p>
-                <FormattedMessage id={item.name} />
-              </p>
-              {item.menus && (
-                <i
-                  style={{
-                    transform: `scaleY(${onHover.isHover ? -1 : 1})`,
-                  }}
-                  className="fa-solid fa-chevron-down"
-                ></i>
-              )}
-              {item.menus && onHover.isHover && onHover.index === index && (
-                <div className="submenu--list">
-                  {item.menus.map((submenuItem, index) => {
-                    return (
-                      <div key={index} className="submenu">
-                        {
-                          <div className="submenu-item">
-                            <Link to={submenuItem.path}>
-                              <p>
-                                <FormattedMessage id={submenuItem.name} />
-                              </p>
-                            </Link>
-                          </div>
-                        }
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+            <Link to={item.path}>
+              <div
+                key={index}
+                onMouseEnter={() => setOnHover({ isHover: true, index: index })}
+                onMouseLeave={() =>
+                  setOnHover({ isHover: false, index: index })
+                }
+                onClick={() => setDefaultActiveMenu(index)}
+                className={
+                  defaultActiveMenu === index ? 'menu-item active' : 'menu-item'
+                }
+              >
+                <p>
+                  <FormattedMessage id={item.name} />
+                </p>
+
+                {item.menus && (
+                  <i
+                    style={{
+                      transform: `scaleY(${onHover.isHover ? -1 : 1})`,
+                    }}
+                    className="fa-solid fa-chevron-down"
+                  ></i>
+                )}
+                {item.menus && onHover.isHover && onHover.index === index && (
+                  <div className="submenu--list">
+                    {item.menus.map((submenuItem, index) => {
+                      return (
+                        <div key={index} className="submenu">
+                          {
+                            <div className="submenu-item">
+                              <Link to={submenuItem.path}>
+                                <p>
+                                  <FormattedMessage id={submenuItem.name} />
+                                </p>
+                              </Link>
+                            </div>
+                          }
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </Link>
           );
         })}
       </div>

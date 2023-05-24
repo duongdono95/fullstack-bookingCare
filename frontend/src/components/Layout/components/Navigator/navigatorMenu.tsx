@@ -7,24 +7,24 @@ export const adminMenu = [
       {
         name: 'menu.admin.manage-doctor',
         title: 'Manage Doctors',
-        path: '/system/manage-doctor',
+        path: '/system/managing-doctors',
       },
       {
         name: 'menu.admin.manage-schedule',
         title: 'Manage Schedules',
-        path: '/system/manage-schedules',
+        path: '/system/managing-schedules',
       },
     ],
   },
   {
     name: 'menu.admin.manage-clinic',
-    title: 'Clinic Management',
-    path: '/system/clinic-management',
+    title: 'managing-clinics',
+    path: '/system/managing-clinics',
   },
   {
     name: 'menu.admin.manage-specialty',
     title: 'Medical Specialty Management',
-    path: '/system/specialty-management',
+    path: '/system/managing-specialties',
   },
 ];
 
