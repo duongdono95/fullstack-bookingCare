@@ -1,9 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import HomePage from '../Pages/HomePage/HomePage';
-import LoginPage from '../Pages/LoginPage/LoginPage';
-import PageLayout from '../Pages/Layout/PageLayout';
-import AdminPage from '../Pages/system/AdminPage/AdminPage';
-
+import HomePage from '../components/Pages/HomePage/HomePage';
+import LoginPage from '../components/Pages/LoginPage/LoginPage';
+import PageLayout from '../components/Layout/PageLayout';
+import AdminPage from '../components/Pages/AdminPage/AdminPage';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -21,11 +23,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '/system',
-    children: [
-      {
-        path: '/system/admin',
-        element: <AdminPage />,
-      },
-    ],
+    element: <AdminPage />,
   },
 ]);

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { initialLoginInputs } from '../../utils/constants';
+import { initialLoginInputs } from '../../../utils/constants';
 import './LoginPage.scss';
-import { userLogin } from '../../services/userServices';
-import { redirect } from 'react-router-dom';
+import { userLogin } from '../../../services/userServices';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { loginSuccess } from '../../redux/appSlice';
+import { loginSuccess } from '../../../redux/appSlice';
 
 type userLoginResponse = {
   errCode: number;
@@ -26,6 +24,7 @@ const LoginPage = () => {
     }));
   };
   const handleLoginRequest = async (e: React.FormEvent<HTMLFormElement>) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     e.preventDefault();
     const userEmail = loginInputs.email;
     const userPassword = loginInputs.password;
