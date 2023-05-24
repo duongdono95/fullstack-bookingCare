@@ -4,6 +4,8 @@ import './LoginPage.scss';
 import { userLogin } from '../../../services/userServices';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '../../../redux/appSlice';
+import { RootState } from '../../../redux/store';
+import { useNavigate } from 'react-router-dom';
 
 type userLoginResponse = {
   errCode: number;
@@ -17,6 +19,8 @@ const LoginPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
   const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInputs((prev) => ({
       ...prev,
@@ -39,7 +43,11 @@ const LoginPage = () => {
       console.log(e);
     }
   };
-  console.log(loginInputs);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/system');
+    }
+  }, [isLoggedIn]);
   return (
     <div className="login-page">
       <form action="" className="login-form" onSubmit={handleLoginRequest}>
