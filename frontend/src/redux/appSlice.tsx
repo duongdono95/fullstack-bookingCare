@@ -30,10 +30,17 @@ export const appSlice = createSlice({
         isLoggedIn: true,
       };
     },
+    logOut: (state) => {
+      console.log('log out');
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { switchLanguage, loginSuccess } = appSlice.actions;
+export const { switchLanguage, loginSuccess, logOut } = appSlice.actions;
 const appReducer = appSlice.reducer;
 export default appReducer;

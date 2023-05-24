@@ -21,24 +21,24 @@
     "mental-health": "Mental Health",
     "dental-examination": "Dental Examination"
   },
-  "promotion-section": {},
   "menu": {
     "admin": {
-      "manage-user": "Users System",
-      "manage-doctor": "Manage Doctors",
-      "manage-admin": "Manage Admins",
-      "crud": "CRUD User",
-      "crud-redux": "CRUD Redux",
-      "clinic": "Clinics",
-      "manage-clinic": "Manage Clinics",
-      "specialty": "Specialties",
-      "manage-specialty": "Manage Specialties",
-      "handbook": "Handbook",
-      "manage-handbook": "Manage Handbook"
-    },
-    "doctor": {
-      "manage-schedule": "Manage Doctor's Schedule"
+      "manage-user": "Managing Users",
+      "manage-doctor": "Managing Doctors",
+      "manage-clinic": "Managing Clinics",
+      "manage-specialty": "Managing Medical Specialties",
+      "manage-schedule": "Managing Doctor's Schedule"
     }
+  },
+  "business-details": {
+    "business-title": "BookingCare Technology Corporation",
+    "business-address": "B4/D21 Lot, Cau Giay New Urban Area, Dich Vong Ha Noi",
+    "branch-title-1": "Office in Hanoi City",
+    "branch-address-1": "B4/D21 Lot, Cau Giay New Urban Area, Dich Vong Ha Noi",
+    "branch-title-2": "Office in Hanoi City Ho Chi Minh",
+    "branch-address-2": "Number 01, Ho Ba Kien Street, Ward 15, District 10",
+    "business-certificate": "Business registration number: 0106790291. Issued by Hanoi Department of Planning and Investment on March 16, 2015.",
+    "support": "Customer Support"
   },
   "manage-user": {
     "add": "Add New User",

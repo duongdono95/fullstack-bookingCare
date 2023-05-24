@@ -5,7 +5,7 @@ import { RootState } from './redux/store';
 import GlobalStyles from './GlobalStyles/GlobalStyles';
 import LanguageUtils from './utils/LanguageUtils';
 import './App.scss';
-import Router from './routers/Router';
+import AppRouter from './routes/Router';
 
 const messages = LanguageUtils.getFlattenedMessages();
 function App() {
@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <IntlProvider locale={language} messages={messages[language]} defaultLocale="en">
         <GlobalStyles>
-          <Router />
+          <AppRouter />
         </GlobalStyles>
       </IntlProvider>
     </div>

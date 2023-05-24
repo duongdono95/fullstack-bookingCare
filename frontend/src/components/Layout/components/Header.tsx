@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../PageLayout.scss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { FormattedMessage } from 'react-intl';
-import { LANGUAGES } from '../../../utils/constants';
 import { RootState } from '../../../redux/store';
-import { switchLanguage } from '../../../redux/appSlice';
 import { FormattedMessage } from 'react-intl';
 import LanguageOptions from './LanguageOptions';
+import { logOut } from '../../../redux/appSlice';
+import { Link } from 'react-router-dom';
 const Header = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
   const language = useSelector((state: RootState) => state.languages);
   return (
     <div id="header">
       <LanguageOptions />
-      <div className="header-bottom">
+      <div className="header-navigator">
         <div className="logo"></div>
         <div className="tags">
           <div className="tag">
@@ -54,6 +55,29 @@ const Header = () => {
               <FormattedMessage id="homeheader.support" />
             </div>
             <div className="phone">(+89) 024-7301-2468</div>
+          </div>
+        </div>
+        <div className="header-tools">
+          <div title="Profile" className="profile">
+            {isLoggedIn ? (
+              <Link to="/system">
+                <i className="fa-solid fa-user"></i>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <i className="fa-solid fa-right-to-bracket"></i>
+              </Link>
+            )}
+          </div>
+          <div title="Log Out" className="log-out">
+            {isLoggedIn ? (
+              <i
+                className="fa-solid fa-right-from-bracket"
+                onClick={() => dispatch(logOut())}
+              ></i>
+            ) : (
+              <p className="sign-up">Sign Up</p>
+            )}
           </div>
         </div>
       </div>
