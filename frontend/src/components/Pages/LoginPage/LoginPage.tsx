@@ -46,7 +46,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/system');
-    }
+    } else navigate('/login');
   }, [isLoggedIn]);
   return (
     <div className="login-page">

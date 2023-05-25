@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AdminMenu } from '../../../../utils/types';
 import LanguageOptions from '../LanguageOptions';
 import './AdminNavigator.scss';
@@ -14,13 +14,14 @@ const AdminNavigator: React.FC<Props> = ({ menu }) => {
     isHover: false,
     index: 0,
   });
+  const navigate = useNavigate();
   return (
     <div className="admin-navigator">
       <LanguageOptions />
       <div className="main-menu">
         {menu.map((item, index) => {
           return (
-            <Link to={item.path}>
+            <Fragment key={index}>
               <div
                 key={index}
                 onMouseEnter={() => setOnHover({ isHover: true, index: index })}
@@ -32,9 +33,11 @@ const AdminNavigator: React.FC<Props> = ({ menu }) => {
                   defaultActiveMenu === index ? 'menu-item active' : 'menu-item'
                 }
               >
-                <p>
-                  <FormattedMessage id={item.name} />
-                </p>
+                <Link to={item.path}>
+                  <p>
+                    <FormattedMessage id={item.name} />
+                  </p>
+                </Link>
 
                 {item.menus && (
                   <i
@@ -50,13 +53,13 @@ const AdminNavigator: React.FC<Props> = ({ menu }) => {
                       return (
                         <div key={index} className="submenu">
                           {
-                            <div className="submenu-item">
-                              <Link to={submenuItem.path}>
+                            <Link to={submenuItem.path}>
+                              <div className="submenu-item">
                                 <p>
                                   <FormattedMessage id={submenuItem.name} />
                                 </p>
-                              </Link>
-                            </div>
+                              </div>
+                            </Link>
                           }
                         </div>
                       );
@@ -64,7 +67,7 @@ const AdminNavigator: React.FC<Props> = ({ menu }) => {
                   </div>
                 )}
               </div>
-            </Link>
+            </Fragment>
           );
         })}
       </div>

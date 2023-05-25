@@ -19,7 +19,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(adminApi.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      adminApi.middleware,
+    ),
 });
 
 export const persistor = persistStore(store);
