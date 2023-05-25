@@ -33,19 +33,24 @@ export type AdminMenu = (
     }
 )[];
 
- export type User = {
-  id: number,
-  email: string,
-  firstName: string,
-  lastName: string,
-  address: string,
-  phoneNumber: string,
-  gender: number,
-  image: string,
-  roleId: string,
-  positionId: string,
-  createAt: string,
-  updateAt: string
-} | []
+export type User = {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  phonenumber: string;
+  gender: number;
+  image: string;
+  roleId: string;
+  positionId: string;
+  createAt: string;
+  updateAt: string;
+};
 
-export type AllUser = User[] | []
+export type responseFetchedUser = {
+  errCode: number;
+  errMessage: string;
+  users: User[];
+};
+// export type AllUser = User[] | []
