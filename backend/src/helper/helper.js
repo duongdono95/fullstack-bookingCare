@@ -1,3 +1,5 @@
+import db from "../models";
+
 export const checkUserEmail = (providedEmail) => {
   return new Promise(async (resolve, reject) => {
     try {

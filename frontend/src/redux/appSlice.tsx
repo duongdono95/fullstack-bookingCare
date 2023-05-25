@@ -42,5 +42,4 @@ export const appSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { switchLanguage, loginSuccess, logOut } = appSlice.actions;
-const appReducer = appSlice.reducer;
-export default appReducer;
+export default appSlice.reducer;

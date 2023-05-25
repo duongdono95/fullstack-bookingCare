@@ -13,7 +13,7 @@ import ManagingSchedules from '../components/Pages/AdminPage/components/Managing
 import ManagingSpecialties from '../components/Pages/AdminPage/components/ManagingSpecialties/ManagingSpecialties';
 
 const AppRouter = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.app.isLoggedIn);
   return (
     <Router>
       <Routes>

@@ -8,8 +8,8 @@ import { logOut } from '../../../redux/appSlice';
 import { Link } from 'react-router-dom';
 const Header = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
-  const language = useSelector((state: RootState) => state.languages);
+  const isLoggedIn = useSelector((state: RootState) => state.app.isLoggedIn);
+  const language = useSelector((state: RootState) => state.app.languages);
   return (
     <div id="header">
       <LanguageOptions />

@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { getAllUsers } from '../../../../../services/userServices';
+import { useGetAllUsersQuery } from '../../../../../redux/api/userQuery';
 
 const ManagingUsers = () => {
-  useEffect(() => {
-    const users = getAllUsers('ALL');
-    console.log(users);
-  });
-
+  const { data, error, isLoading } = useGetAllUsersQuery('ALL');
+  console.log(data);
   return (
     <div className="managing-users">
       <div className="tools">

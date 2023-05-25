@@ -9,10 +9,14 @@ import AppRouter from './routes/Router';
 
 const messages = LanguageUtils.getFlattenedMessages();
 function App() {
-  const language = useSelector((state: RootState) => state.languages);
+  const language = useSelector((state: RootState) => state.app.languages);
   return (
     <div className="App">
-      <IntlProvider locale={language} messages={messages[language]} defaultLocale="en">
+      <IntlProvider
+        locale={language}
+        messages={messages[language]}
+        defaultLocale="en"
+      >
         <GlobalStyles>
           <AppRouter />
         </GlobalStyles>
