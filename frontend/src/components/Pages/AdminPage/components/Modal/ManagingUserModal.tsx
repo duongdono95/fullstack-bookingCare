@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ManagingUserModal.scss';
 interface Props {
   modalTitle: string;
 }
 
 const ManagingUserModal: React.FC<Props> = ({ modalTitle }) => {
+  const [userDetail, setUserDetails] = useState();
   return (
     <div className="create-new-user">
       <h1>{modalTitle === 'create' ? 'Create New User' : 'Edit User'}</h1>
