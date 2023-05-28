@@ -2,15 +2,23 @@ import React, { useState, Fragment } from 'react';
 // import { getAllUsers } from '../../../../../services/userServices';
 import './ManagingUsers.scss';
 import ManagingUserModal from '../Modal/ManagingUserModal';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getUsers } from '../../../../../services/userServices';
+import { User } from '../../../../../utils/types';
 
 const ManagingUsers = () => {
+  const queryClient = useQueryClient();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
-  const handleOpenModal = (modalTitle: string) => {
+  const handleOpenModal = (modalTitle: string, user?: User) => {
     setIsOpenModal(true);
     setModalType(modalTitle);
   };
 
+  const usersQuery = useQuery({
+    queryKey: ['users'],
+    queryFn: () => getUsers('ALL'),
+  });
   return (
     <Fragment>
       {isOpenModal && <ManagingUserModal modalTitle={modalType} setIsOpenModal={setIsOpenModal} />}
@@ -43,9 +51,8 @@ const ManagingUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {users &&
-                users.map((user, index) => {
-                  console.log(user);
+              {usersQuery.data?.users &&
+                usersQuery.data?.users.map((user, index) => {
                   return (
                     <tr key={index}>
                       <td>{index + 1}</td>
@@ -53,13 +60,13 @@ const ManagingUsers = () => {
                       <td>{user.lastName}</td>
                       <td>{user.email}</td>
                       <td>{user.address}</td>
-                      <td>{user.phonenumber}</td>
+                      <td>{user.phoneNumber}</td>
                       <td>{user.roleId}</td>
                       <td>{user.positionId}</td>
                       <td>
                         <i
                           className="fa-solid fa-user-pen"
-                          onClick={() => handleOpenModal('edit')}
+                          onClick={() => handleOpenModal('edit', user)}
                         ></i>
                       </td>
                       <td>
@@ -68,9 +75,9 @@ const ManagingUsers = () => {
                     </tr>
                   );
                 })}
-              {error && <p>Users not found!</p>} */}
             </tbody>
           </table>
+          {usersQuery.data?.errCode !== 0 && <p>Users not found!</p>}
         </div>
       </div>
     </Fragment>

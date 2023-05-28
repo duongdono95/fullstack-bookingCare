@@ -1,10 +1,23 @@
 import axios from 'axios';
-import { userLoginResponse } from '../utils/types';
+import { User, userLoginResponse } from '../utils/types';
+import { http } from '../utils/http';
+import { responseFetchedUser } from './../utils/types';
 
 export const userLogin = async (email: string, password: string) => {
-  const response = await axios.post<userLoginResponse>('http://localhost:8080/login', {
+  const response = http.post<userLoginResponse>('/login', {
     email,
     password,
   });
-  return response.data;
+  return (await response).data;
+};
+export const getUsers = async (id: string | number) => {
+  const response = http.get<responseFetchedUser>('/admin/getUsers', {
+    params: { id },
+  });
+  return (await response).data;
+};
+
+export const createUser = async (userData: User) => {
+  const response = http.post<responseFetchedUser>('/admin/addNewUser', userData);
+  return (await response).data;
 };

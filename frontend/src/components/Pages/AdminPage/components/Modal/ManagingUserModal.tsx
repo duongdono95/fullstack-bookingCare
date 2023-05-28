@@ -1,5 +1,8 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { InitialInputForm } from '../../../../../utils/types';
+import { createUser } from '../../../../../services/userServices';
+import { initialInputForm } from '../../../../../utils/constants';
+import { InitialInputForm, User } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
 interface Props {
   modalTitle: string;
@@ -7,19 +10,15 @@ interface Props {
 }
 
 const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
-  const initialInputForm = {
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    address: '',
-    phoneNumber: '',
-    genderId: 'M',
-    roleId: 'R1',
-    positionId: 'P0',
-    image: '',
-  };
-  const [userDetails, setUserDetails] = useState<InitialInputForm>(initialInputForm);
+  const queryClient = useQueryClient();
+  const [userDetails, setUserDetails] =
+    useState<Omit<User, 'id' | 'createdAt' | 'updatedAt'>>(initialInputForm);
+  const addUserMutation = useMutation({
+    mutationFn: (userDetail: User) => {
+      return createUser(userDetail);
+    },
+  });
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserDetails((prev) => ({
       ...prev,
@@ -34,6 +33,13 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
   };
   const handleSubmitUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (modalTitle === 'create') {
+      addUserMutation.mutate(userDetails, {
+        onSuccess: () => console.log('success'),
+        onError: () => console.log('error'),
+      });
+    }
+    console.log(addUserMutation.data?.errCode);
   };
 
   return (

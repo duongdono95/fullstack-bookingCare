@@ -33,20 +33,21 @@ export type AdminMenu = (
     }
 )[];
 
-export type User = {
-  id: number;
+export interface User {
+  address: string;
+  password?: string;
+  createdAt?: string;
   email: string;
   firstName: string;
-  lastName: string;
-  address: string;
-  phonenumber: string;
-  gender: number;
+  gender: string;
+  id?: string;
   image: string;
-  roleId: string;
+  lastName: string;
+  phoneNumber: string;
   positionId: string;
-  createAt: string;
-  updateAt: string;
-};
+  roleId: string;
+  updatedAt?: string;
+}
 
 export type responseFetchedUser = {
   errCode: number;
@@ -62,7 +63,7 @@ export type InitialInputForm = {
   lastName: string;
   address: string;
   phoneNumber: string;
-  genderId: string;
+  gender: string;
   roleId: string;
   positionId: string;
   image?: string;

@@ -59,3 +59,16 @@ export const ROLES = {
   R2: 'doctor',
   R3: 'patient',
 };
+
+export const initialInputForm = {
+  email: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  address: '',
+  phoneNumber: '',
+  gender: 'M',
+  roleId: 'R1',
+  positionId: 'P0',
+  image: '',
+};
