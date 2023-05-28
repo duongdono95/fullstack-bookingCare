@@ -23,20 +23,25 @@ const getUsers = async (req, res) => {
     return res.status(200).json({
       errCode: 1,
       errMessage: 'Missing Required Parameters',
-      users: []
-    })
+      users: [],
+    });
   }
   if (id) {
-    let users = await userService.getUsers(id)
+    let users = await userService.getUsers(id);
     return res.status(200).json({
       errCode: 0,
       errMessage: 'Fetched User Data Successfully',
-      users
-    })
+      users,
+    });
   }
-}
-
+};
+const addNewUser = async (req, res) => {
+  console.log(req.body);
+  let message = await userService.addNewUser(req.body);
+  return res.status(200).json(message);
+};
 module.exports = {
   handleLogin: handleLogin,
   getUsers: getUsers,
+  addNewUser: addNewUser,
 };

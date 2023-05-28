@@ -20,7 +20,7 @@ const LoginPage = () => {
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state: RootState) => state.app.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
   const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInputs((prev) => ({
       ...prev,
@@ -54,9 +54,7 @@ const LoginPage = () => {
         <i className="fa-solid fa-circle-xmark"></i>
         <div className="login-form--top">
           <h2>User Login</h2>
-          <p className="error-message">
-            {loginError && 'Incorrect Username or Password'}
-          </p>
+          <p className="error-message">{loginError && 'Incorrect Username or Password'}</p>
           <div className="form-group email">
             <label htmlFor="">Email:</label>
             <input

@@ -5,16 +5,19 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}><App /></PersistGate>
+      <QueryClientProvider client={queryClient}>
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
+      </QueryClientProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -6,13 +6,11 @@ import { languageType } from '../utils/types';
 export interface initialState {
   languages: languageType;
   isLoggedIn: boolean;
-  // userData: {};
 }
 
 const initialState: initialState = {
   languages: 'en',
   isLoggedIn: false,
-  // userData: null,
 };
 
 export const appSlice = createSlice({
@@ -42,4 +40,4 @@ export const appSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { switchLanguage, loginSuccess, logOut } = appSlice.actions;
-export default appSlice.reducer;
+// export default appSlice.reducer;

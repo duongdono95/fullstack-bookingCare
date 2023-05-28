@@ -13,7 +13,7 @@ import ManagingSchedules from '../components/Pages/AdminPage/components/Managing
 import ManagingSpecialties from '../components/Pages/AdminPage/components/ManagingSpecialties/ManagingSpecialties';
 
 const AppRouter = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.app.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
   return (
     <Router>
       <Routes>
@@ -22,27 +22,12 @@ const AppRouter = () => {
           <Route path={':doctorId'} element={<DoctorDetailPage />} />
         </Route>
         <Route path={'/login'} element={<LoginPage />} />
-        <Route
-          path={'/system'}
-          element={isLoggedIn ? <AdminPage /> : <LoginPage />}
-        >
+        <Route path={'/system'} element={isLoggedIn ? <AdminPage /> : <LoginPage />}>
           <Route index element={isLoggedIn && <ManagingUsers />} />
-          <Route
-            path="managing-doctors"
-            element={isLoggedIn && <ManagingDoctors />}
-          />
-          <Route
-            path="managing-schedules"
-            element={isLoggedIn && <ManagingSchedules />}
-          />
-          <Route
-            path="managing-clinics"
-            element={isLoggedIn && <ManagingSchedules />}
-          />
-          <Route
-            path="managing-specialties"
-            element={isLoggedIn && <ManagingSpecialties />}
-          />
+          <Route path="managing-doctors" element={isLoggedIn && <ManagingDoctors />} />
+          <Route path="managing-schedules" element={isLoggedIn && <ManagingSchedules />} />
+          <Route path="managing-clinics" element={isLoggedIn && <ManagingSchedules />} />
+          <Route path="managing-specialties" element={isLoggedIn && <ManagingSpecialties />} />
         </Route>
       </Routes>
     </Router>

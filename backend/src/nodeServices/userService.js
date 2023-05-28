@@ -1,5 +1,6 @@
 import db from '../models/index';
-import { checkUserEmail } from "../helper/helper";
+import { checkUserEmail, hashUserPassword } from '../helper/helper';
+
 const handleLogin = (email, password) => {
   console.log(email, password);
   return new Promise(async (resolve, reject) => {
@@ -52,25 +53,58 @@ const getUsers = (userId) => {
         users = await db.User.findAll({
           attributes: {
             exclude: ['password'],
-          }
-        })
+          },
+        });
       }
       if (userId && userId !== 'ALL') {
         users = await db.User.findOne({
           where: { id: userId },
           attributes: {
-            exclude: ['password']
-          }
-        })
+            exclude: ['password'],
+          },
+        });
       }
-      resolve(users)
+      resolve(users);
     } catch (e) {
-      reject(e)
+      reject(e);
     }
-  })
-}
-
+  });
+};
+const addNewUser = (data) => {
+  return new Promise(async (resolve, reject) => {
+    let check = await checkUserEmail(data.email);
+    if (check === true) {
+      resolve({
+        errCode: 1,
+        errMessage: 'Email has been used.',
+      });
+    } else {
+      let hashedPassword = await hashUserPassword(data.password);
+      await db.User.create({
+        email: data.email,
+        password: hashedPassword,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        gender: data.gender,
+        roleId: data.roleId,
+        positionId: data.positionId,
+        image: data.image,
+      });
+      resolve({
+        errCode: 0,
+        errMessage: 'Create new User Successfully',
+      });
+    }
+    try {
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   handleLogin: handleLogin,
-  getUsers: getUsers
+  getUsers: getUsers,
+  addNewUser: addNewUser,
 };

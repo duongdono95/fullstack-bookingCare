@@ -8,7 +8,7 @@ import { switchLanguage } from '../../../redux/appSlice';
 import { FormattedMessage } from 'react-intl';
 
 const LanguageOptions = () => {
-  const language = useSelector((state: RootState) => state.app.languages);
+  const language = useSelector((state: RootState) => state.languages);
   const dispatch = useDispatch();
   const languageArr = Object.values(LANGUAGES);
   return (
@@ -20,11 +20,7 @@ const LanguageOptions = () => {
             className={item === language ? `language active` : 'language'}
             onClick={() => dispatch(switchLanguage(item))}
           >
-            {item === 'vi' ? (
-              <div className="vi-icon"></div>
-            ) : (
-              <div className="en-icon"></div>
-            )}
+            {item === 'vi' ? <div className="vi-icon"></div> : <div className="en-icon"></div>}
             {item.toUpperCase()}
           </div>
         );

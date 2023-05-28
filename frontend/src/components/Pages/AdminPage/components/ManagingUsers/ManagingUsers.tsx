@@ -1,23 +1,19 @@
 import React, { useState, Fragment } from 'react';
 // import { getAllUsers } from '../../../../../services/userServices';
-import { useGetAllUsersQuery } from '../../../../../redux/api/userQuery';
 import './ManagingUsers.scss';
 import ManagingUserModal from '../Modal/ManagingUserModal';
 
 const ManagingUsers = () => {
-  const { data, error, isLoading } = useGetAllUsersQuery('ALL');
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
-  const users = data?.users;
-  console.log(users);
   const handleOpenModal = (modalTitle: string) => {
     setIsOpenModal(true);
     setModalType(modalTitle);
   };
-  console.log(isOpenModal);
+
   return (
     <Fragment>
-      {isOpenModal && <ManagingUserModal modalTitle={modalType} />}
+      {isOpenModal && <ManagingUserModal modalTitle={modalType} setIsOpenModal={setIsOpenModal} />}
       <div className="managing-users">
         <h1>List of Users</h1>
         <div className="content">
@@ -47,7 +43,7 @@ const ManagingUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {users &&
+              {/* {users &&
                 users.map((user, index) => {
                   console.log(user);
                   return (
@@ -72,6 +68,7 @@ const ManagingUsers = () => {
                     </tr>
                   );
                 })}
+              {error && <p>Users not found!</p>} */}
             </tbody>
           </table>
         </div>

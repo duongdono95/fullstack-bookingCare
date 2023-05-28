@@ -54,3 +54,16 @@ export type responseFetchedUser = {
   users: User[];
 };
 // export type AllUser = User[] | []
+
+export type InitialInputForm = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  phoneNumber: string;
+  genderId: string;
+  roleId: string;
+  positionId: string;
+  image?: string;
+};

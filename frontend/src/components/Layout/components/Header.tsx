@@ -8,8 +8,8 @@ import { logOut } from '../../../redux/appSlice';
 import { Link } from 'react-router-dom';
 const Header = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: RootState) => state.app.isLoggedIn);
-  const language = useSelector((state: RootState) => state.app.languages);
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+  const language = useSelector((state: RootState) => state.languages);
   return (
     <div id="header">
       <LanguageOptions />
@@ -71,10 +71,7 @@ const Header = () => {
           </div>
           <div title="Log Out" className="log-out">
             {isLoggedIn ? (
-              <i
-                className="fa-solid fa-right-from-bracket"
-                onClick={() => dispatch(logOut())}
-              ></i>
+              <i className="fa-solid fa-right-from-bracket" onClick={() => dispatch(logOut())}></i>
             ) : (
               <p className="sign-up">Sign Up</p>
             )}
