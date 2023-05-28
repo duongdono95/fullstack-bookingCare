@@ -10,9 +10,11 @@ const ManagingUsers = () => {
   const queryClient = useQueryClient();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [editUserDetail, setEditUserDetail] = useState<User | undefined>();
   const handleOpenModal = (modalTitle: string, user?: User) => {
     setIsOpenModal(true);
     setModalType(modalTitle);
+    setEditUserDetail(user);
   };
 
   const usersQuery = useQuery({
@@ -21,7 +23,13 @@ const ManagingUsers = () => {
   });
   return (
     <Fragment>
-      {isOpenModal && <ManagingUserModal modalTitle={modalType} setIsOpenModal={setIsOpenModal} />}
+      {isOpenModal && (
+        <ManagingUserModal
+          modalTitle={modalType}
+          setIsOpenModal={setIsOpenModal}
+          editUserDetail={editUserDetail as User}
+        />
+      )}
       <div className="managing-users">
         <h1>List of Users</h1>
         <div className="content">

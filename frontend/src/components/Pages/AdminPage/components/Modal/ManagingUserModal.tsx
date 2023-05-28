@@ -2,20 +2,32 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { createUser } from '../../../../../services/userServices';
 import { initialInputForm } from '../../../../../utils/constants';
-import { InitialInputForm, User } from '../../../../../utils/types';
+import { User } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
+import { toast } from 'react-toastify';
+
 interface Props {
   modalTitle: string;
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  editUserDetail?: User;
 }
 
-const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
+const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUserDetail }) => {
   const queryClient = useQueryClient();
-  const [userDetails, setUserDetails] =
-    useState<Omit<User, 'id' | 'createdAt' | 'updatedAt'>>(initialInputForm);
+  const [userDetails, setUserDetails] = useState<User>(
+    editUserDetail ? editUserDetail : initialInputForm,
+  );
+  // access to the mutation
   const addUserMutation = useMutation({
-    mutationFn: (userDetail: User) => {
-      return createUser(userDetail);
+    mutationFn: async (userDetail: User) => {
+      const response = await createUser(userDetail);
+      // return response;
+      if (response.errCode !== 0) {
+        toast.error(response.errMessage);
+      } else {
+        toast.success('Create New User Successfully');
+      }
+      return;
     },
   });
 
@@ -33,13 +45,10 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
   };
   const handleSubmitUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Call the mutation
     if (modalTitle === 'create') {
-      addUserMutation.mutate(userDetails, {
-        onSuccess: () => console.log('success'),
-        onError: () => console.log('error'),
-      });
+      addUserMutation.mutate(userDetails);
     }
-    console.log(addUserMutation.data?.errCode);
   };
 
   return (
@@ -57,6 +66,8 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
             type="email"
             id="email"
             onChange={(e) => handleOnChange(e)}
+            placeholder={userDetails.email}
+            disabled={modalTitle === 'edit' ? true : false}
           />
         </div>
         <div className="form-group">
@@ -67,6 +78,8 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
             type="password"
             id="password"
             onChange={(e) => handleOnChange(e)}
+            placeholder={userDetails.password}
+            disabled={modalTitle === 'edit' ? true : false}
           />
         </div>
         <div className="form-group halfWidth">
@@ -77,6 +90,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
             type="text"
             id="firstName"
             onChange={(e) => handleOnChange(e)}
+            placeholder={userDetails.firstName}
           />
         </div>
         <div className="form-group halfWidth">
@@ -87,6 +101,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
             type="text"
             id="lastName"
             onChange={(e) => handleOnChange(e)}
+            placeholder={userDetails.lastName}
           />
         </div>
         <div className="form-group halfWidth">
@@ -97,6 +112,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
             type="text"
             id="address"
             onChange={(e) => handleOnChange(e)}
+            placeholder={userDetails.address}
           />
         </div>
         <div className="form-group halfWidth">
@@ -107,11 +123,12 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
             type="text"
             id="phoneNumber"
             onChange={(e) => handleOnChange(e)}
+            placeholder={userDetails.phoneNumber}
           />
         </div>
         <div className="form-group halfWidth">
           <label htmlFor="gender">Gender</label>
-          <select required name="genderId" id="gender" onChange={(e) => handleSelected(e)}>
+          <select name="genderId" id="gender" onChange={(e) => handleSelected(e)}>
             <option selected value="M">
               Male
             </option>
@@ -135,7 +152,6 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
             <option selected value="P0">
               Dr
             </option>
-            <option value="P1">Master</option>
             <option value="P2">Doctor</option>
             <option value="P3">Associate Professor</option>
             <option value="P4">Professor</option>
@@ -143,7 +159,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal }) => {
         </div>
         <div className="form-group">
           <label htmlFor="image">Image URL</label>
-          <input type="text" id="image" />
+          <input type="text" id="image" placeholder={userDetails.image} />
         </div>
         <button type="submit" className="submit-btn">
           Submit
