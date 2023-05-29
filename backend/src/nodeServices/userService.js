@@ -103,8 +103,47 @@ const addNewUser = (data) => {
     }
   });
 };
+
+const editUser = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.id || !data.roleId || !data.positionId || !data.gender) {
+        resolve({
+          errCode: 2,
+          errMessage: 'missing required parameter',
+        });
+      }
+      let user = await db.User.findOne({
+        where: {
+          id: data.id,
+          // raw: false,
+        },
+      });
+      if (user) {
+        user.firstName = data.firstName;
+        user.lastName = data.lastName;
+        user.address = data.address;
+        user.roleId = data.roleId;
+        user.positionId = data.positionId;
+        user.gender = data.gender;
+        user.phoneNumber = data.phoneNumber;
+        if (data.avatar) {
+          user.image = data.image;
+        }
+        await user.save();
+        resolve({
+          errCode: 0,
+          message: 'Update User Details Successfully',
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   handleLogin: handleLogin,
   getUsers: getUsers,
   addNewUser: addNewUser,
+  editUser: editUser,
 };

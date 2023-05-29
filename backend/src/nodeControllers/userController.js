@@ -36,12 +36,17 @@ const getUsers = async (req, res) => {
   }
 };
 const addNewUser = async (req, res) => {
-  console.log(req.body);
   let message = await userService.addNewUser(req.body);
+  return res.status(200).json(message);
+};
+const editUser = async (req, res) => {
+  let data = req.body;
+  let message = await userService.editUser(data);
   return res.status(200).json(message);
 };
 module.exports = {
   handleLogin: handleLogin,
   getUsers: getUsers,
   addNewUser: addNewUser,
+  editUser: editUser,
 };

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { createUser } from '../../../../../services/userServices';
+import { createUser, editUser } from '../../../../../services/userServices';
 import { initialInputForm } from '../../../../../utils/constants';
 import { User } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
@@ -27,6 +27,18 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
       } else {
         toast.success('Create New User Successfully');
       }
+      console.log(response);
+      return;
+    },
+  });
+  const editUserMutation = useMutation({
+    mutationFn: async (userDetail: User) => {
+      const response = await editUser(userDetail);
+      if (response.errCode !== 0) {
+        toast.error(response.errMessage);
+      } else {
+        toast.success('Edit User Successfully');
+      }
       return;
     },
   });
@@ -48,6 +60,8 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
     // Call the mutation
     if (modalTitle === 'create') {
       addUserMutation.mutate(userDetails);
+    } else {
+      editUserMutation.mutate(userDetails);
     }
   };
 

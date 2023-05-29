@@ -21,3 +21,8 @@ export const createUser = async (userData: User) => {
   const response = http.post<responseFetchedUser>('/admin/addNewUser', userData);
   return (await response).data;
 };
+
+export const editUser = async (userData: User) => {
+  const response = http.post<responseFetchedUser>('/admin/editUser', userData);
+  return (await response).data;
+};
