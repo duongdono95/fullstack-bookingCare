@@ -44,9 +44,22 @@ const editUser = async (req, res) => {
   let message = await userService.editUser(data);
   return res.status(200).json(message);
 };
+const deleteUser = async (req, res) => {
+  let userId = req.query.id;
+  console.log(userId)
+  if (!userId) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "Missing required Parametter"
+    })
+  }
+  let message = await userService.deleteUser(userId);
+  return res.status(200).json(message)
+}
 module.exports = {
   handleLogin: handleLogin,
   getUsers: getUsers,
   addNewUser: addNewUser,
   editUser: editUser,
+  deleteUser: deleteUser
 };

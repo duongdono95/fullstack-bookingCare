@@ -1,10 +1,11 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 // import { getAllUsers } from '../../../../../services/userServices';
 import './ManagingUsers.scss';
 import ManagingUserModal from '../Modal/ManagingUserModal';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getUsers } from '../../../../../services/userServices';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { deleteUser, getUsers } from '../../../../../services/userServices';
 import { User } from '../../../../../utils/types';
+import { toast } from 'react-toastify';
 
 const ManagingUsers = () => {
   const queryClient = useQueryClient();
@@ -21,6 +22,23 @@ const ManagingUsers = () => {
     queryKey: ['users'],
     queryFn: () => getUsers('ALL'),
   });
+  const deleteUserMutation = useMutation({
+    mutationFn: async (userId: string | number) => {
+      const response = await deleteUser(userId);
+      // return response;
+      if (response.errCode !== 0) {
+        toast.error(response.errMessage);
+      } else {
+        toast.success('Delete User Successfully');
+        usersQuery.refetch();
+      }
+      return;
+    },
+  });
+  const handleDeleteRequest = (userId: string | number) => {
+    deleteUserMutation.mutate(userId);
+    console.log(deleteUserMutation);
+  };
   return (
     <Fragment>
       {isOpenModal && (
@@ -28,6 +46,7 @@ const ManagingUsers = () => {
           modalTitle={modalType}
           setIsOpenModal={setIsOpenModal}
           editUserDetail={editUserDetail as User}
+          usersQuery={usersQuery}
         />
       )}
       <div className="managing-users">
@@ -78,7 +97,10 @@ const ManagingUsers = () => {
                         ></i>
                       </td>
                       <td>
-                        <i className="fa-solid fa-trash"></i>
+                        <i
+                          className="fa-solid fa-trash"
+                          onClick={() => handleDeleteRequest(user.id as string)}
+                        ></i>
                       </td>
                     </tr>
                   );

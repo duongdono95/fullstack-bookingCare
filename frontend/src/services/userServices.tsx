@@ -26,3 +26,13 @@ export const editUser = async (userData: User) => {
   const response = http.post<responseFetchedUser>('/admin/editUser', userData);
   return (await response).data;
 };
+
+export const deleteUser = async (userId: string | number) => {
+  const response = http.delete<responseFetchedUser>(`/admin/deleteUser?id=${userId}`);
+  return (await response).data;
+};
+
+export const getDoctors = async (code: string) => {
+  const response = http.get<responseFetchedUser>(`/homePage/getAllDoctors?id=${code}`);
+  return (await response).data;
+};

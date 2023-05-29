@@ -141,9 +141,31 @@ const editUser = (data) => {
     }
   });
 };
+
+const deleteUser = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    let dbUser = await db.User.findOne({
+      where: { id: userId }
+    })
+    if (!dbUser) {
+      resolve({
+        errCode: 2,
+        errMessage: 'User not found!'
+      })
+    }
+    await db.User.destroy({
+      where: { id: userId }
+    })
+    resolve({
+      errCode: 0,
+      errMessage: 'Delete User Successfully'
+    })
+  })
+}
 module.exports = {
   handleLogin: handleLogin,
   getUsers: getUsers,
   addNewUser: addNewUser,
   editUser: editUser,
+  deleteUser: deleteUser,
 };

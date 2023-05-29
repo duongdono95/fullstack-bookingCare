@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseQueryResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { createUser, editUser } from '../../../../../services/userServices';
 import { initialInputForm } from '../../../../../utils/constants';
-import { User } from '../../../../../utils/types';
+import { User, responseFetchedUser } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
 import { toast } from 'react-toastify';
 
@@ -10,9 +10,15 @@ interface Props {
   modalTitle: string;
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   editUserDetail?: User;
+  usersQuery: UseQueryResult<responseFetchedUser, unknown>;
 }
 
-const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUserDetail }) => {
+const ManagingUserModal: React.FC<Props> = ({
+  modalTitle,
+  setIsOpenModal,
+  editUserDetail,
+  usersQuery,
+}) => {
   const queryClient = useQueryClient();
   const [userDetails, setUserDetails] = useState<User>(
     editUserDetail ? editUserDetail : initialInputForm,
@@ -26,6 +32,8 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
         toast.error(response.errMessage);
       } else {
         toast.success('Create New User Successfully');
+        setIsOpenModal(false);
+        usersQuery.refetch();
       }
       console.log(response);
       return;
@@ -38,6 +46,8 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
         toast.error(response.errMessage);
       } else {
         toast.success('Edit User Successfully');
+        setIsOpenModal(false);
+        usersQuery.refetch();
       }
       return;
     },
@@ -80,7 +90,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
             type="email"
             id="email"
             onChange={(e) => handleOnChange(e)}
-            placeholder={userDetails.email}
+            value={userDetails.email}
             disabled={modalTitle === 'edit' ? true : false}
           />
         </div>
@@ -92,7 +102,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
             type="password"
             id="password"
             onChange={(e) => handleOnChange(e)}
-            placeholder={userDetails.password}
+            value={userDetails.password}
             disabled={modalTitle === 'edit' ? true : false}
           />
         </div>
@@ -104,7 +114,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
             type="text"
             id="firstName"
             onChange={(e) => handleOnChange(e)}
-            placeholder={userDetails.firstName}
+            value={userDetails.firstName}
           />
         </div>
         <div className="form-group halfWidth">
@@ -115,7 +125,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
             type="text"
             id="lastName"
             onChange={(e) => handleOnChange(e)}
-            placeholder={userDetails.lastName}
+            value={userDetails.lastName}
           />
         </div>
         <div className="form-group halfWidth">
@@ -126,7 +136,7 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
             type="text"
             id="address"
             onChange={(e) => handleOnChange(e)}
-            placeholder={userDetails.address}
+            value={userDetails.address}
           />
         </div>
         <div className="form-group halfWidth">
@@ -137,35 +147,47 @@ const ManagingUserModal: React.FC<Props> = ({ modalTitle, setIsOpenModal, editUs
             type="text"
             id="phoneNumber"
             onChange={(e) => handleOnChange(e)}
-            placeholder={userDetails.phoneNumber}
+            value={userDetails.phoneNumber}
           />
         </div>
         <div className="form-group halfWidth">
           <label htmlFor="gender">Gender</label>
-          <select name="genderId" id="gender" onChange={(e) => handleSelected(e)}>
-            <option selected value="M">
-              Male
-            </option>
+          <select
+            required
+            defaultValue="M"
+            name="genderId"
+            id="gender"
+            onChange={(e) => handleSelected(e)}
+          >
+            <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
           </select>
         </div>
         <div className="form-group halfWidth">
           <label htmlFor="roleId">Role</label>
-          <select required name="roleId" id="roleId" onChange={(e) => handleSelected(e)}>
-            <option selected value="R1">
-              Admin
-            </option>
+          <select
+            defaultValue="R1"
+            required
+            name="roleId"
+            id="roleId"
+            onChange={(e) => handleSelected(e)}
+          >
+            <option value="R1">Admin</option>
             <option value="R2">Doctor</option>
             <option value="R3">Patient</option>
           </select>
         </div>
         <div className="form-group halfWidth">
           <label htmlFor="position">Position</label>
-          <select required name="positionId" id="position" onChange={(e) => handleSelected(e)}>
-            <option selected value="P0">
-              Dr
-            </option>
+          <select
+            defaultValue="P0"
+            required
+            name="positionId"
+            id="position"
+            onChange={(e) => handleSelected(e)}
+          >
+            <option value="P0">Dr</option>
             <option value="P2">Doctor</option>
             <option value="P3">Associate Professor</option>
             <option value="P4">Professor</option>
