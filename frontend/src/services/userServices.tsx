@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { User, userLoginResponse } from '../utils/types';
+import { User, responseFetchedDoctors, userLoginResponse } from '../utils/types';
 import { http } from '../utils/http';
-import { responseFetchedUser } from './../utils/types';
+import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
 
 export const userLogin = async (email: string, password: string) => {
   const response = http.post<userLoginResponse>('/login', {
@@ -33,11 +33,11 @@ export const deleteUser = async (userId: string | number) => {
 };
 
 export const getDoctors = async (code: string) => {
-  const response = http.get<responseFetchedUser>(`/homePage/getAllDoctors?id=${code}`);
+  const response = http.get<responseFetchedDoctors>(`/homePage/getAllDoctors?id=${code}`);
   return (await response).data;
 };
 
 export const getAllCode = async (type: string) => {
-  const response = http.get<responseFetchedUser>(`/api/allcode?type=${type}`);
+  const response = http.get<responseFetchAllCode>(`/api/allcode?type=${type}`);
   return (await response).data;
 };

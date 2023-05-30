@@ -1,16 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { LANGUAGES } from '../utils/constants';
-import { languageType } from '../utils/types';
+import { Code, languageType } from '../utils/types';
 
 export interface initialState {
   languages: languageType;
   isLoggedIn: boolean;
+  allCode: Code[];
 }
 
 const initialState: initialState = {
   languages: 'en',
   isLoggedIn: false,
+  allCode: [],
 };
 
 export const appSlice = createSlice({
@@ -35,9 +36,13 @@ export const appSlice = createSlice({
         isLoggedIn: false,
       };
     },
+    saveAllCode: (state, action: PayloadAction<Code[]>) => {
+      const fetchedCode = action.payload;
+      state.allCode = fetchedCode;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { switchLanguage, loginSuccess, logOut } = appSlice.actions;
+export const { switchLanguage, loginSuccess, logOut, saveAllCode } = appSlice.actions;
 // export default appSlice.reducer;

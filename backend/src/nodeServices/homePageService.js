@@ -1,20 +1,21 @@
 import db from '../models/index';
 
 const getDoctors = (code) => {
-  // return new Promise(async (resolve, reject) => {
-  //   try {
-  //     let doctors = '';
-  //     // if(code && code === "DOCTORS") {
-  //     //   doctors = await db.User.findAll({
-  //     //     attributes: {
-  //     //       exclude: ['password']
-  //     //     }
-  //     //   })
-  //     // }
-  //   } catch (e) {
-  //     reject(e)
-  //   }
-  // })
+  return new Promise(async (resolve, reject) => {
+    try {
+      let doctors = await db.User.findAll({
+        where: { roleId: code },
+        attributes: {
+          exclude: ['password']
+        }
+      })
+      resolve({
+        doctors
+      })
+    } catch (e) {
+      reject(e)
+    }
+  })
 }
 
 module.exports = {

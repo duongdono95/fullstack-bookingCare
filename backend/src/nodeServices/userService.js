@@ -170,11 +170,20 @@ const getAllCode = (type) => {
           errCode: 1,
           errMessage: 'Missing required parameter',
         });
-      } else {
+      }
+      if (type !== "ALL") {
         let res = {};
         let allcode = await db.Allcode.findAll({
           where: { type: type },
         });
+        res.errCode = 0;
+        res.message = 'Fetch all codes successfully';
+        res.data = allcode;
+        resolve(res);
+      }
+      if (type === "ALL") {
+        let res = {};
+        let allcode = await db.Allcode.findAll();
         res.errCode = 0;
         res.message = 'Fetch all codes successfully';
         res.data = allcode;

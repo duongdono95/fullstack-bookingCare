@@ -54,7 +54,13 @@ export type responseFetchedUser = {
   errMessage: string;
   users: User[];
 };
-// export type AllUser = User[] | []
+export type responseFetchedDoctors = {
+  errCode: number;
+  errMessage: string;
+  data: {
+    doctors: User[]
+  };
+};
 
 export type InitialInputForm = {
   email: string;
@@ -68,3 +74,18 @@ export type InitialInputForm = {
   positionId: string;
   image?: string;
 };
+
+export type Code = {
+  createdAt: null,
+  id: number,
+  keyMap:string,
+  type:string,
+  updatedAt:null,
+  valueEn:string,
+  valueVi:string
+}
+export type responseFetchAllCode = {
+  errCode: number;
+  errMessage: string;
+  data: Code[]
+}
