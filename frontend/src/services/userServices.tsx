@@ -36,3 +36,8 @@ export const getDoctors = async (code: string) => {
   const response = http.get<responseFetchedUser>(`/homePage/getAllDoctors?id=${code}`);
   return (await response).data;
 };
+
+export const getAllCode = async (type: string) => {
+  const response = http.get<responseFetchedUser>(`/api/allcode?type=${type}`);
+  return (await response).data;
+};

@@ -27,7 +27,8 @@
       "manage-doctor": "Quản Lý Bác Sĩ",
       "manage-schedule": "Quản Lý Kế Hoạch Khám Bệnh",
       "manage-clinic": "Quản Lý Phòng Khám",
-      "manage-specialty": "Quản Lý Chuyên Khoa"
+      "manage-specialty": "Quản Lý Chuyên Khoa",
+      "list-of-users": "DANH SÁCH NGƯỜI DÙNG"
     }
   },
   "business-details": {
@@ -41,6 +42,7 @@
     "support": "Hỗ trợ khách hàng"
   },
   "manage-user": {
+    "edit-user": "Sửa Thông Tin Người Dùng",
     "add": "Thêm mới người dùng",
     "email": "Email",
     "password": "Mật Khẩu",
@@ -53,7 +55,8 @@
     "role": "Vai trò",
     "save": "Lưu user",
     "edit": "Lưu thay đổi",
-    "image": "Ảnh đại diện"
+    "image": "Ảnh đại diện",
+    "delete": "Xoá"
   },
   "homepage": {
     "outstanding-doctor": "Bác Sĩ nổi bật tuần qua",

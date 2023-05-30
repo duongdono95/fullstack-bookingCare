@@ -5,6 +5,7 @@ import ManagingUserModal from '../Modal/ManagingUserModal';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteUser, getUsers } from '../../../../../services/userServices';
 import { User } from '../../../../../utils/types';
+import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
 const ManagingUsers = () => {
@@ -50,7 +51,9 @@ const ManagingUsers = () => {
         />
       )}
       <div className="managing-users">
-        <h1>List of Users</h1>
+        <h1>
+          <FormattedMessage id="menu.admin.list-of-users" />
+        </h1>
         <div className="content">
           <table>
             <thead>
@@ -66,15 +69,27 @@ const ManagingUsers = () => {
                 <th>
                   <i className="fa-solid fa-layer-group"></i>
                 </th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <th>Role</th>
-                <th>Position</th>
-                <th></th>
-                <th></th>
+                <th>
+                  <FormattedMessage id="manage-user.first-name" />
+                </th>
+                <th>
+                  <FormattedMessage id="manage-user.last-name" />
+                </th>
+                <th>
+                  <FormattedMessage id="manage-user.email" />
+                </th>
+                <th>
+                  <FormattedMessage id="manage-user.address" />
+                </th>
+                <th>
+                  <FormattedMessage id="manage-user.phone-number" />
+                </th>
+                <th>
+                  <FormattedMessage id="manage-user.role" />
+                </th>
+                <th>
+                  <FormattedMessage id="manage-user.position" />
+                </th>
               </tr>
             </thead>
             <tbody>

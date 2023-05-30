@@ -27,7 +27,8 @@
       "manage-doctor": "Managing Doctors",
       "manage-clinic": "Managing Clinics",
       "manage-specialty": "Managing Medical Specialties",
-      "manage-schedule": "Managing Doctor's Schedule"
+      "manage-schedule": "Managing Doctor's Schedule",
+      "list-of-users": "LIST OF USERS"
     }
   },
   "business-details": {
@@ -41,6 +42,7 @@
     "support": "Customer Support"
   },
   "manage-user": {
+    "edit-user": "Edit User",
     "add": "Add New User",
     "email": "Email",
     "password": "Password",
@@ -53,7 +55,8 @@
     "role": "Role",
     "image": "Avatar",
     "save": "Save User",
-    "edit": "Save Changes"
+    "edit": "Save Changes",
+    "delete": "Delete"
   },
   "homepage": {
     "outstanding-doctor": "Last week's featured doctor",

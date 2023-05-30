@@ -5,6 +5,7 @@ import { initialInputForm } from '../../../../../utils/constants';
 import { User, responseFetchedUser } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
 import { toast } from 'react-toastify';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
   modalTitle: string;
@@ -77,13 +78,21 @@ const ManagingUserModal: React.FC<Props> = ({
 
   return (
     <div className="create-new-user">
-      <h1>{modalTitle === 'create' ? 'Create New User' : 'Edit User'}</h1>
+      <h1>
+        {modalTitle === 'create' ? (
+          <FormattedMessage id="manage-user.add" />
+        ) : (
+          <FormattedMessage id="manage-user.edit-user" />
+        )}
+      </h1>
       <form action="" className="form--container" onSubmit={(e) => handleSubmitUser(e)}>
         <div className="close-btn" onClick={() => setIsOpenModal(false)}>
           <i className="fa-solid fa-circle-xmark"></i>
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            <FormattedMessage id="manage-user.email" />
+          </label>
           <input
             required
             name="email"
@@ -95,7 +104,9 @@ const ManagingUserModal: React.FC<Props> = ({
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            <FormattedMessage id="manage-user.password" />
+          </label>
           <input
             required
             name="password"
@@ -107,7 +118,9 @@ const ManagingUserModal: React.FC<Props> = ({
           />
         </div>
         <div className="form-group halfWidth">
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="firstName">
+            <FormattedMessage id="manage-user.first-name" />
+          </label>
           <input
             required
             name="firstName"
@@ -118,7 +131,9 @@ const ManagingUserModal: React.FC<Props> = ({
           />
         </div>
         <div className="form-group halfWidth">
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="lastName">
+            <FormattedMessage id="manage-user.last-name" />
+          </label>
           <input
             required
             name="lastName"
@@ -129,7 +144,9 @@ const ManagingUserModal: React.FC<Props> = ({
           />
         </div>
         <div className="form-group halfWidth">
-          <label htmlFor="address">Address</label>
+          <label htmlFor="address">
+            <FormattedMessage id="manage-user.address" />
+          </label>
           <input
             required
             name="address"
@@ -140,7 +157,9 @@ const ManagingUserModal: React.FC<Props> = ({
           />
         </div>
         <div className="form-group halfWidth">
-          <label htmlFor="phoneNumber">Phone Number</label>
+          <label htmlFor="phoneNumber">
+            <FormattedMessage id="manage-user.phone-number" />
+          </label>
           <input
             required
             name="phoneNumber"
@@ -151,7 +170,9 @@ const ManagingUserModal: React.FC<Props> = ({
           />
         </div>
         <div className="form-group halfWidth">
-          <label htmlFor="gender">Gender</label>
+          <label htmlFor="gender">
+            <FormattedMessage id="manage-user.gender" />
+          </label>
           <select
             required
             defaultValue="M"
@@ -165,7 +186,9 @@ const ManagingUserModal: React.FC<Props> = ({
           </select>
         </div>
         <div className="form-group halfWidth">
-          <label htmlFor="roleId">Role</label>
+          <label htmlFor="roleId">
+            <FormattedMessage id="manage-user.role" />
+          </label>
           <select
             defaultValue="R1"
             required
@@ -179,7 +202,9 @@ const ManagingUserModal: React.FC<Props> = ({
           </select>
         </div>
         <div className="form-group halfWidth">
-          <label htmlFor="position">Position</label>
+          <label htmlFor="position">
+            <FormattedMessage id="manage-user.position" />
+          </label>
           <select
             defaultValue="P0"
             required
@@ -194,11 +219,13 @@ const ManagingUserModal: React.FC<Props> = ({
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="image">Image URL</label>
+          <label htmlFor="image">
+            <FormattedMessage id="manage-user.image" />
+          </label>
           <input type="text" id="image" placeholder={userDetails.image} />
         </div>
         <button type="submit" className="submit-btn">
-          Submit
+          <FormattedMessage id="manage-user.save" />
         </button>
       </form>
     </div>

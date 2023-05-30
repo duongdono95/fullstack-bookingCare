@@ -46,20 +46,33 @@ const editUser = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
   let userId = req.query.id;
-  console.log(userId)
+  console.log(userId);
   if (!userId) {
     return res.status(200).json({
       errCode: 1,
-      errMessage: "Missing required Parametter"
-    })
+      errMessage: 'Missing required Parametter',
+    });
   }
   let message = await userService.deleteUser(userId);
-  return res.status(200).json(message)
-}
+  return res.status(200).json(message);
+};
+const getAllCode = async (req, res) => {
+  try {
+    let data = await userService.getAllCode(req.query.type);
+    return res.status(200).json(data);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: 'Error from server',
+    });
+  }
+};
 module.exports = {
   handleLogin: handleLogin,
   getUsers: getUsers,
   addNewUser: addNewUser,
   editUser: editUser,
-  deleteUser: deleteUser
+  deleteUser: deleteUser,
+  getAllCode: getAllCode,
 };

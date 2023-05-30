@@ -145,27 +145,51 @@ const editUser = (data) => {
 const deleteUser = (userId) => {
   return new Promise(async (resolve, reject) => {
     let dbUser = await db.User.findOne({
-      where: { id: userId }
-    })
+      where: { id: userId },
+    });
     if (!dbUser) {
       resolve({
         errCode: 2,
-        errMessage: 'User not found!'
-      })
+        errMessage: 'User not found!',
+      });
     }
     await db.User.destroy({
-      where: { id: userId }
-    })
+      where: { id: userId },
+    });
     resolve({
       errCode: 0,
-      errMessage: 'Delete User Successfully'
-    })
-  })
-}
+      errMessage: 'Delete User Successfully',
+    });
+  });
+};
+const getAllCode = (type) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!type) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameter',
+        });
+      } else {
+        let res = {};
+        let allcode = await db.Allcode.findAll({
+          where: { type: type },
+        });
+        res.errCode = 0;
+        res.message = 'Fetch all codes successfully';
+        res.data = allcode;
+        resolve(res);
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   handleLogin: handleLogin,
   getUsers: getUsers,
   addNewUser: addNewUser,
   editUser: editUser,
   deleteUser: deleteUser,
+  getAllCode: getAllCode,
 };
