@@ -6,6 +6,7 @@ import { User, responseFetchedUser } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
 import { toast } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
+import { FilterCodeArray, useAppLanguage } from '../../../../../redux/handyHelper';
 
 interface Props {
   modalTitle: string;
@@ -24,6 +25,11 @@ const ManagingUserModal: React.FC<Props> = ({
   const [userDetails, setUserDetails] = useState<User>(
     editUserDetail ? editUserDetail : initialInputForm,
   );
+  const language = useAppLanguage();
+  const genderArray = FilterCodeArray('gender');
+  const roleArray = FilterCodeArray('role');
+  const positionArray = FilterCodeArray('position');
+  console.log(genderArray);
   // access to the mutation
   const addUserMutation = useMutation({
     mutationFn: async (userDetail: User) => {
@@ -75,7 +81,7 @@ const ManagingUserModal: React.FC<Props> = ({
       editUserMutation.mutate(userDetails);
     }
   };
-
+  console.log(genderArray);
   return (
     <div className="create-new-user">
       <h1>
@@ -180,9 +186,14 @@ const ManagingUserModal: React.FC<Props> = ({
             id="gender"
             onChange={(e) => handleSelected(e)}
           >
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
+            {genderArray.map((item, index) => {
+              const { keyMap, valueEn, valueVi } = item;
+              return (
+                <option key={index} value={keyMap}>
+                  {language === 'vi' ? valueVi : valueEn}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="form-group halfWidth">
@@ -196,9 +207,14 @@ const ManagingUserModal: React.FC<Props> = ({
             id="roleId"
             onChange={(e) => handleSelected(e)}
           >
-            <option value="R1">Admin</option>
-            <option value="R2">Doctor</option>
-            <option value="R3">Patient</option>
+            {roleArray.map((item, index) => {
+              const { keyMap, valueEn, valueVi } = item;
+              return (
+                <option key={index} value={keyMap}>
+                  {language === 'vi' ? valueVi : valueEn}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="form-group halfWidth">
@@ -212,10 +228,14 @@ const ManagingUserModal: React.FC<Props> = ({
             id="position"
             onChange={(e) => handleSelected(e)}
           >
-            <option value="P0">Dr</option>
-            <option value="P2">Doctor</option>
-            <option value="P3">Associate Professor</option>
-            <option value="P4">Professor</option>
+            {positionArray.map((item, index) => {
+              const { keyMap, valueEn, valueVi } = item;
+              return (
+                <option key={index} value={keyMap}>
+                  {language === 'vi' ? valueVi : valueEn}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="form-group">

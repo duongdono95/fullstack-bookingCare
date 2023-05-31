@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { User } from '../../../utils/types';
-import { useAppAllCode } from '../../../redux/handyHelper';
+import { useAppTranslationAllCode, useAppLanguage } from '../../../redux/handyHelper';
 
 interface Props {
   doctors: User[];
@@ -20,7 +20,8 @@ const OutstandingDoctors: React.FC<Props> = ({ doctors }) => {
     autoplaySpeed: 2000,
     pauseOnHover: true,
   };
-  const allCode = useAppAllCode();
+  const currentLanguague = useAppLanguage();
+  const allCodes = useAppTranslationAllCode();
   return (
     <div className="home-section">
       <div className="outstanding-doctors">
@@ -28,15 +29,32 @@ const OutstandingDoctors: React.FC<Props> = ({ doctors }) => {
         <Slider {...settings}>
           {doctors &&
             doctors.map((doctor, index) => {
+              const { image, positionId, roleId, firstName, lastName } = doctor;
               return (
-                <div className="doctor">
-                  <div
-                    className="doctor-img"
-                    style={{ backgroundImage: `url(${doctor.image})` }}
-                  ></div>
-                  <div className="doctor-positions">{doctor.positionId}</div>
+                <div key={index} className="doctor">
+                  <div className="doctor-img" style={{ backgroundImage: `url(${image})` }}></div>
+                  <div className="doctor-positions">
+                    {currentLanguague === 'vi'
+                      ? allCodes[positionId].valueVi
+                      : allCodes[positionId].valueEn}
+                  </div>
                   <div className="doctor-name">
-                    {doctor.roleId} {doctor.firstName} {doctor.lastName}
+                    <p>
+                      {currentLanguague === 'vi'
+                        ? allCodes[roleId].valueVi
+                        : allCodes[roleId].valueEn}
+                    </p>
+                    {currentLanguague === 'vi' ? (
+                      <>
+                        <p>{lastName}</p>
+                        <p>{firstName}</p>
+                      </>
+                    ) : (
+                      <>
+                        <p>{firstName}</p>
+                        <p>{lastName}</p>
+                      </>
+                    )}
                   </div>
                 </div>
               );

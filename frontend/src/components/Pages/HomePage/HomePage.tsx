@@ -7,9 +7,10 @@ import SpecialitiesSection from '../../Sections/SpecialitiesSection/Specialities
 import './HomePage.scss';
 import { useQuery } from '@tanstack/react-query';
 import { getAllCode, getDoctors } from '../../../services/userServices';
-import { User } from '../../../utils/types';
+import { ConvertedCodeType, User } from '../../../utils/types';
 import { useDispatch } from 'react-redux';
-import { saveAllCode } from '../../../redux/appSlice';
+import { saveAllCodes, saveTranslationCodes } from '../../../redux/appSlice';
+import ConvertedAllCode from '../../../redux/handyHelper';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -34,10 +35,13 @@ const HomePage = () => {
       if (allCodeQuery.data?.errCode !== 0) {
         console.log(allCodeQuery.data?.errMessage);
       } else {
-        dispatch(saveAllCode(allCodeQuery.data?.data));
+        const convertedAllCode = ConvertedAllCode(allCodeQuery.data?.data);
+        dispatch(saveTranslationCodes(convertedAllCode));
+        dispatch(saveAllCodes(allCodeQuery.data?.data));
       }
     }
   }, [doctorUserQuery.data, allCodeQuery.data]);
+
   return (
     <div className="home-page">
       <HeroSection />

@@ -75,7 +75,7 @@ export type InitialInputForm = {
   image?: string;
 };
 
-export type Code = {
+export type OriginalCode = {
   createdAt: null,
   id: number,
   keyMap:string,
@@ -84,8 +84,9 @@ export type Code = {
   valueEn:string,
   valueVi:string
 }
+export type ConvertedCodeType = Record<string, { valueEn: string; valueVi: string; }>
 export type responseFetchAllCode = {
   errCode: number;
   errMessage: string;
-  data: Code[]
+  data: OriginalCode[]
 }
