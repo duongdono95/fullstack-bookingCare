@@ -90,3 +90,14 @@ export type responseFetchAllCode = {
   errMessage: string;
   data: OriginalCode[]
 }
+
+export type InitialDoctorDetailForm = {
+  doctorId: string | undefined,
+  price: string | undefined,
+  payment: string | undefined,
+  province: string | undefined,
+  clinicName: string,
+  clinicAddress: string,
+  about?: string,
+  note?: string,
+};

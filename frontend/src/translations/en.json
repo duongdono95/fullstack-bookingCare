@@ -99,11 +99,10 @@
   },
   "admin": {
     "manage-doctor": {
-      "title": "Create More Doctor's Details",
+      "title": "Managing Doctor's Details",
       "select-doctor": "Select Doctor",
       "intro": "Introduction: ",
-      "add": "Create Infor",
-      "save": "Save Infor",
+      "save": "Save Doctor Detail",
       "price": "Price",
       "payment": "Payment",
       "province": "Province",

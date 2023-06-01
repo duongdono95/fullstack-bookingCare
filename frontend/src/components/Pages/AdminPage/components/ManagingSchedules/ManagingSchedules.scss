@@ -34,12 +34,23 @@
   }
   .schedules {
     display: flex;
-    gap: 10px;
-    div {
+    flex-wrap: wrap;
+    gap: 2%;
+    .schedule {
+      width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       padding: 5px 10px;
       border-radius: 50px;
-      border: 1px solid var(--black05);
+      border: 1px solid var(--black02);
       cursor: pointer;
+      margin: 5px 0;
+      opacity: 1;
+      &:hover {
+        background-color: var(--black01);
+      }
       &.active {
         background-color: var(--primary);
         color: white;
