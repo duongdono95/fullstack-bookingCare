@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { User } from '../../../utils/types';
-import { useAppTranslationAllCode, useAppLanguage } from '../../../redux/handyHelper';
+import { useSelectorTranslationAllCode, useSelectorLanguage } from '../../../redux/handyHelper';
 
 interface Props {
   doctors: User[];
@@ -20,8 +20,8 @@ const OutstandingDoctors: React.FC<Props> = ({ doctors }) => {
     autoplaySpeed: 2000,
     pauseOnHover: true,
   };
-  const currentLanguague = useAppLanguage();
-  const allCodes = useAppTranslationAllCode();
+  const currentLanguague = useSelectorLanguage();
+  const allCodes = useSelectorTranslationAllCode();
   return (
     <div className="home-section">
       <div className="outstanding-doctors">

@@ -6,7 +6,7 @@ import { User, responseFetchedUser } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
 import { toast } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
-import { FilterCodeArray, useAppLanguage } from '../../../../../redux/handyHelper';
+import { FilterCodeArray, useSelectorLanguage } from '../../../../../redux/handyHelper';
 
 interface Props {
   modalTitle: string;
@@ -25,7 +25,7 @@ const ManagingUserModal: React.FC<Props> = ({
   const [userDetails, setUserDetails] = useState<User>(
     editUserDetail ? editUserDetail : initialInputForm,
   );
-  const language = useAppLanguage();
+  const language = useSelectorLanguage();
   const genderArray = FilterCodeArray('gender');
   const roleArray = FilterCodeArray('role');
   const positionArray = FilterCodeArray('position');

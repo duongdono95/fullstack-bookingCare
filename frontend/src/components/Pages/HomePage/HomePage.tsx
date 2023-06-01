@@ -9,29 +9,17 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllCode, getDoctors } from '../../../services/userServices';
 import { ConvertedCodeType, User } from '../../../utils/types';
 import { useDispatch } from 'react-redux';
-import { saveAllCodes, saveTranslationCodes } from '../../../redux/appSlice';
+import { saveAllCodes, saveAllDoctors, saveTranslationCodes } from '../../../redux/appSlice';
 import ConvertedAllCode from '../../../redux/handyHelper';
+import { GetAllCodeQuery, GetDoctorQuery } from '../../../services/apiQuery';
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const [doctors, setDoctors] = useState<User[]>();
-  const doctorUserQuery = useQuery({
-    queryKey: ['users', 'doctor'],
-    queryFn: () => getDoctors('R2'),
-  });
-  const allCodeQuery = useQuery({
-    queryKey: ['code'],
-    queryFn: () => getAllCode('ALL'),
-  });
+  const allCodeQuery = GetAllCodeQuery();
+  const doctorsQuery = GetDoctorQuery();
   useEffect(() => {
     if (allCodeQuery.data) {
-      if (doctorUserQuery.data?.errCode !== 0) {
-        console.log(doctorUserQuery.data?.errMessage);
-      } else {
-        setDoctors(doctorUserQuery.data?.data.doctors);
-      }
-    }
-    if (doctorUserQuery.data) {
       if (allCodeQuery.data?.errCode !== 0) {
         console.log(allCodeQuery.data?.errMessage);
       } else {
@@ -40,8 +28,15 @@ const HomePage = () => {
         dispatch(saveAllCodes(allCodeQuery.data?.data));
       }
     }
-  }, [doctorUserQuery.data, allCodeQuery.data]);
-
+    if (doctorsQuery.data) {
+      if (doctorsQuery.data.errCode !== 0) {
+        console.log(doctorsQuery.data.errMessage);
+      } else {
+        setDoctors(doctorsQuery.data.data.doctors);
+        dispatch(saveAllDoctors(doctorsQuery.data.data.doctors));
+      }
+    }
+  }, [doctorsQuery.data, allCodeQuery.data]);
   return (
     <div className="home-page">
       <HeroSection />
