@@ -33,17 +33,18 @@ const ManagingDoctors = () => {
     }));
   };
   console.log(doctorForm);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
   return (
     <div className="managing-doctors">
       <h1>
         <FormattedMessage id="admin.manage-doctor.title" />
       </h1>
-      <form className="managing-doctor--form">
+      <form className="managing-doctor--form" onSubmit={(e) => handleSubmit(e)}>
         <div className="form-group">
           <label htmlFor="doctor-name">
             <FormattedMessage id="admin.manage-doctor.select-doctor" />
           </label>
-          <select defaultValue={doctors[0].id} name="doctor-name" id="doctor-name">
+          <select required defaultValue={doctors[0].id} name="doctor-name" id="doctor-name">
             {doctors.map((item, index) => {
               return (
                 <option key={index} value={item.id}>
@@ -59,7 +60,7 @@ const ManagingDoctors = () => {
           <label htmlFor="price">
             <FormattedMessage id="admin.manage-doctor.price" />
           </label>
-          <select defaultValue={prices[0].keyMap} name="price" id="price">
+          <select required defaultValue={prices[0].keyMap} name="price" id="price">
             {prices.map((item, index) => {
               return (
                 <option key={index} value={item.keyMap}>
@@ -73,7 +74,7 @@ const ManagingDoctors = () => {
           <label htmlFor="province">
             <FormattedMessage id="admin.manage-doctor.province" />
           </label>
-          <select defaultValue={provinces[0].keyMap} name="province" id="province">
+          <select required defaultValue={provinces[0].keyMap} name="province" id="province">
             {provinces.map((item, index) => {
               return (
                 <option key={index} value={item.keyMap}>
@@ -87,7 +88,7 @@ const ManagingDoctors = () => {
           <label htmlFor="payment">
             <FormattedMessage id="admin.manage-doctor.payment" />
           </label>
-          <select defaultValue={payments[0].keyMap} name="payment" id="payment">
+          <select required defaultValue={payments[0].keyMap} name="payment" id="payment">
             {payments.map((item, index) => {
               return (
                 <option key={index} value={item.keyMap}>
@@ -106,6 +107,7 @@ const ManagingDoctors = () => {
             name="clinicName"
             type="text"
             onChange={(e) => handleInputOnChange(e)}
+            required
           />
         </div>
         <div className="form-group">
@@ -117,17 +119,19 @@ const ManagingDoctors = () => {
             value={doctorForm.clinicAddress}
             type="text"
             onChange={(e) => handleInputOnChange(e)}
+            required
           />
         </div>
         <div className="form-group note">
-          <label htmlFor="note">
+          <label htmlFor="about">
             <FormattedMessage id="admin.manage-doctor.intro" />
           </label>
           <input
-            name="intro"
+            name="about"
             value={doctorForm.about}
             type="text-area"
             onChange={(e) => handleInputOnChange(e)}
+            required
           />
         </div>
         <div className="form-group note">
