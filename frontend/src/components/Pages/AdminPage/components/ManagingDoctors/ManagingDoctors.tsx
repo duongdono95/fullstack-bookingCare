@@ -7,7 +7,11 @@ import {
 } from '../../../../../redux/handyHelper';
 import { InitialDoctorDetailForm } from '../../../../../utils/types';
 import { FormattedMessage } from 'react-intl';
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
 
+const mdParser = new MarkdownIt(/* Markdown-it options*/);
 const ManagingDoctors = () => {
   const doctors = useSelectorDoctor();
   const prices = FilterCodeArray('price');
@@ -145,6 +149,13 @@ const ManagingDoctors = () => {
             onChange={(e) => handleInputOnChange(e)}
           />
         </div>
+        <MdEditor
+          style={{ height: '500px' }}
+          renderHTML={(text) => mdParser.render(text)}
+          // onChange={this.handleEditorChange}
+          // value={this.state.contentMarkdown}
+        />
+
         <div className="submit-btn">
           <button type="submit">
             <FormattedMessage id="admin.manage-doctor.save" />

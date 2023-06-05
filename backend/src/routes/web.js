@@ -1,6 +1,7 @@
 import express from 'express';
 import userController from '../nodeControllers/userController';
 import homePageController from '../nodeControllers/homePageController';
+import doctorController from '../nodeControllers/doctorController';
 let router = express.Router();
 
 let initWebRoutes = (app) => {
@@ -10,7 +11,9 @@ let initWebRoutes = (app) => {
   router.post('/admin/editUser', userController.editUser);
   router.delete('/admin/deleteUser', userController.deleteUser);
 
-  router.get('/homePage/getAllDoctors', homePageController.getDoctors)
+  router.post('/doctor/saveDoctorDetails', doctorController.postDoctorInfor);
+
+  router.get('/homePage/getAllDoctors', homePageController.getDoctors);
   router.get('/api/allcode', userController.getAllCode);
   return app.use('/', router);
 };
