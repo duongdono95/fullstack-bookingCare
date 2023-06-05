@@ -100,4 +100,5 @@ export type InitialDoctorDetailForm = {
   clinicAddress: string,
   about?: string,
   note?: string,
+  contentMarkdown: { text: string; html: string },
 };

@@ -9,6 +9,7 @@ import { InitialDoctorDetailForm } from '../../../../../utils/types';
 import { FormattedMessage } from 'react-intl';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
+// import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 
 const mdParser = new MarkdownIt(/* Markdown-it options*/);
@@ -27,6 +28,10 @@ const ManagingDoctors = () => {
     clinicAddress: '',
     about: '',
     note: '',
+    contentMarkdown: {
+      text: '',
+      html: '',
+    },
   };
   const [doctorForm, setDoctorForm] = useState<InitialDoctorDetailForm>(initialDoctorForm);
 
@@ -38,6 +43,13 @@ const ManagingDoctors = () => {
   };
   console.log(doctorForm);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
+  const handleEditorChange = (content: { text: string; html: string }) => {
+    setDoctorForm((prev) => ({
+      ...prev,
+      contentMarkdown: content,
+    }));
+  };
+  console.log(doctorForm);
   return (
     <div className="managing-doctors">
       <h1>
@@ -151,9 +163,9 @@ const ManagingDoctors = () => {
         </div>
         <MdEditor
           style={{ height: '500px' }}
-          renderHTML={(text) => mdParser.render(text)}
-          // onChange={this.handleEditorChange}
-          // value={this.state.contentMarkdown}
+          renderHTML={(text: any) => mdParser.render(text)}
+          onChange={(content) => handleEditorChange(content)}
+          value={doctorForm.contentMarkdown.text}
         />
 
         <div className="submit-btn">
