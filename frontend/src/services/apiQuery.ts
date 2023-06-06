@@ -1,6 +1,5 @@
-import {  useQuery } from "@tanstack/react-query";
-import { getAllCode, getDoctors } from "./userServices";
-
+import { useQuery } from '@tanstack/react-query'
+import { getAllCode, getDoctors, postDoctorInfo } from "./userServices";
 
 
 export  const GetAllCodeQuery = ( )  => {

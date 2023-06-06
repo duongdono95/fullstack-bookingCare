@@ -13,6 +13,18 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      contentHTML: {
+        allowNull: false,
+        type: Sequelize.TEXT('long')
+      },
+      contentMarkdown: {
+        allowNull: false,
+        type: Sequelize.TEXT('long')
+      },
+      description: {
+        allowNull: true,
+        type: Sequelize.TEXT('long')
+      },
       priceId: {
         type: Sequelize.STRING,
         allowNull: false
@@ -25,22 +37,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      addressClinic: {
+      clinicName: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      nameClinic: {
+      clinicAddress: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      note: {
-        type: Sequelize.STRING,
-      },
-      count: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-      },
+
       createdAt: {
         allowNull: true,
         type: Sequelize.DATE

@@ -92,13 +92,21 @@ export type responseFetchAllCode = {
 }
 
 export type InitialDoctorDetailForm = {
-  doctorId: string | undefined,
+  doctorId: number | null,
   price: string | undefined,
   payment: string | undefined,
   province: string | undefined,
   clinicName: string,
   clinicAddress: string,
-  about?: string,
-  note?: string,
-  contentMarkdown: { text: string; html: string },
+  contentMarkdown: string,
+  contentHTML : string,
+  description : string,
+  action?: string,
+};
+export type responseSaveDoctorDetails = {
+  errCode: number;
+  errMessage: string;
+  data: {
+    doctors: InitialDoctorDetailForm
+  };
 };

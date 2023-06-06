@@ -36,6 +36,7 @@ const ManagingUsers = () => {
       return;
     },
   });
+
   const handleDeleteRequest = (userId: string | number) => {
     deleteUserMutation.mutate(userId);
     console.log(deleteUserMutation);

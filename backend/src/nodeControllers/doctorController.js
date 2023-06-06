@@ -1,8 +1,7 @@
-const doctorServices = require('../nodeServices/doctorServices');
-
-const postDoctorInfor = async (req, res) => {
+import doctorServices from '../nodeServices/doctorServices'
+const postDoctorInfo = async (req, res) => {
   try {
-    let response = await doctorServices.postDoctorInfor(req.body);
+    let response = await doctorServices.postDoctorInfo(req.body);
     return res.status(200).json(response);
   } catch (e) {
     console.log(e);
@@ -13,5 +12,5 @@ const postDoctorInfor = async (req, res) => {
   }
 };
 module.exports = {
-  postDoctorInfor: postDoctorInfor,
+  postDoctorInfo: postDoctorInfo,
 };

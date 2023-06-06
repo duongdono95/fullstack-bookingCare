@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { User, responseFetchedDoctors, userLoginResponse } from '../utils/types';
+import {
+  InitialDoctorDetailForm,
+  User,
+  responseFetchedDoctors,
+  responseSaveDoctorDetails,
+  userLoginResponse,
+} from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
 
@@ -39,5 +45,9 @@ export const getDoctors = async (code: string) => {
 
 export const getAllCode = async (type: string) => {
   const response = http.get<responseFetchAllCode>(`/api/allcode?type=${type}`);
+  return (await response).data;
+};
+export const postDoctorInfo = async (doctorInput: InitialDoctorDetailForm) => {
+  const response = http.post<responseSaveDoctorDetails>(`/doctor/saveDoctorDetails`, doctorInput);
   return (await response).data;
 };
