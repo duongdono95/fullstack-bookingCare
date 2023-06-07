@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Schedule extends Model {
     /**
@@ -17,17 +15,17 @@ module.exports = (sequelize, DataTypes) => {
       //   foreignKey: 'doctorId', targetKey: 'id', as: 'doctorData'
       // })
     }
-  };
-  Schedule.init({
-    currentNumber: DataTypes.INTEGER,
-    maxNumber: DataTypes.INTEGER,
-    date: DataTypes.STRING,
-    timeType: DataTypes.STRING,
-    doctorId: DataTypes.INTEGER,
-
-  }, {
-    sequelize,
-    modelName: 'Schedule',
-  });
+  }
+  Schedule.init(
+    {
+      date: DataTypes.STRING,
+      timeType: DataTypes.STRING,
+      doctorId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'Schedule',
+    },
+  );
   return Schedule;
 };
