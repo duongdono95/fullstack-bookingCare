@@ -30,6 +30,7 @@ const ManagingSchedules = () => {
       setSelectedTimeArray(filteredArray);
     }
   };
+  console.log(selectedDate);
   const postSchedulesMutation = useMutation({
     mutationFn: async (schedules: DoctorSchedule[]) => {
       const response = await saveDoctorSchedules(schedules);
