@@ -31,6 +31,11 @@
       background-color: var(--black01);
       color: #525252;
     }
+    .date-picker {
+      border: 1px solid var(--black01);
+      width: 171px;
+      cursor: pointer;
+    }
   }
   .schedules {
     display: flex;

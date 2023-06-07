@@ -69,6 +69,10 @@ const postDoctorInfo = (inputData) => {
     }
   });
 };
+const saveDoctorSchedules = (data) => {
+  console.log(data)
+}
 module.exports = {
   postDoctorInfo: postDoctorInfo,
+  saveDoctorSchedules: saveDoctorSchedules
 };

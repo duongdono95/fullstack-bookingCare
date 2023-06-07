@@ -12,8 +12,10 @@ let initWebRoutes = (app) => {
   router.delete('/admin/deleteUser', userController.deleteUser);
 
   router.post('/doctor/saveDoctorDetails', doctorController.postDoctorInfo);
+  router.post('/doctor/saveDoctorSchedules', doctorController.saveDoctorSchedules)
 
   router.get('/homePage/getAllDoctors', homePageController.getDoctors);
+
   router.get('/api/allcode', userController.getAllCode);
   return app.use('/', router);
 };

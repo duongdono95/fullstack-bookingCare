@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {
+  DoctorSchedule,
+  GeneralResponse,
   InitialDoctorDetailForm,
   User,
   responseFetchedDoctors,
@@ -49,5 +51,10 @@ export const getAllCode = async (type: string) => {
 };
 export const postDoctorInfo = async (doctorInput: InitialDoctorDetailForm) => {
   const response = http.post<responseSaveDoctorDetails>(`/doctor/saveDoctorDetails`, doctorInput);
+  return (await response).data;
+};
+
+export const saveDoctorSchedules = async (schedules: DoctorSchedule[]) => {
+  const response = http.post<GeneralResponse>('/doctor/saveDoctorSchedules', schedules);
   return (await response).data;
 };

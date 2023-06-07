@@ -110,3 +110,12 @@ export type responseSaveDoctorDetails = {
     doctors: InitialDoctorDetailForm
   };
 };
+export type DoctorSchedule = {
+  selectedDate : Date,
+  selectedDoctor: number
+  selectedSchedule: string,
+}
+export type GeneralResponse = {
+  errCode: number;
+  errMessage: string;
+}
