@@ -1,4 +1,4 @@
-import doctorServices from '../nodeServices/doctorServices'
+import doctorServices from '../nodeServices/doctorServices';
 const postDoctorInfo = async (req, res) => {
   try {
     let response = await doctorServices.postDoctorInfo(req.body);
@@ -19,11 +19,24 @@ const saveDoctorSchedules = async (req, res) => {
     console.log(e);
     return res.status(200).json({
       errCode: -1,
-      errMessage: 'Error from server'
-    })
+      errMessage: 'Error from server',
+    });
   }
-}
+};
+const getAllBookedSchedules = async (req, res) => {
+  try {
+    let response = await doctorServices.getAllBookedSchedules(req.query);
+    return res.status(200).json(response);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: 'Error from server',
+    });
+  }
+};
 module.exports = {
   postDoctorInfo: postDoctorInfo,
   saveDoctorSchedules: saveDoctorSchedules,
+  getAllBookedSchedules: getAllBookedSchedules,
 };

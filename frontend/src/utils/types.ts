@@ -58,7 +58,7 @@ export type responseFetchedDoctors = {
   errCode: number;
   errMessage: string;
   data: {
-    doctors: User[]
+    doctors: User[];
   };
 };
 
@@ -76,46 +76,55 @@ export type InitialInputForm = {
 };
 
 export type OriginalCode = {
-  createdAt: null,
-  id: number,
-  keyMap:string,
-  type:string,
-  updatedAt:null,
-  valueEn:string,
-  valueVi:string
-}
-export type ConvertedCodeType = Record<string, { valueEn: string; valueVi: string; }>
+  createdAt: null;
+  id: number;
+  keyMap: string;
+  type: string;
+  updatedAt: null;
+  valueEn: string;
+  valueVi: string;
+};
+export type ConvertedCodeType = Record<string, { valueEn: string; valueVi: string }>;
 export type responseFetchAllCode = {
   errCode: number;
   errMessage: string;
-  data: OriginalCode[]
-}
+  data: OriginalCode[];
+};
 
 export type InitialDoctorDetailForm = {
-  doctorId: number | null,
-  price: string | undefined,
-  payment: string | undefined,
-  province: string | undefined,
-  clinicName: string,
-  clinicAddress: string,
-  contentMarkdown: string,
-  contentHTML : string,
-  description : string,
-  action?: string,
+  doctorId: number | null;
+  price: string | undefined;
+  payment: string | undefined;
+  province: string | undefined;
+  clinicName: string;
+  clinicAddress: string;
+  contentMarkdown: string;
+  contentHTML: string;
+  description: string;
+  action?: string;
 };
 export type responseSaveDoctorDetails = {
   errCode: number;
   errMessage: string;
   data: {
-    doctors: InitialDoctorDetailForm
+    doctors: InitialDoctorDetailForm;
   };
 };
 export type DoctorSchedule = {
-  selectedDate : Date,
-  selectedDoctor: number
-  selectedSchedule: string,
-}
+  date: string;
+  doctorId: number;
+  timeType: string;
+};
 export type GeneralResponse = {
   errCode: number;
   errMessage: string;
-}
+};
+export type GetAllBookedSchedule = {
+  errCode: number;
+  errMessage: string;
+  allBookedSchedules: { timeType: string }[];
+};
+export type GetAllBookedScheduleParam = {
+  date: string;
+  doctorId: number;
+};

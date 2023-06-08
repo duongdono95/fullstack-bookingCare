@@ -1,18 +1,26 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllCode, getDoctors, postDoctorInfo } from "./userServices";
+import { useQuery } from '@tanstack/react-query';
+import { GetAllBookedScheduleParam } from '../utils/types';
 
+import { getAllBookedSchedules, getAllCode, getDoctors } from './userServices';
 
-export  const GetAllCodeQuery = ( )  => {
-    const allCodesQuery =  useQuery({
-      queryKey: ['code'],
+export const GetAllCodeQuery = () => {
+  const allCodesQuery = useQuery({
+    queryKey: ['code'],
     queryFn: () => getAllCode('ALL'),
-    })
-    return allCodesQuery
-  }
+  });
+  return allCodesQuery;
+};
 export const GetDoctorQuery = () => {
- const doctorsQuery = useQuery({
+  const doctorsQuery = useQuery({
     queryKey: ['users', 'doctor'],
     queryFn: () => getDoctors('R2'),
   });
-  return doctorsQuery
-}
+  return doctorsQuery;
+};
+export const GetAllBookedScheduleQuery = (data: GetAllBookedScheduleParam) => {
+  const bookedSchedules = useQuery({
+    queryKey: ['users', 'doctor', 'schedule', data.date, data.doctorId],
+    queryFn: () => getAllBookedSchedules(data),
+  });
+  return bookedSchedules.data;
+};

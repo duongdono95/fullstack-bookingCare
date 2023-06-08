@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ManagingSchedules.scss';
-import { useMutation } from '@tanstack/react-query';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 import {
   FilterCodeArray,
   useSelectorDoctor,
@@ -11,15 +11,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-toastify';
 import { DoctorSchedule } from '../../../../../utils/types';
 import { saveDoctorSchedules } from '../../../../../services/userServices';
+import { GetAllBookedScheduleQuery } from '../../../../../services/apiQuery';
+import { formattedDate } from '../../../../../utils/formattedDate';
 const ManagingSchedules = () => {
   const doctors = useSelectorDoctor();
   const language = useSelectorLanguage();
   const timeArray = FilterCodeArray('time');
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const isWeekday = (date: Date) => {
     const day = date.getDay();
     return day !== 0 && day !== 6;
   };
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedTimeArray, setSelectedTimeArray] = useState<string[]>([]);
   const [selectedDoctor, setSelectedDoctor] = useState<number>(parseInt(doctors[0].id as string));
   const handleSelection = (keyMap: string) => {
@@ -30,7 +32,6 @@ const ManagingSchedules = () => {
       setSelectedTimeArray(filteredArray);
     }
   };
-  console.log(selectedDate);
   const postSchedulesMutation = useMutation({
     mutationFn: async (schedules: DoctorSchedule[]) => {
       const response = await saveDoctorSchedules(schedules);
@@ -42,6 +43,10 @@ const ManagingSchedules = () => {
       return;
     },
   });
+  const bookedScheduleQuery = GetAllBookedScheduleQuery({
+    date: formattedDate(selectedDate as Date),
+    doctorId: selectedDoctor,
+  });
   const handlePostSchedules = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const formattedSchedules: DoctorSchedule[] = [];
@@ -52,15 +57,21 @@ const ManagingSchedules = () => {
     if (selectedDoctor && selectedTimeArray.length > 0 && selectedDate) {
       selectedTimeArray.forEach((item) => {
         const formattedSchedule: DoctorSchedule = {
-          selectedDate: selectedDate,
-          selectedDoctor: selectedDoctor,
-          selectedSchedule: item,
+          date: formattedDate(selectedDate),
+          doctorId: selectedDoctor,
+          timeType: item,
         };
         formattedSchedules.push(formattedSchedule);
       });
     }
     postSchedulesMutation.mutate(formattedSchedules);
   };
+
+  const allBookedSchedule = bookedScheduleQuery?.allBookedSchedules;
+  const filteredTimeArray = timeArray.filter((item) =>
+    allBookedSchedule?.every((schedule) => item.keyMap !== schedule.timeType),
+  );
+  console.log(filteredTimeArray);
   return (
     <div className="managing-schedules">
       <h1>Managing Doctor's Schedules</h1>
@@ -98,19 +109,21 @@ const ManagingSchedules = () => {
         <div className="form-group">
           <label htmlFor="schedules">Available Times</label>
           <div className="schedules">
-            {timeArray.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className={
-                    selectedTimeArray.includes(item.keyMap) ? 'schedule active' : 'schedule'
-                  }
-                  onClick={() => handleSelection(item.keyMap)}
-                >
-                  {language === 'vi' ? `${item.valueVi}` : `${item.valueEn}`}
-                </div>
-              );
-            })}
+            <>
+              {filteredTimeArray?.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={
+                      selectedTimeArray.includes(item.keyMap) ? 'schedule active' : 'schedule'
+                    }
+                    onClick={() => handleSelection(item.keyMap)}
+                  >
+                    {language === 'vi' ? `${item.valueVi}` : `${item.valueEn}`}
+                  </div>
+                );
+              })}
+            </>
           </div>
         </div>
         <div className="submit-btn">
