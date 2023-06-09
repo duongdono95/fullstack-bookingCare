@@ -23,7 +23,6 @@ const OutstandingDoctors: React.FC<Props> = ({ doctors }) => {
   };
   const currentLanguague = useSelectorLanguage();
   const allCodes = useSelectorTranslationAllCode();
-
   return (
     <div className="home-section">
       <div className="outstanding-doctors">

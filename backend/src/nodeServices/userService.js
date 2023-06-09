@@ -62,6 +62,9 @@ const getUsers = (userId) => {
           attributes: {
             exclude: ['password'],
           },
+          include: [
+            { model: db.Allcode, as: 'roleData', attributes: ['valueEn', 'valueVi'] },
+          ]
         });
       }
       resolve(users);

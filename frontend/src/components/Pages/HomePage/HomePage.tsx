@@ -17,6 +17,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const [doctors, setDoctors] = useState<User[]>();
   const allCodeQuery = GetAllCodeQuery();
+  console.log(allCodeQuery);
   const doctorsQuery = GetDoctorQuery();
   useEffect(() => {
     if (allCodeQuery.data) {
