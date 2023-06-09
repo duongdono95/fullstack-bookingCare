@@ -9,6 +9,7 @@ import {
   userLoginResponse,
   GetAllBookedScheduleParam,
   GetAllBookedSchedule,
+  responseFetchedUsers,
 } from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
@@ -21,6 +22,12 @@ export const userLogin = async (email: string, password: string) => {
   return (await response).data;
 };
 export const getUsers = async (id: string | number) => {
+  const response = http.get<responseFetchedUsers>('/admin/getUsers', {
+    params: { id },
+  });
+  return (await response).data;
+};
+export const getUser = async (id: string | number) => {
   const response = http.get<responseFetchedUser>('/admin/getUsers', {
     params: { id },
   });

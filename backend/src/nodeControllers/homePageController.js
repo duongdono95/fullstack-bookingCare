@@ -1,4 +1,4 @@
-import { request } from 'express';
+
 import homePageService from '../nodeServices/homePageService'
 
 export const getDoctors = async (req, res) => {

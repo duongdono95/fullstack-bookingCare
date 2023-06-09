@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './ManagingSchedules.scss';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import {
   FilterCodeArray,
   useSelectorDoctor,
   useSelectorLanguage,
 } from '../../../../../redux/handyHelper';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-toastify';
 import { DoctorSchedule } from '../../../../../utils/types';
 import { saveDoctorSchedules } from '../../../../../services/userServices';
 import { GetAllBookedScheduleQuery } from '../../../../../services/apiQuery';
-import { formattedDate } from '../../../../../utils/formattedDate';
+import DatePickerComponent from '../../../../../redux/DatePickerComponent';
 const ManagingSchedules = () => {
   const doctors = useSelectorDoctor();
   const language = useSelectorLanguage();
   const timeArray = FilterCodeArray('time');
-  const isWeekday = (date: Date) => {
-    const day = date.getDay();
-    return day !== 0 && day !== 6;
-  };
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
+  const [selectedDate, setSelectedDate] = useState<string>();
   const [selectedTimeArray, setSelectedTimeArray] = useState<string[]>([]);
   const [selectedDoctor, setSelectedDoctor] = useState<number>(parseInt(doctors[0].id as string));
+
   const handleSelection = (keyMap: string) => {
     if (!selectedTimeArray.includes(keyMap)) {
       setSelectedTimeArray((prev) => [...prev, keyMap]);
@@ -32,6 +28,16 @@ const ManagingSchedules = () => {
       setSelectedTimeArray(filteredArray);
     }
   };
+
+  const bookedScheduleQuery = GetAllBookedScheduleQuery({
+    date: selectedDate ? selectedDate : '0',
+    doctorId: selectedDoctor,
+  });
+  const allBookedSchedule =
+    bookedScheduleQuery.data && bookedScheduleQuery?.data.allBookedSchedules;
+  const filteredTimeArray = timeArray.filter((item) =>
+    allBookedSchedule?.every((schedule) => item.keyMap !== schedule.timeType),
+  );
   const postSchedulesMutation = useMutation({
     mutationFn: async (schedules: DoctorSchedule[]) => {
       const response = await saveDoctorSchedules(schedules);
@@ -39,14 +45,11 @@ const ManagingSchedules = () => {
         toast.error(response.errMessage);
       } else {
         toast.success('Save Doctor Schedule Successfully');
+        bookedScheduleQuery.refetch();
       }
-      return;
     },
   });
-  const bookedScheduleQuery = GetAllBookedScheduleQuery({
-    date: formattedDate(selectedDate as Date),
-    doctorId: selectedDoctor,
-  });
+
   const handlePostSchedules = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const formattedSchedules: DoctorSchedule[] = [];
@@ -57,7 +60,7 @@ const ManagingSchedules = () => {
     if (selectedDoctor && selectedTimeArray.length > 0 && selectedDate) {
       selectedTimeArray.forEach((item) => {
         const formattedSchedule: DoctorSchedule = {
-          date: formattedDate(selectedDate),
+          date: selectedDate,
           doctorId: selectedDoctor,
           timeType: item,
         };
@@ -67,11 +70,6 @@ const ManagingSchedules = () => {
     postSchedulesMutation.mutate(formattedSchedules);
   };
 
-  const allBookedSchedule = bookedScheduleQuery?.allBookedSchedules;
-  const filteredTimeArray = timeArray.filter((item) =>
-    allBookedSchedule?.every((schedule) => item.keyMap !== schedule.timeType),
-  );
-  console.log(filteredTimeArray);
   return (
     <div className="managing-schedules">
       <h1>Managing Doctor's Schedules</h1>
@@ -98,37 +96,30 @@ const ManagingSchedules = () => {
         <div className="form-group">
           <label htmlFor="">Select Date</label>
           <div className="date-picker">
-            <DatePicker
-              minDate={new Date()}
-              filterDate={isWeekday}
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
-            />
+            <DatePickerComponent setSelectedDate={setSelectedDate} />
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="schedules">Available Times</label>
           <div className="schedules">
-            <>
-              {filteredTimeArray?.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={
-                      selectedTimeArray.includes(item.keyMap) ? 'schedule active' : 'schedule'
-                    }
-                    onClick={() => handleSelection(item.keyMap)}
-                  >
-                    {language === 'vi' ? `${item.valueVi}` : `${item.valueEn}`}
-                  </div>
-                );
-              })}
-            </>
+            {filteredTimeArray?.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={
+                    selectedTimeArray.includes(item.keyMap) ? 'schedule active' : 'schedule'
+                  }
+                  onClick={() => handleSelection(item.keyMap)}
+                >
+                  {language === 'vi' ? `${item.valueVi}` : `${item.valueEn}`}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="submit-btn">
           <button type="submit" onClick={(e) => handlePostSchedules(e)}>
-            Save Doctor Details
+            Save Doctor Booked Schedules
           </button>
         </div>
       </form>

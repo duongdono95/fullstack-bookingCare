@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { User } from '../../../utils/types';
 import { useSelectorTranslationAllCode, useSelectorLanguage } from '../../../redux/handyHelper';
+import { Link } from 'react-router-dom';
 
 interface Props {
   doctors: User[];
@@ -22,6 +23,7 @@ const OutstandingDoctors: React.FC<Props> = ({ doctors }) => {
   };
   const currentLanguague = useSelectorLanguage();
   const allCodes = useSelectorTranslationAllCode();
+
   return (
     <div className="home-section">
       <div className="outstanding-doctors">
@@ -31,7 +33,7 @@ const OutstandingDoctors: React.FC<Props> = ({ doctors }) => {
             doctors.map((doctor, index) => {
               const { image, positionId, roleId, firstName, lastName } = doctor;
               return (
-                <div key={index} className="doctor">
+                <Link to={`/doctor/${doctor.id}`} key={index} className="doctor">
                   <div className="doctor-img" style={{ backgroundImage: `url(${image})` }}></div>
                   <div className="doctor-positions">
                     {currentLanguague === 'vi'
@@ -56,7 +58,7 @@ const OutstandingDoctors: React.FC<Props> = ({ doctors }) => {
                       </>
                     )}
                   </div>
-                </div>
+                </Link>
               );
             })}
         </Slider>

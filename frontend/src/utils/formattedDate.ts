@@ -1,3 +1,3 @@
-export const formattedDate = (date: Date) => {
-  return date.toISOString().split('T')[0];
+export const formattedDate = (date: Date | null) => {
+  return date ? date.toISOString().split('T')[0] : '';
 };

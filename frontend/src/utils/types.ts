@@ -52,6 +52,12 @@ export interface User {
 export type responseFetchedUser = {
   errCode: number;
   errMessage: string;
+  users: User;
+};
+
+export type responseFetchedUsers = {
+  errCode: number;
+  errMessage: string;
   users: User[];
 };
 export type responseFetchedDoctors = {

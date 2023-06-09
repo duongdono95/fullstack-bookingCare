@@ -11,6 +11,9 @@ import ManagingUsers from '../components/Pages/AdminPage/components/ManagingUser
 import ManagingDoctors from '../components/Pages/AdminPage/components/ManagingDoctors/ManagingDoctors';
 import ManagingSchedules from '../components/Pages/AdminPage/components/ManagingSchedules/ManagingSchedules';
 import ManagingSpecialties from '../components/Pages/AdminPage/components/ManagingSpecialties/ManagingSpecialties';
+import ClinicDetailPage from '../components/Pages/ClinicDetailPage/ClinicDetailPage';
+import SpecialtyDetailPage from '../components/Pages/SpecialtyDetailPage/SpecialtyDetailPage';
+import DetailPageLayout from '../components/Layout/DetailPageLayout/DetailPageLayout';
 
 const AppRouter = () => {
   const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
@@ -19,7 +22,12 @@ const AppRouter = () => {
       <Routes>
         <Route path={'/'} element={<PageLayout />}>
           <Route path={'/'} element={<HomePage />} />
-          <Route path={':doctorId'} element={<DoctorDetailPage />} />
+          <Route path={'doctor/:doctorId'} element={<DetailPageLayout category="doctor" />} />
+          <Route path={'clinic/:clinicId'} element={<DetailPageLayout category="clinic" />} />
+          <Route
+            path={'specialty/:specialtyId'}
+            element={<DetailPageLayout category="specialty" />}
+          />
         </Route>
         <Route path={'/login'} element={<LoginPage />} />
         <Route path={'/system'} element={isLoggedIn ? <AdminPage /> : <LoginPage />}>

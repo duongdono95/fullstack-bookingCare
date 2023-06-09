@@ -1,8 +1,9 @@
-import React from 'react'
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import './SpecialitiesSection.scss'
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import './SpecialitiesSection.scss';
+import { Link } from 'react-router-dom';
 
 const SpecialitiesSection = () => {
   const settings = {
@@ -13,51 +14,31 @@ const SpecialitiesSection = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    pauseOnHover: true
+    pauseOnHover: true,
   };
   return (
-    <div className='section-container'>
+    <div className="section-container">
       <div className="section-title">Chuyên Khoa Phổ Biến</div>
       <Slider {...settings}>
-            <div className="section-post">
-              <div className="post-img"></div>
-              <div className="post-details">
-                  Cơ Xương Khớp
-                </div>
-            </div>
-            <div className="section-post">
-              <div className="post-img"></div>
-              <div className="post-details">
-                  Cơ Xương Khớp
-                </div>
-            </div>
-            <div className="section-post">
-              <div className="post-img"></div>
-              <div className="post-details">
-                  Cơ Xương Khớp
-                </div>
-            </div>
-            <div className="section-post">
-              <div className="post-img"></div>
-              <div className="post-details">
-                  Cơ Xương Khớp
-                </div>
-            </div>
-            <div className="section-post">
-              <div className="post-img"></div>
-              <div className="post-details">
-                  Cơ Xương Khớp
-                </div>
-            </div>
-            <div className="section-post">
-              <div className="post-img"></div>
-              <div className="post-details">
-                  Cơ Xương Khớp
-                </div>
-            </div>
+        <Link to={`/clinic/1`} className="section-post">
+          <div className="post-img"></div>
+          <div className="post-details">Cơ Xương Khớp</div>
+        </Link>
+        <Link to={`/clinic/1`} className="section-post">
+          <div className="post-img"></div>
+          <div className="post-details">Cơ Xương Khớp</div>
+        </Link>
+        <Link to={`/clinic/1`} className="section-post">
+          <div className="post-img"></div>
+          <div className="post-details">Cơ Xương Khớp</div>
+        </Link>
+        <Link to={`/clinic/1`} className="section-post">
+          <div className="post-img"></div>
+          <div className="post-details">Cơ Xương Khớp</div>
+        </Link>
       </Slider>
     </div>
-  )
-}
+  );
+};
 
-export default SpecialitiesSection
+export default SpecialitiesSection;

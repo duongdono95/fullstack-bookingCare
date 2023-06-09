@@ -35,6 +35,7 @@ const HomePage = () => {
         setDoctors(doctorsQuery.data.data.doctors);
         dispatch(saveAllDoctors(doctorsQuery.data.data.doctors));
       }
+      console.log(doctorsQuery.data);
     }
   }, [doctorsQuery.data, allCodeQuery.data]);
   return (

@@ -2,7 +2,7 @@ import { UseQueryResult, useMutation, useQueryClient } from '@tanstack/react-que
 import React, { useState } from 'react';
 import { createUser, editUser } from '../../../../../services/userServices';
 import { initialInputForm } from '../../../../../utils/constants';
-import { User, responseFetchedUser } from '../../../../../utils/types';
+import { User, responseFetchedUsers } from '../../../../../utils/types';
 import './ManagingUserModal.scss';
 import { toast } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
@@ -12,7 +12,7 @@ interface Props {
   modalTitle: string;
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   editUserDetail?: User;
-  usersQuery: UseQueryResult<responseFetchedUser, unknown>;
+  usersQuery: UseQueryResult<responseFetchedUsers, unknown>;
 }
 
 const ManagingUserModal: React.FC<Props> = ({

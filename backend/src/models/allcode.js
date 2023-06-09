@@ -8,16 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // // 1 - 1 : positionId and gender of user is listed in keyMap in AllCodes => user belong to allCode
-      // User.belongsTo(models.Allcode, { foreignKey: 'positionId', targetKey: 'keyMap', as: 'positionData' });
-      // User.belongsTo(models.Allcode, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' });
-      // // 1 - 1 : 1 user has one doctorId -> which is listed in Markdown
-      // User.hasOne(models.Markdown, { foreignKey: 'doctorId' });
-      // User.hasOne(models.Doctor_Infor, { foreignKey: 'doctorId' });
-      // User.hasMany(models.Schedule, {
-      //   foreignKey: 'doctorId',
-      //   as: 'doctorData',
-      // });
+      // Allcode.hasMany(models.User, { foreignKey: 'positionId', as: 'positionData' })
+      Allcode.hasMany(models.User, { foreignKey: 'roleId', as: 'roleData' })
+      // Allcode.hasMany(models.User, { foreignKey: 'gender', as: 'genderData' })
+      // Allcode.hasMany(models.Schedule, { foreignKey: 'timeType', as: 'timeTypeData' })
+
+      // Allcode.hasMany(models.Doctor_Infor, { foreignKey: 'priceId', as: 'priceTypeData' })
+      // Allcode.hasMany(models.Doctor_Infor, { foreignKey: 'provinceId', as: 'provinceTypeData' })
+      // Allcode.hasMany(models.Doctor_Infor, { foreignKey: 'paymentId', as: 'paymentTypeData' })
     }
   }
   User.init(
