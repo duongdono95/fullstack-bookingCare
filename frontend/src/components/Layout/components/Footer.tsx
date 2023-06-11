@@ -1,9 +1,13 @@
-import React from 'react'
-import '../PageLayout.scss'
+import React from 'react';
+import BusinessDetails from '../../Sections/BusinessDetails/BusinessDetails';
+import '../PageLayout.scss';
 const Footer = () => {
   return (
-    <div className='footer'>Copyright © 2012 - 2023 TermsFeed®. All rights reserved.</div>
-  )
-}
+    <div>
+      <BusinessDetails />
+      <div className="footer">Copyright © 2012 - 2023 TermsFeed®. All rights reserved.</div>
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;

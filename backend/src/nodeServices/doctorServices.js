@@ -8,14 +8,13 @@ const postDoctorInfo = (inputData) => {
         !inputData.doctorId |
         !inputData.contentHTML |
         !inputData.contentMarkdown |
-        !inputData.price |
-        !inputData.payment |
-        !inputData.province |
+        !inputData.priceId |
+        !inputData.paymentId |
+        !inputData.provinceId |
         !inputData.clinicName |
         !inputData.clinicAddress |
         !inputData.description |
         !inputData.action
-        // !inputData
       ) {
         resolve({
           errCode: 1,
@@ -28,9 +27,9 @@ const postDoctorInfo = (inputData) => {
             doctorId: inputData.doctorId,
             contentHTML: inputData.contentHTML,
             contentMarkdown: inputData.contentMarkdown,
-            priceId: inputData.price,
-            paymentId: inputData.payment,
-            provinceId: inputData.province,
+            priceId: inputData.priceId,
+            paymentId: inputData.paymentId,
+            provinceId: inputData.provinceId,
             clinicName: inputData.clinicName,
             clinicAddress: inputData.clinicAddress,
             description: inputData.description,
@@ -49,9 +48,9 @@ const postDoctorInfo = (inputData) => {
           (doctorInforDB.doctorId = inputData.doctorId),
             (doctorInforDB.contentHTML = inputData.contentHTML),
             (doctorInforDB.contentMarkdown = inputData.contentMarkdown),
-            (doctorInforDB.priceId = inputData.price),
-            (doctorInforDB.paymentId = inputData.payment),
-            (doctorInforDB.provinceId = inputData.province),
+            (doctorInforDB.priceId = inputData.priceId),
+            (doctorInforDB.paymentId = inputData.paymentId),
+            (doctorInforDB.provinceId = inputData.provinceId),
             (doctorInforDB.ClinicName = inputData.clinicName),
             (doctorInforDB.ClinicAddress = inputData.clinicAddress),
             (doctorInforDB.description = inputData.description),
@@ -121,8 +120,34 @@ const getAllBookedSchedules = (data) => {
     }
   });
 };
+const getDoctorDetails = (doctorId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      console.log(doctorId);
+      const doctorInfor = await db.Doctor_Infor.findOne({
+        where: {
+          doctorId: doctorId,
+        },
+        include: [
+          { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
+          { model: db.Allcode, as: 'provinceTypeData', attributes: ['valueEn', 'valueVi'] },
+          { model: db.Allcode, as: 'paymentTypeData', attributes: ['valueEn', 'valueVi'] },
+        ],
+      });
+      if (doctorInfor) {
+        resolve(doctorInfor);
+      } else {
+        resolve('Doctor not found');
+      }
+    } catch (e) {
+      console.log(e);
+      reject(e);
+    }
+  });
+};
 module.exports = {
   postDoctorInfo: postDoctorInfo,
   saveDoctorSchedules: saveDoctorSchedules,
   getAllBookedSchedules: getAllBookedSchedules,
+  getDoctorDetails: getDoctorDetails,
 };

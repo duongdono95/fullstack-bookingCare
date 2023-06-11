@@ -45,8 +45,12 @@ export interface User {
   lastName: string;
   phoneNumber: string;
   positionId: string;
-  roleId: string;
+  roleId?: string;
   updatedAt?: string;
+  roleData?: {
+    valueEn: string;
+    valueVi: string;
+  };
 }
 
 export type responseFetchedUser = {
@@ -98,16 +102,28 @@ export type responseFetchAllCode = {
 };
 
 export type InitialDoctorDetailForm = {
+  id?: number;
   doctorId: number | null;
-  price: string | undefined;
-  payment: string | undefined;
-  province: string | undefined;
+  priceId: string | undefined;
+  paymentId: string | undefined;
+  provinceId: string | undefined;
   clinicName: string;
   clinicAddress: string;
   contentMarkdown: string;
   contentHTML: string;
   description: string;
-  action?: string;
+  paymentTypeData?: {
+    valueEn: string;
+    valueVi: string;
+  };
+  priceTypeData?: {
+    valueEn: string;
+    valueVi: string;
+  };
+  provinceTypeData?: {
+    valueEn: string;
+    valueVi: string;
+  };
 };
 export type responseSaveDoctorDetails = {
   errCode: number;
@@ -133,4 +149,9 @@ export type GetAllBookedSchedule = {
 export type GetAllBookedScheduleParam = {
   date: string;
   doctorId: number;
+};
+export type GetDoctorById = {
+  errCode: number;
+  errMessage: string;
+  data: InitialDoctorDetailForm;
 };

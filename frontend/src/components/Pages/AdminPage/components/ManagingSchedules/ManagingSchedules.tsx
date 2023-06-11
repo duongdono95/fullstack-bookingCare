@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { DoctorSchedule } from '../../../../../utils/types';
 import { saveDoctorSchedules } from '../../../../../services/userServices';
 import { GetAllBookedScheduleQuery } from '../../../../../services/apiQuery';
-import DatePickerComponent from '../../../../../redux/DatePickerComponent';
+import DatePickerComponent from '../../../../../redux/DatePickerComponent/DatePickerComponent';
 const ManagingSchedules = () => {
   const doctors = useSelectorDoctor();
   const language = useSelectorLanguage();

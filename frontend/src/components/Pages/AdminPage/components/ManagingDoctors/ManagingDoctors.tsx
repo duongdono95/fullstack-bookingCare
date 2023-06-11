@@ -24,9 +24,9 @@ const ManagingDoctors = () => {
   const language = useSelectorLanguage();
   const initialDoctorForm = {
     doctorId: null,
-    price: language === 'vi' ? prices[0].valueVi : prices[0].valueEn,
-    payment: language === 'vi' ? payments[0].valueVi : payments[0].valueEn,
-    province: language === 'vi' ? provinces[0].valueVi : provinces[0].valueEn,
+    priceId: language === 'vi' ? prices[0].valueVi : prices[0].valueEn,
+    paymentId: language === 'vi' ? payments[0].valueVi : payments[0].valueEn,
+    provinceId: language === 'vi' ? provinces[0].valueVi : provinces[0].valueEn,
     clinicName: '',
     clinicAddress: '',
     contentMarkdown: '',

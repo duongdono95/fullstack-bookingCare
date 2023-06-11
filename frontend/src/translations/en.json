@@ -59,7 +59,7 @@
     "delete": "Delete"
   },
   "homepage": {
-    "outstanding-doctor": "Last week's featured doctor",
+    "outstanding-doctor": "Featured Doctors",
     "more-infor": "More Infor"
   },
   "manage-schedule": {
@@ -73,13 +73,13 @@
       "schedule": "Schedule",
       "no-schedule": "The Doctor has no empty Schedule today, please Choose Another day",
       "choose": "Choose",
-      "book-free": "Booking (Free)"
+      "book-free": "Booking (Free)",
+      "available-schedules": "Available Schedules"
     },
     "extra-infor-doctor": {
       "text-address": "Clinic Address",
       "price": "Examination price",
-      "detail": "See Details",
-      "payment": "The patient can pay the cost in the form of: ",
+      "payment": "Payment Methods: ",
       "hide-price": "Hide price list"
     },
     "booking-modal": {

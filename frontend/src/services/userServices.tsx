@@ -10,6 +10,7 @@ import {
   GetAllBookedScheduleParam,
   GetAllBookedSchedule,
   responseFetchedUsers,
+  GetDoctorById,
 } from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
@@ -68,16 +69,14 @@ export const saveDoctorSchedules = async (schedules: DoctorSchedule[]) => {
   return (await response).data;
 };
 
-// export const getAllBookedSchedules = async (aaaaaa: string, doctorId: string) => {
-//   const response = http.get<AllBookedSchedule>('/doctor/getAllBookedSchedules', {
-//     aaaaaa,
-//     doctorId,
-//   });
-//   return (await response).data;
-// };
 export const getAllBookedSchedules = async (data: GetAllBookedScheduleParam) => {
   const response = http.get<GetAllBookedSchedule>('/doctor/getAllBookedSchedules', {
     params: data,
   });
+  return (await response).data;
+};
+
+export const getDoctorInforById = async (doctorId: number) => {
+  const response = http.get<GetDoctorById>(`/doctor/getDoctorDetails?doctorId=${doctorId}`);
   return (await response).data;
 };

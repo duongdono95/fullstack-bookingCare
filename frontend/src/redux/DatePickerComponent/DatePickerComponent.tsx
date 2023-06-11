@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { formattedDate } from '../utils/formattedDate';
+import { formattedDate } from '../../utils/formattedDate';
+import './DatePickerComponent.scss';
 interface Props {
   setSelectedDate: React.Dispatch<React.SetStateAction<string | undefined>>;
 }

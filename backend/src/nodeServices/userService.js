@@ -62,9 +62,7 @@ const getUsers = (userId) => {
           attributes: {
             exclude: ['password'],
           },
-          include: [
-            { model: db.Allcode, as: 'roleData', attributes: ['valueEn', 'valueVi'] },
-          ]
+          include: [{ model: db.Allcode, as: 'roleData', attributes: ['valueEn', 'valueVi'] }],
         });
       }
       resolve(users);
@@ -174,7 +172,7 @@ const getAllCode = (type) => {
           errMessage: 'Missing required parameter',
         });
       }
-      if (type !== "ALL") {
+      if (type !== 'ALL') {
         let res = {};
         let allcode = await db.Allcode.findAll({
           where: { type: type },
@@ -184,7 +182,7 @@ const getAllCode = (type) => {
         res.data = allcode;
         resolve(res);
       }
-      if (type === "ALL") {
+      if (type === 'ALL') {
         let res = {};
         let allcode = await db.Allcode.findAll();
         res.errCode = 0;

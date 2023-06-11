@@ -73,7 +73,8 @@
       "schedule": "Lịch Khám",
       "no-schedule": "Bác Sĩ Không Có Lịch Khám, làm ơn chọn ngày khác",
       "choose": "Chọn",
-      "book-free": "và đặt (miễn Phí)"
+      "book-free": "và đặt (miễn Phí)",
+      "available-schedules": "Lịch Khám :"
     },
     "extra-infor-doctor": {
       "text-address": "Địa Chỉ khám",

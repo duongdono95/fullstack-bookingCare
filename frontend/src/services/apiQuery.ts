@@ -1,7 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
 import { GetAllBookedScheduleParam } from '../utils/types';
 
-import { getAllBookedSchedules, getAllCode, getDoctors, getUser } from './userServices';
+import {
+  getAllBookedSchedules,
+  getAllCode,
+  getDoctorInforById,
+  getDoctors,
+  getUser,
+} from './userServices';
 export const GetAllCodeQuery = () => {
   const allCodesQuery = useQuery({
     queryKey: ['code'],
@@ -18,16 +24,24 @@ export const GetDoctorQuery = () => {
 };
 export const GetAllBookedScheduleQuery = (data: GetAllBookedScheduleParam) => {
   const bookedSchedules = useQuery({
-    queryKey: ['schedule','doctor',  data.date, data.doctorId],
+    queryKey: ['schedule', 'doctor', data.date, data.doctorId],
     queryFn: () => getAllBookedSchedules(data),
   });
 
   return bookedSchedules;
 };
-export const GetUserDoctor = (doctorId:string) => {
+export const GetUserDoctor = (doctorId: string) => {
   const doctorQuery = useQuery({
     queryKey: ['user', 'doctor'],
-    queryFn: () => getUser(doctorId)
-  })
-  return doctorQuery
-}
+    queryFn: () => getUser(doctorId),
+  });
+  return doctorQuery;
+};
+
+export const GetDoctorInfor = (doctorId: number) => {
+  const doctorInforQuery = useQuery({
+    queryKey: ['user', 'doctor', doctorId],
+    queryFn: () => getDoctorInforById(doctorId),
+  });
+  return doctorInforQuery;
+};

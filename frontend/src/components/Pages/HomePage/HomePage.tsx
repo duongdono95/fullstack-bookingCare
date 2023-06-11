@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import BusinessDetails from '../../Sections/BusinessDetails/BusinessDetails';
+import React, { useEffect } from 'react';
 import HeroSection from '../../Sections/HeroSection/HeroSection';
 import OutstandingDoctors from '../../Sections/OutstandingDoctors/OutstandingDoctors';
 import OutstandingMedicalCenter from '../../Sections/OutstandingMedicalCenter/OutstandingMedicalCenter';
 import SpecialitiesSection from '../../Sections/SpecialitiesSection/SpecialitiesSection';
 import './HomePage.scss';
-import { useQuery } from '@tanstack/react-query';
-import { getAllCode, getDoctors } from '../../../services/userServices';
-import { ConvertedCodeType, User } from '../../../utils/types';
 import { useDispatch } from 'react-redux';
 import { saveAllCodes, saveAllDoctors, saveTranslationCodes } from '../../../redux/appSlice';
 import ConvertedAllCode from '../../../redux/handyHelper';
@@ -15,9 +11,7 @@ import { GetAllCodeQuery, GetDoctorQuery } from '../../../services/apiQuery';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const [doctors, setDoctors] = useState<User[]>();
   const allCodeQuery = GetAllCodeQuery();
-  console.log(allCodeQuery);
   const doctorsQuery = GetDoctorQuery();
   useEffect(() => {
     if (allCodeQuery.data) {
@@ -29,23 +23,21 @@ const HomePage = () => {
         dispatch(saveAllCodes(allCodeQuery.data?.data));
       }
     }
-    if (doctorsQuery.data) {
+    if (doctorsQuery.data && doctorsQuery.data.data && doctorsQuery.data.data.doctors) {
       if (doctorsQuery.data.errCode !== 0) {
         console.log(doctorsQuery.data.errMessage);
       } else {
-        setDoctors(doctorsQuery.data.data.doctors);
+        dispatch(saveAllDoctors(doctorsQuery.data.data.doctors));
         dispatch(saveAllDoctors(doctorsQuery.data.data.doctors));
       }
-      console.log(doctorsQuery.data);
     }
   }, [doctorsQuery.data, allCodeQuery.data]);
   return (
     <div className="home-page">
       <HeroSection />
-      <OutstandingDoctors doctors={doctors as User[]} />
+      <OutstandingDoctors />
       <SpecialitiesSection />
       <OutstandingMedicalCenter />
-      <BusinessDetails />
     </div>
   );
 };
