@@ -11,9 +11,9 @@ import ManagingUsers from '../components/Pages/AdminPage/components/ManagingUser
 import ManagingDoctors from '../components/Pages/AdminPage/components/ManagingDoctors/ManagingDoctors';
 import ManagingSchedules from '../components/Pages/AdminPage/components/ManagingSchedules/ManagingSchedules';
 import ManagingSpecialties from '../components/Pages/AdminPage/components/ManagingSpecialties/ManagingSpecialties';
-import ClinicDetailPage from '../components/Pages/ClinicDetailPage/ClinicDetailPage';
-import SpecialtyDetailPage from '../components/Pages/SpecialtyDetailPage/SpecialtyDetailPage';
+
 import DetailPageLayout from '../components/Layout/DetailPageLayout/DetailPageLayout';
+import ManagingClinics from '../components/Pages/AdminPage/components/ManagingClinics/ManagingClinics';
 
 const AppRouter = () => {
   const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
@@ -34,7 +34,7 @@ const AppRouter = () => {
           <Route index element={isLoggedIn && <ManagingUsers />} />
           <Route path="managing-doctors" element={isLoggedIn && <ManagingDoctors />} />
           <Route path="managing-schedules" element={isLoggedIn && <ManagingSchedules />} />
-          <Route path="managing-clinics" element={isLoggedIn && <ManagingSchedules />} />
+          <Route path="managing-clinics" element={isLoggedIn && <ManagingClinics />} />
           <Route path="managing-specialties" element={isLoggedIn && <ManagingSpecialties />} />
         </Route>
       </Routes>

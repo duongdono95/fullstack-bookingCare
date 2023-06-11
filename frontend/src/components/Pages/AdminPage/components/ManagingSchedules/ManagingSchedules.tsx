@@ -18,7 +18,7 @@ const ManagingSchedules = () => {
 
   const [selectedDate, setSelectedDate] = useState<string>();
   const [selectedTimeArray, setSelectedTimeArray] = useState<string[]>([]);
-  const [selectedDoctor, setSelectedDoctor] = useState<number>(parseInt(doctors[0].id as string));
+  const [selectedDoctor, setSelectedDoctor] = useState<number>(doctors[0].id as number);
 
   const handleSelection = (keyMap: string) => {
     if (!selectedTimeArray.includes(keyMap)) {

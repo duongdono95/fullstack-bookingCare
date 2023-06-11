@@ -47,6 +47,7 @@ export const appSlice = createSlice({
     },
     saveAllCodes: (state, action: PayloadAction<OriginalCode[]>) => {
       const fetchedCode = action.payload;
+      console.log(fetchedCode);
       state.allCodes = fetchedCode;
     },
     saveAllDoctors: (state, action: PayloadAction<User[]>) => {

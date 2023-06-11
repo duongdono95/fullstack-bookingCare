@@ -1,4 +1,4 @@
-export type languageType = 'vi' | 'en';
+ export type languageType = 'vi' | 'en';
 
 export type languageArr = {
   VI: languageType;
@@ -40,7 +40,7 @@ export interface User {
   email: string;
   firstName: string;
   gender: string;
-  id?: string;
+  id?: number;
   image: string;
   lastName: string;
   phoneNumber: string;
@@ -155,3 +155,16 @@ export type GetDoctorById = {
   errMessage: string;
   data: InitialDoctorDetailForm;
 };
+
+export type SpecialtyDetails = {
+  id? : number,
+  specialty: string,
+  contentHTML: string,
+  contentMarkdown: string,
+  doctorId: number | null,
+  image:string,
+}
+export type PostSpecialtyDetail = {
+  errCode: number;
+  errMessage: string;
+}

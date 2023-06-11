@@ -8,11 +8,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      specialty: {
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.TEXT
+      contentHTML: {
+        allowNull: false,
+        type: Sequelize.TEXT('long')
+      },
+      contentMarkdown: {
+        allowNull: false,
+        type: Sequelize.TEXT('long')
+      },
+      doctorId: {
+        type: Sequelize.INTEGER,
       },
       image: {
         type: Sequelize.STRING

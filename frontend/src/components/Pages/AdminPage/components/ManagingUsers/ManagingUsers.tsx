@@ -115,7 +115,7 @@ const ManagingUsers = () => {
                       <td>
                         <i
                           className="fa-solid fa-trash"
-                          onClick={() => handleDeleteRequest(user.id as string)}
+                          onClick={() => handleDeleteRequest(user.id as number)}
                         ></i>
                       </td>
                     </tr>

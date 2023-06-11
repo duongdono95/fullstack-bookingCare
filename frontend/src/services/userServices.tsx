@@ -11,6 +11,8 @@ import {
   GetAllBookedSchedule,
   responseFetchedUsers,
   GetDoctorById,
+  SpecialtyDetails,
+  PostSpecialtyDetail,
 } from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
@@ -78,5 +80,10 @@ export const getAllBookedSchedules = async (data: GetAllBookedScheduleParam) => 
 
 export const getDoctorInforById = async (doctorId: number) => {
   const response = http.get<GetDoctorById>(`/doctor/getDoctorDetails?doctorId=${doctorId}`);
+  return (await response).data;
+};
+
+export const postSpecialtyDetails = async (specialtyDetails: SpecialtyDetails[]) => {
+  const response = http.post<PostSpecialtyDetail>('/specialty/saveSpecialty', specialtyDetails);
   return (await response).data;
 };

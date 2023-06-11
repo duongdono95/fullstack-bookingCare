@@ -76,7 +76,7 @@ const saveDoctorSchedules = (data) => {
       });
       const newSchedules = _.differenceWith(data, existing, _.isEqual);
       console.log(newSchedules);
-      if (existing === 0) {
+      if (existing) {
         await db.Schedule.bulkCreate(data);
       } else if (newSchedules.length > 0) {
         await db.Schedule.bulkCreate(newSchedules);

@@ -149,7 +149,7 @@ module.exports = {
           '## PGS, TS, Giảng viên cao cấp Trần Hữu Bình   #### Danh hiệu Thầy thuốc Nhân dân  * Bác sĩ đầu ngành chuyên khoa Tâm thần, tâm bệnh * Nguyên Viện trưởng Viện Sức khoẻ Tâm thần quốc gia, Bệnh viện Bạch Mai * Nguyên Phó Chủ nhiệm Bộ môn Tâm thần, Trường Đại học Y Hà Nội * Bác sĩ nhận khám mọi độ tuổi * Bác sĩ không nhận khám tự kỉ và chậm nói * Quá trình công tác * PGS.TS.BS Khám bệnh tại Trung tâm Y khoa số 1, Bệnh viện Đại học Y Hà Nội  Chủ trì Hội chẩn lâm sàng bệnh nhân Tâm thần tại Viện Sức khỏe Tâm thần, Bệnh viện Bạch Mai  Đào tạo (giảng dạy, hướng dẫn, chấm luận án) Tiến sĩ, Thạc sĩ, Bác sĩ chuyên khoa II, Bác sĩ nội trú chuyên ngành Tâm thần, Y tế công cộng của Trường Đại học Y Hà Nội  Viện trưởng Viện Sức khoẻ Tâm thần , Bệnh viện Bạch Mai (2008 – 2011) Trưởng khoa điều trị Nghiện chất Viện Sức khoẻ Tâm thần, Bệnh viện Bạch Mai (2010 – 2014)  Trưởng khoa điều trị loạn thần Nam Viện Sức khoẻ Tâm thần , Bệnh viện Bạch Mai (1995 – 2008)  Phó Chủ nhiệm Bộ môn Tâm thần, Trường Đại học Y Hà Nội (1995 - 2014) Bác sĩ – cán bộ giảng dạy, Bộ môn Tâm thầnTrường Đại học Y Hà Nội (1978 - 1994)',
         description:
           '\t PGS, TS, Giảng viên cao cấp Trần Hữu Bình (Bác sĩ từ xa) Bác sĩ đầu ngành chuyên khoa Tâm thần, tâm bệnh Nguyên Viện trưởng Viện Sức khoẻ Tâm thần quốc gia, Bệnh viện Bạch Mai Nguyên Phó Chủ nhiệm Bộ môn Tâm thần trường Đại học Y Hà Nội Bác sĩ nhận khám mọi độ tuổi Bác sĩ không nhận khám tự kỉ và chậm nói',
-        priceId: '10',
+        priceId: 'PRI3',
         provinceId: 'Ha Noi',
         paymentId: 'PAY2',
         clinicName: 'Phòng khám Chuyên khoa Yên Hòa',

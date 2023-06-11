@@ -1,4 +1,4 @@
-import { languageArr } from './types';
+import { SpecialtyDetails, languageArr } from './types';
 import { initialLoginInputsType } from './types';
 export const paths = {
   HOME: '/',
@@ -70,5 +70,13 @@ export const initialInputForm = {
   gender: 'M',
   roleId: 'R1',
   positionId: 'P0',
+  image: '',
+};
+
+export const inititalInputSpecialty: SpecialtyDetails = {
+  specialty: 'SPE1',
+  contentHTML: '',
+  contentMarkdown: '',
+  doctorId: null,
   image: '',
 };

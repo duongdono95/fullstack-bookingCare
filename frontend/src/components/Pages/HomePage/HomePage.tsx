@@ -6,7 +6,7 @@ import SpecialitiesSection from '../../Sections/SpecialitiesSection/Specialities
 import './HomePage.scss';
 import { useDispatch } from 'react-redux';
 import { saveAllCodes, saveAllDoctors, saveTranslationCodes } from '../../../redux/appSlice';
-import ConvertedAllCode from '../../../redux/handyHelper';
+import { ConvertedAllCode } from '../../../redux/handyHelper';
 import { GetAllCodeQuery, GetDoctorQuery } from '../../../services/apiQuery';
 
 const HomePage = () => {

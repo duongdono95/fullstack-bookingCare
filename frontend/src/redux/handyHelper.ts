@@ -6,7 +6,7 @@ export const useSelectorTranslationAllCode =  () => useSelector((state:RootState
 export const useSelectorLanguage = () => useSelector((state: RootState) => state.languages)
 export const useAppAllcodes = () => useSelector((state: RootState) => state.allCodes)
 export const useSelectorDoctor = () => useSelector((state:RootState) => state.allDoctors)
-const ConvertedAllCode = (codeArray : OriginalCode[]) => {
+export const ConvertedAllCode = (codeArray : OriginalCode[]) => {
   const transformedArray: ConvertedCodeType = {};
   codeArray?.forEach((obj) => {
     const { keyMap, valueEn, valueVi } = obj;
@@ -14,7 +14,7 @@ const ConvertedAllCode = (codeArray : OriginalCode[]) => {
   });
   return transformedArray
 }
-export default ConvertedAllCode
+
 
 export const FilterCodeArray = (type: string) => {
   const allcodes = useAppAllcodes()
