@@ -42,7 +42,9 @@ const ManagingSpecialties = () => {
         toast.error(response.errMessage);
       }
       if (response.errCode === 0) {
+        console.log(response.errCode === 0);
         toast.success(response.errMessage);
+        setSpecialtyForm(inititalInputSpecialty);
       }
     },
   });

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PageLayout from '../components/Layout/PageLayout';
 import LoginPage from '../components/Pages/LoginPage/LoginPage';
 import HomePage from '../components/Pages/HomePage/HomePage';
-import DoctorDetailPage from '../components/Pages/DoctorDetailPage/DoctorDetailPage';
 import AdminPage from '../components/Pages/AdminPage/AdminPage';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
