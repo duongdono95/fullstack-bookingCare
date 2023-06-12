@@ -1,4 +1,4 @@
- export type languageType = 'vi' | 'en';
+export type languageType = 'vi' | 'en';
 
 export type languageArr = {
   VI: languageType;
@@ -157,14 +157,24 @@ export type GetDoctorById = {
 };
 
 export type SpecialtyDetails = {
-  id? : number,
-  specialty: string,
-  contentHTML: string,
-  contentMarkdown: string,
-  doctorId: number | null,
-  image:string,
-}
+  id?: number;
+  specialty: string;
+  contentHTML: string;
+  contentMarkdown: string;
+  doctorId: string;
+  image: string;
+  specialtyName?: {
+    valueEn: string;
+    valueVi: string;
+  };
+};
 export type PostSpecialtyDetail = {
   errCode: number;
   errMessage: string;
-}
+};
+
+export type GetSpecialties = {
+  errCode: number;
+  errMessage: string;
+  data?: SpecialtyDetails[];
+};

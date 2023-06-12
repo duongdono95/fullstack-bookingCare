@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { ConvertedCodeType, User, languageType } from '../utils/types';
+import { ConvertedCodeType, User, languageType, SpecialtyDetails } from '../utils/types';
 import { OriginalCode } from '../utils/types';
 
 export interface initialState {
@@ -9,6 +9,7 @@ export interface initialState {
   translationCodes: ConvertedCodeType;
   allCodes: OriginalCode[];
   allDoctors: User[];
+  allSpecialtiesDetail: SpecialtyDetails[];
 }
 
 const initialState: initialState = {
@@ -17,6 +18,7 @@ const initialState: initialState = {
   translationCodes: {},
   allCodes: [],
   allDoctors: [],
+  allSpecialtiesDetail: [],
 };
 
 export const appSlice = createSlice({
@@ -47,12 +49,15 @@ export const appSlice = createSlice({
     },
     saveAllCodes: (state, action: PayloadAction<OriginalCode[]>) => {
       const fetchedCode = action.payload;
-      console.log(fetchedCode);
       state.allCodes = fetchedCode;
     },
     saveAllDoctors: (state, action: PayloadAction<User[]>) => {
       const fetchedDoctor = action.payload;
       state.allDoctors = fetchedDoctor;
+    },
+    saveAllSpecialties: (state, action: PayloadAction<SpecialtyDetails[]>) => {
+      const allSpecialties = action.payload;
+      state.allSpecialtiesDetail = allSpecialties;
     },
   },
 });
@@ -64,4 +69,5 @@ export const {
   saveTranslationCodes,
   saveAllCodes,
   saveAllDoctors,
+  saveAllSpecialties,
 } = appSlice.actions;

@@ -77,6 +77,6 @@ export const inititalInputSpecialty: SpecialtyDetails = {
   specialty: 'SPE1',
   contentHTML: '',
   contentMarkdown: '',
-  doctorId: null,
+  doctorId: '',
   image: '',
 };

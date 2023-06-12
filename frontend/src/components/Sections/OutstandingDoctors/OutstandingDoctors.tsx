@@ -26,7 +26,6 @@ const OutstandingDoctors = () => {
   const allCodes = useSelectorTranslationAllCode();
 
   const doctors = useSelector((state: RootState) => state.allDoctors);
-  console.log(doctors);
   return (
     <div className="home-section">
       <div className="outstanding-doctors">

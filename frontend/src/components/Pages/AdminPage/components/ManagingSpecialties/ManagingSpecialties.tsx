@@ -26,6 +26,7 @@ const ManagingSpecialties = () => {
       contentHTML: content.html,
     }));
   };
+  console.log(specialtyForm);
   const handleSelection = (doctorId: number) => {
     if (!selectedDoctors.includes(doctorId)) {
       setSelectedDoctors((prev) => [...prev, doctorId]);
@@ -35,7 +36,7 @@ const ManagingSpecialties = () => {
     }
   };
   const postSpecialtyMutation = useMutation({
-    mutationFn: async (specialtyForm: SpecialtyDetails[]) => {
+    mutationFn: async (specialtyForm: SpecialtyDetails) => {
       const response = await postSpecialtyDetails(specialtyForm);
       console.log(response);
       if (response.errCode !== 0) {
@@ -50,16 +51,12 @@ const ManagingSpecialties = () => {
   });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const handleDoctorSpecialtyArray: SpecialtyDetails[] = [];
-    selectedDoctors.forEach((doctor) => {
-      const newSpecialty = { ...specialtyForm, doctorId: doctor };
-      handleDoctorSpecialtyArray.push(newSpecialty);
-    });
-    postSpecialtyMutation.mutate(handleDoctorSpecialtyArray);
+    setSpecialtyForm((prev) => ({ ...prev, doctorId: selectedDoctors.toString() }));
+    postSpecialtyMutation.mutate(specialtyForm);
   };
   return (
     <div className="managing-specialties">
-      <h1>Managing Doctor's Schedules</h1>
+      <h1>Managing Specialties</h1>
       <form className="managing-specialties--form" onSubmit={(e) => handleSubmit(e)}>
         <div className="form-group">
           <label htmlFor="specialty">Select Specialty</label>

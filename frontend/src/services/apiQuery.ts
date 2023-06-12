@@ -6,6 +6,7 @@ import {
   getAllCode,
   getDoctorInforById,
   getDoctors,
+  getSpecialties,
   getUser,
 } from './userServices';
 export const GetAllCodeQuery = () => {
@@ -44,4 +45,12 @@ export const GetDoctorInfor = (doctorId: number) => {
     queryFn: () => getDoctorInforById(doctorId),
   });
   return doctorInforQuery;
+};
+
+export const GetSpecialties = (specialtyId: number | string) => {
+  const getSpecialtiesQuery = useQuery({
+    queryKey: ['doctor', 'specialty'],
+    queryFn: () => getSpecialties(specialtyId),
+  });
+  return getSpecialtiesQuery;
 };

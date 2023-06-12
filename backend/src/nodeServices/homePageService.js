@@ -6,18 +6,38 @@ const getDoctors = (code) => {
       let doctors = await db.User.findAll({
         where: { roleId: code },
         attributes: {
-          exclude: ['password']
-        }
-      })
+          exclude: ['password'],
+        },
+      });
       resolve({
-        doctors
-      })
+        doctors,
+      });
     } catch (e) {
-      reject(e)
+      reject(e);
     }
-  })
-}
+  });
+};
 
+const getAllSpecialties = (specialtyId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (specialtyId === 'ALL') {
+        const response = await db.Specialty.findAll({
+          include: [{ model: db.Allcode, as: 'specialtyName', attributes: ['valueEn', 'valueVi'] }],
+        });
+        resolve(response);
+      } else {
+        const response = await db.Specialty.findOne({
+          where: { id: specialtyId },
+        });
+        resolve(response);
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getDoctors: getDoctors,
-}
+  getAllSpecialties: getAllSpecialties,
+};

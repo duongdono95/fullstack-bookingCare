@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   DoctorSchedule,
   GeneralResponse,
@@ -13,6 +12,7 @@ import {
   GetDoctorById,
   SpecialtyDetails,
   PostSpecialtyDetail,
+  GetSpecialties,
 } from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
@@ -83,7 +83,12 @@ export const getDoctorInforById = async (doctorId: number) => {
   return (await response).data;
 };
 
-export const postSpecialtyDetails = async (specialtyDetails: SpecialtyDetails[]) => {
+export const postSpecialtyDetails = async (specialtyDetails: SpecialtyDetails) => {
   const response = http.post<PostSpecialtyDetail>('/specialty/saveSpecialty', specialtyDetails);
+  return (await response).data;
+};
+
+export const getSpecialties = async (specialtyId: number | string) => {
+  const response = http.get<GetSpecialties>(`/homePage/getAllSpecialties?id=${specialtyId}`);
   return (await response).data;
 };

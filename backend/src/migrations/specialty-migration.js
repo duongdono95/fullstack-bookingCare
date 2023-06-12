@@ -6,37 +6,37 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       specialty: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       contentHTML: {
         allowNull: false,
-        type: Sequelize.TEXT('long')
+        type: Sequelize.TEXT('long'),
       },
       contentMarkdown: {
         allowNull: false,
-        type: Sequelize.TEXT('long')
+        type: Sequelize.TEXT('long'),
       },
       doctorId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
 
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('specialties');
-  }
+  },
 };
