@@ -59,10 +59,10 @@ const getUsers = (userId) => {
       if (userId && userId !== 'ALL') {
         users = await db.User.findOne({
           where: { id: userId },
+
           attributes: {
             exclude: ['password'],
           },
-          include: [{ model: db.Allcode, as: 'roleData', attributes: ['valueEn', 'valueVi'] }],
         });
       }
       resolve(users);

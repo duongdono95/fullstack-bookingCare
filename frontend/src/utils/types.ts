@@ -51,6 +51,10 @@ export interface User {
     valueEn: string;
     valueVi: string;
   };
+  positionData?: {
+    valueEn: string;
+    valueVi: string;
+  };
 }
 
 export type responseFetchedUser = {

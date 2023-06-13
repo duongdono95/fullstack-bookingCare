@@ -15,7 +15,6 @@ const DoctorDetailPage = () => {
   const language = useSelectorLanguage();
   const timeArray = FilterCodeArray('time');
   const [selectedDate, setSelectedDate] = useState<string>();
-
   const { data } = GetUserDoctor(doctorId ? doctorId : '');
   const userDetails = data?.users;
 

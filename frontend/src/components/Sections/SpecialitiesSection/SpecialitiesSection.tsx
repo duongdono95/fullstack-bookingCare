@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './SpecialitiesSection.scss';
 import { Link } from 'react-router-dom';
 import { GetSpecialties } from '../../../services/apiQuery';
-import { SpecialtyDetails } from '../../../utils/types';
 import { useSelectorLanguage } from '../../../redux/handyHelper';
 import { useDispatch } from 'react-redux';
 import { saveAllSpecialties } from '../../../redux/appSlice';
@@ -31,7 +30,6 @@ const SpecialitiesSection = () => {
     fetchedAllspecialties.data && fetchedAllspecialties.data.data
       ? fetchedAllspecialties.data.data
       : [];
-  console.log(allSpecialties);
   return (
     <div className="section-container">
       <div className="section-title">Chuyên Khoa Phổ Biến</div>

@@ -8,6 +8,10 @@ const getDoctors = (code) => {
         attributes: {
           exclude: ['password'],
         },
+        include: [
+          { model: db.Allcode, as: 'roleData', attributes: ['valueEn', 'valueVi'] },
+          { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] }
+        ],
       });
       resolve({
         doctors,

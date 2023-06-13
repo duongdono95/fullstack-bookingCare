@@ -13,7 +13,6 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const allCodeQuery = GetAllCodeQuery();
   const doctorsQuery = GetDoctorQuery();
-  const fetchedAllspecialties = GetSpecialties('ALL');
   useEffect(() => {
     if (allCodeQuery.data) {
       if (allCodeQuery.data?.errCode !== 0) {

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // // 1 - 1 : positionId and gender of user is listed in keyMap in AllCodes => user belong to allCode
       User.belongsTo(models.Allcode, { foreignKey: 'roleId', as: 'roleData', targetKey: 'keyMap' });
-      // User.belongsTo(models.Allcode, { foreignKey: "positionId", targetKey: "keyMap", as: 'positionData' });
+      User.belongsTo(models.Allcode, { foreignKey: "positionId", targetKey: "keyMap", as: 'positionData' });
       // User.belongsTo(models.Allcode, { foreignKey: "gender", targetKey: "keyMap", as: 'genderData' });
       // // 1 - 1 : 1 user has one doctorId -> which is listed in Markdown
       // User.hasOne(models.Markdown, { foreignKey: "doctorId" })
