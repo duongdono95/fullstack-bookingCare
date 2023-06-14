@@ -1,0 +1,49 @@
+.outstanding-clinics {
+  width: var(--default-layout-width);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .section-title {
+    font-size: 32px;
+    font-weight: 600;
+  }
+  .doctor {
+    width: 250px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--black01);
+    padding: 10px;
+    gap: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    .doctor-img {
+      margin: 0 auto;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 5px solid var(--primary);
+      background-size: cover;
+      background-position: center;
+    }
+    .doctor-positions {
+      opacity: 0.7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .doctor-name {
+      width: 100%;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+    }
+    &:hover {
+      background-color: var(--black01);
+    }
+  }
+}

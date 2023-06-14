@@ -21,6 +21,7 @@ let initWebRoutes = (app) => {
   router.post('/specialty/saveSpecialty', specialtyController.saveSpecialty);
 
   router.post('/clinic/saveClinic', clinicController.saveClinic);
+  router.get('/clinic/getClinics', clinicController.getClinics)
 
   router.get('/homePage/getAllDoctors', homePageController.getDoctors);
   router.get('/homePage/getAllSpecialties', homePageController.getAllSpecialties);

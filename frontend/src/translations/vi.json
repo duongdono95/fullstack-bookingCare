@@ -60,7 +60,9 @@
   },
   "homepage": {
     "outstanding-doctor": "Bác Sĩ nổi bật tuần qua",
-    "more-infor": "Xem Thêm"
+    "more-infor": "Xem Thêm",
+    "specialty": "Chuyên Khoa nổi bật",
+    "outstanding-clinics": "Bệnh Viện nổi bật"
   },
   "manage-schedule": {
     "title": "Quản lý Kế Hoạch khám bệnh của bác sĩ",

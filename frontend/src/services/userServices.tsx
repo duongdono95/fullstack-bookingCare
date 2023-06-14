@@ -98,3 +98,8 @@ export const postClinicDetails = async (clinicDetailsInput: ClinicDetails) => {
   const response = http.post<PostSpecialtyDetail>('/clinic/saveClinic', clinicDetailsInput);
   return (await response).data;
 };
+
+export const getClinics = async (id: string) => {
+  const response = http.post<PostSpecialtyDetail>(`/clinic/getClinics?id=${id}`);
+  return (await response).data;
+};

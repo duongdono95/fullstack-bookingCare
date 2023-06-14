@@ -60,7 +60,9 @@
   },
   "homepage": {
     "outstanding-doctor": "Featured Doctors",
-    "more-infor": "More Infor"
+    "more-infor": "More Infor",
+    "specialty": "Featured Specialties",
+    "outstanding-clinics": "Featured Clinic"
   },
   "manage-schedule": {
     "title": "Manage Doctor's Schedule Plan",

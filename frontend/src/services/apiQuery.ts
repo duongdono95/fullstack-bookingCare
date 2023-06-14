@@ -4,6 +4,7 @@ import { GetAllBookedScheduleParam } from '../utils/types';
 import {
   getAllBookedSchedules,
   getAllCode,
+  getClinics,
   getDoctorInforById,
   getDoctors,
   getSpecialties,
@@ -54,3 +55,10 @@ export const GetSpecialties = (specialtyId: number | string) => {
   });
   return getSpecialtiesQuery;
 };
+
+export const GetClinics = (id: string) => {
+  const getClinicQuery = useQuery({
+    queryKey: ['doctor', 'clinic'],
+    queryFn: () => getClinics(id)
+  })
+}

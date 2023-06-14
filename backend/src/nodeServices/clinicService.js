@@ -22,7 +22,20 @@ const saveClinic = (clinicDetails) => {
     }
   });
 };
-
+const getClinics = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let clinics = '';
+      if (userId && userId === 'ALL') {
+        clinics = await db.Clinic.findAll();
+      }
+      resolve(clinics);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   saveClinic: saveClinic,
+  getClinics: getClinics,
 };

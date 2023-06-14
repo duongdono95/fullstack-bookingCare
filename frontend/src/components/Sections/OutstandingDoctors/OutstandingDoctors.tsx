@@ -15,7 +15,7 @@ const OutstandingDoctors = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 800,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,

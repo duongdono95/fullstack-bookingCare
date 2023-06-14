@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './SpecialitiesSection.scss';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { GetSpecialties } from '../../../services/apiQuery';
 import { useSelectorLanguage } from '../../../redux/handyHelper';
@@ -14,7 +15,7 @@ const SpecialitiesSection = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 800,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
@@ -33,7 +34,9 @@ const SpecialitiesSection = () => {
   console.log(fetchedAllspecialties);
   return (
     <div className="section-container">
-      <div className="section-title">Chuyên Khoa Phổ Biến</div>
+      <div className="section-title">
+        <FormattedMessage id="homepage.specialty" />
+      </div>
       <Slider {...settings}>
         {allSpecialties &&
           allSpecialties.map((specialty, index) => {
