@@ -182,3 +182,13 @@ export type GetSpecialties = {
   errMessage: string;
   data?: SpecialtyDetails[];
 };
+
+export type ClinicDetails = {
+  id?: number;
+  clinicId: string;
+  contentHTML: string;
+  contentMarkdown: string;
+  doctorId: string;
+  image: string;
+  address: string;
+};

@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
 import './ManagingClinics.scss';
-import { FilterCodeArray, useSelectorLanguage } from '../../../../../redux/handyHelper';
-import { inititalInputSpecialty } from '../../../../../utils/constants';
-import { SpecialtyDetails } from '../../../../../utils/types';
+import {
+  FilterCodeArray,
+  useSelectorDoctor,
+  useSelectorLanguage,
+} from '../../../../../redux/handyHelper';
+import { initialInputClinic, inititalInputSpecialty } from '../../../../../utils/constants';
+import { ClinicDetails, SpecialtyDetails, User } from '../../../../../utils/types';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import { toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
-import { postSpecialtyDetails } from '../../../../../services/userServices';
+import { postClinicDetails, postSpecialtyDetails } from '../../../../../services/userServices';
 const mdParser = new MarkdownIt(/* Markdown-it options*/);
 const ManagingClinics = () => {
   const language = useSelectorLanguage();
+  const doctors = useSelectorDoctor();
   const specialties = FilterCodeArray('CLINIC');
-  console.log(specialties);
+  const [selectedClinic, setSelectedClinic] = useState<number[]>([]);
+  const [clinicForm, setClinicForm] = useState<ClinicDetails>(initialInputClinic);
   const [selectedDoctors, setSelectedDoctors] = useState<number[]>([]);
-  const [specialtyForm, setSpecialtyForm] = useState<SpecialtyDetails>(inititalInputSpecialty);
   const handleEditorChange = (content: { text: string; html: string }) => {
-    setSpecialtyForm((prev) => ({
+    setClinicForm((prev) => ({
       ...prev,
       contentMarkdown: content.text,
       contentHTML: content.html,
     }));
   };
-  console.log(specialtyForm);
+
+  console.log(clinicForm);
   const handleSelection = (doctorId: number) => {
     if (!selectedDoctors.includes(doctorId)) {
       setSelectedDoctors((prev) => [...prev, doctorId]);
@@ -31,9 +37,9 @@ const ManagingClinics = () => {
       setSelectedDoctors(filteredArray);
     }
   };
-  const postSpecialtyMutation = useMutation({
-    mutationFn: async (specialtyForm: SpecialtyDetails) => {
-      const response = await postSpecialtyDetails(specialtyForm);
+  const postClinicMutation = useMutation({
+    mutationFn: async (clinicForm: ClinicDetails) => {
+      const response = await postClinicDetails(clinicForm);
       console.log(response);
       if (response.errCode !== 0) {
         toast.error(response.errMessage);
@@ -41,27 +47,28 @@ const ManagingClinics = () => {
       if (response.errCode === 0) {
         console.log(response.errCode === 0);
         toast.success(response.errMessage);
-        setSpecialtyForm(inititalInputSpecialty);
+        setClinicForm(initialInputClinic);
       }
     },
   });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSpecialtyForm((prev) => ({ ...prev, doctorId: selectedDoctors.toString() }));
-    postSpecialtyMutation.mutate(specialtyForm);
+    setClinicForm((prev) => ({ ...prev, doctorId: selectedDoctors.toString() }));
+    postClinicMutation.mutate(clinicForm);
   };
+  console.log(clinicForm, selectedDoctors);
   return (
     <div className="managing-clinics">
       <h1>Managing Clinic</h1>
       <form className="managing-clinic--form" onSubmit={(e) => handleSubmit(e)}>
         <div className="form-group">
-          <label htmlFor="specialty">Select Clinic</label>
+          <label htmlFor="clinicId">Select Clinic</label>
           <select
             required
-            name="specialty"
-            id="specialty"
+            name="clinicId"
+            id="clinicId"
             onChange={(e) =>
-              setSpecialtyForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+              setClinicForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
             }
           >
             {specialties.map((item, index) => {
@@ -79,9 +86,9 @@ const ManagingClinics = () => {
             required
             type="text"
             name="address"
-            defaultValue={specialtyForm.image}
+            defaultValue={clinicForm.image}
             onChange={(e) =>
-              setSpecialtyForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+              setClinicForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
             }
           />
         </div>
@@ -91,20 +98,45 @@ const ManagingClinics = () => {
             required
             type="text"
             name="image"
-            defaultValue={specialtyForm.image}
+            defaultValue={clinicForm.image}
             onChange={(e) =>
-              setSpecialtyForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+              setClinicForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
             }
           />
         </div>
-
+        <div className="form-group full-width">
+          <label htmlFor="doctors">Select Doctor(s)</label>
+          <div className="doctors">
+            {doctors.map((doctor: User, index) => {
+              return (
+                <div
+                  className={
+                    selectedDoctors.includes(doctor.id ? doctor.id : 0) ? 'doctor active' : 'doctor'
+                  }
+                  key={index}
+                  onClick={() => handleSelection(doctor.id ? doctor.id : 0)}
+                >
+                  {language === 'vi' ? (
+                    <p>
+                      {doctor.lastName} {doctor.firstName}
+                    </p>
+                  ) : (
+                    <p>
+                      {doctor.firstName} {doctor.lastName}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <div className="form-group full-width">
           <label htmlFor="doctors">Description</label>
           <MdEditor
             style={{ height: '500px' }}
             renderHTML={(text: any) => mdParser.render(text)}
             onChange={(content) => handleEditorChange(content)}
-            defaultValue={specialtyForm.contentMarkdown}
+            defaultValue={clinicForm.contentMarkdown}
           />
         </div>
         <div className="submit-btn">

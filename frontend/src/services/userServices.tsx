@@ -13,6 +13,7 @@ import {
   SpecialtyDetails,
   PostSpecialtyDetail,
   GetSpecialties,
+  ClinicDetails,
 } from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
@@ -90,5 +91,10 @@ export const postSpecialtyDetails = async (specialtyDetails: SpecialtyDetails) =
 
 export const getSpecialties = async (specialtyId: number | string) => {
   const response = http.get<GetSpecialties>(`/homePage/getAllSpecialties?id=${specialtyId}`);
+  return (await response).data;
+};
+
+export const postClinicDetails = async (clinicDetailsInput: ClinicDetails) => {
+  const response = http.post<PostSpecialtyDetail>('/clinic/saveClinic', clinicDetailsInput);
   return (await response).data;
 };

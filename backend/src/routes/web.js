@@ -3,6 +3,7 @@ import userController from '../nodeControllers/userController';
 import homePageController from '../nodeControllers/homePageController';
 import doctorController from '../nodeControllers/doctorController';
 import specialtyController from '../nodeControllers/specialtyController';
+import clinicController from '../nodeControllers/clinicController';
 let router = express.Router();
 
 let initWebRoutes = (app) => {
@@ -18,6 +19,8 @@ let initWebRoutes = (app) => {
   router.get('/doctor/getAllBookedSchedules', doctorController.getAllBookedSchedules);
 
   router.post('/specialty/saveSpecialty', specialtyController.saveSpecialty);
+
+  router.post('/clinic/saveClinic', clinicController.saveClinic);
 
   router.get('/homePage/getAllDoctors', homePageController.getDoctors);
   router.get('/homePage/getAllSpecialties', homePageController.getAllSpecialties);

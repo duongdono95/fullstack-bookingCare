@@ -1,4 +1,4 @@
-import { SpecialtyDetails, languageArr } from './types';
+import { SpecialtyDetails, languageArr, ClinicDetails } from './types';
 import { initialLoginInputsType } from './types';
 export const paths = {
   HOME: '/',
@@ -79,4 +79,12 @@ export const inititalInputSpecialty: SpecialtyDetails = {
   contentMarkdown: '',
   doctorId: '',
   image: '',
+};
+export const initialInputClinic: ClinicDetails = {
+  clinicId: 'CLI1',
+  contentHTML: '',
+  contentMarkdown: '',
+  doctorId: '',
+  image: '',
+  address: '',
 };
