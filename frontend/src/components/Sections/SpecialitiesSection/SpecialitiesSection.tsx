@@ -30,6 +30,7 @@ const SpecialitiesSection = () => {
     fetchedAllspecialties.data && fetchedAllspecialties.data.data
       ? fetchedAllspecialties.data.data
       : [];
+  console.log(fetchedAllspecialties);
   return (
     <div className="section-container">
       <div className="section-title">Chuyên Khoa Phổ Biến</div>

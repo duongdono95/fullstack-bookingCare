@@ -1,0 +1,65 @@
+.managing-clinics {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .managing-clinic--form {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+
+    label {
+      font-size: 16px;
+      font-weight: 600;
+      opacity: 0.7;
+    }
+    select {
+      border: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      background-color: var(--black01);
+      color: #525252;
+    }
+    input {
+      border-bottom: 1px solid var(--black02);
+      font-size: 16px;
+      padding: 5px 10px;
+    }
+    &.note {
+      width: 100%;
+    }
+  }
+  .submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+      padding: 10px 20px;
+      background-color: var(--primary);
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      opacity: 0.7;
+      border-radius: 50px;
+      margin-top: 20px;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .full-width {
+    width: 100%;
+  }
+}
