@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import './ManagingClinics.scss';
-import {
-  FilterCodeArray,
-  useSelectorDoctor,
-  useSelectorLanguage,
-} from '../../../../../redux/handyHelper';
+import { FilterCodeArray, useSelectorLanguage } from '../../../../../redux/handyHelper';
 import { inititalInputSpecialty } from '../../../../../utils/constants';
-import { SpecialtyDetails, User } from '../../../../../utils/types';
+import { SpecialtyDetails } from '../../../../../utils/types';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import { toast } from 'react-toastify';
@@ -14,9 +10,9 @@ import { useMutation } from '@tanstack/react-query';
 import { postSpecialtyDetails } from '../../../../../services/userServices';
 const mdParser = new MarkdownIt(/* Markdown-it options*/);
 const ManagingClinics = () => {
-  const doctors = useSelectorDoctor();
   const language = useSelectorLanguage();
-  const specialties = FilterCodeArray('SPECIALTY');
+  const specialties = FilterCodeArray('CLINIC');
+  console.log(specialties);
   const [selectedDoctors, setSelectedDoctors] = useState<number[]>([]);
   const [specialtyForm, setSpecialtyForm] = useState<SpecialtyDetails>(inititalInputSpecialty);
   const handleEditorChange = (content: { text: string; html: string }) => {
