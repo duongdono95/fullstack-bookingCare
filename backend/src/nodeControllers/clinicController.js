@@ -36,15 +36,15 @@ const getClinics = async (req, res) => {
     return res.status(200).json({
       errCode: 1,
       errMessage: 'Missing Required Parameters',
-      users: [],
+      data: [],
     });
   }
   if (id) {
-    let users = await clinicService.getClinics(id);
+    let data = await clinicService.getClinics(id);
     return res.status(200).json({
       errCode: 0,
       errMessage: 'Fetched User Data Successfully',
-      users,
+      data,
     });
   }
 };

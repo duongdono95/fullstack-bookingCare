@@ -61,4 +61,5 @@ export const GetClinics = (id: string) => {
     queryKey: ['doctor', 'clinic'],
     queryFn: () => getClinics(id)
   })
+  return getClinicQuery
 }

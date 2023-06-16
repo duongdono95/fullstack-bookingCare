@@ -25,7 +25,6 @@ let initWebRoutes = (app) => {
 
   router.get('/homePage/getAllDoctors', homePageController.getDoctors);
   router.get('/homePage/getAllSpecialties', homePageController.getAllSpecialties);
-  // router.get('/homePage/getAllClinics', homePageController.getAllClinics);
 
   router.get('/api/allcode', userController.getAllCode);
   return app.use('/', router);

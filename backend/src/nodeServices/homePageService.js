@@ -41,6 +41,7 @@ const getAllSpecialties = (specialtyId) => {
     }
   });
 };
+
 module.exports = {
   getDoctors: getDoctors,
   getAllSpecialties: getAllSpecialties,

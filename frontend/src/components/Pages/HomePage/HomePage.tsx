@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { saveAllCodes, saveAllDoctors, saveTranslationCodes } from '../../../redux/appSlice';
 import { ConvertedAllCode } from '../../../redux/handyHelper';
 import { GetAllCodeQuery, GetDoctorQuery, GetSpecialties } from '../../../services/apiQuery';
+import BusinessOnMedia from '../../Sections/BusinessOnMedia/BusinessOnMedia';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const HomePage = () => {
       <OutstandingDoctors />
       <SpecialitiesSection />
       <OutstandingMedicalCenter />
+      <BusinessOnMedia />
     </div>
   );
 };

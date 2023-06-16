@@ -192,3 +192,8 @@ export type ClinicDetails = {
   image: string;
   address: string;
 };
+export type GetClinics = {
+  errCode: number;
+  errMessage: string;
+  data?: ClinicDetails[];
+};

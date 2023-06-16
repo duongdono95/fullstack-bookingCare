@@ -22,7 +22,6 @@ export const getDoctors = async (req, res) => {
 const getAllSpecialties = async (req, res) => {
   try {
     let specialtyId = req.query.id;
-    console.log(specialtyId);
     if (!specialtyId) {
       return res.status(200).json({
         errCode: 1,
@@ -45,8 +44,9 @@ const getAllSpecialties = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   getDoctors: getDoctors,
   getAllSpecialties: getAllSpecialties,
-  // getAllClinics: getAllClinics,
 };

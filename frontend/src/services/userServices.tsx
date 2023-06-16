@@ -14,6 +14,7 @@ import {
   PostSpecialtyDetail,
   GetSpecialties,
   ClinicDetails,
+  GetClinics,
 } from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
@@ -100,6 +101,6 @@ export const postClinicDetails = async (clinicDetailsInput: ClinicDetails) => {
 };
 
 export const getClinics = async (id: string) => {
-  const response = http.post<PostSpecialtyDetail>(`/clinic/getClinics?id=${id}`);
+  const response = http.get<GetClinics>(`/clinic/getClinics?id=${id}`);
   return (await response).data;
 };
