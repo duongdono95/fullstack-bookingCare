@@ -1,10 +1,13 @@
 import React from 'react';
 import './BusinessOnMedia.scss';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 const BusinessOnMedia = () => {
   return (
     <div className="businessOnMedia">
-      <p className="title">BookingCare on national Media</p>
+      <p className="title">
+        <FormattedMessage id="homepage.media" />
+      </p>
       <div className="utube">
         <iframe
           width="560"
@@ -18,15 +21,49 @@ const BusinessOnMedia = () => {
       </div>
       <div className="brands">
         <Link to="https://suckhoedoisong.vn/dat-lich-kham-benh-tiet-kiem-thong-minh-va-hieu-qua-169153232.htm">
-          <div className="brand">
-            <div
-              className="brand-img"
-              style={{
-                backgroundImage:
-                  'url(https://static.wikia.nocookie.net/logos/images/d/d2/VTV1_logo_1998.png/revision/latest/scale-to-width-down/1200?cb=20211231174310&path-prefix=vi)',
-              }}
-            ></div>
-          </div>
+          <div
+            className="brand-img"
+            style={{
+              backgroundImage:
+                'url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/VTV1_logo_2013_final.svg/2560px-VTV1_logo_2013_final.svg.png)',
+            }}
+          ></div>
+        </Link>
+        <Link to="https://video.vnexpress.net/cuoc-song-4-0/kham-benh-khong-phai-xep-hang-o-ha-noi-3797126.html">
+          <div
+            className="brand-img"
+            style={{
+              backgroundImage:
+                'url(https://upload.wikimedia.org/wikipedia/commons/f/fd/VnExpress_logo.png)',
+            }}
+          ></div>
+        </Link>
+        <Link to="https://www.youtube.com/watch?v=mstAc81lpMc">
+          <div
+            className="brand-img"
+            style={{
+              backgroundImage:
+                'url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/VTC_official_logo.svg/2560px-VTC_official_logo.svg.png)',
+            }}
+          ></div>
+        </Link>
+        <Link to="https://vtc.vn/dat-kham-chuyen-khoa-va-hanh-trinh-ho-tro-cac-benh-vien-qua-tai-ar434101.html">
+          <div
+            className="brand-img"
+            style={{
+              backgroundImage:
+                'url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/VTC_News_logo.svg/2560px-VTC_News_logo.svg.png)',
+            }}
+          ></div>
+        </Link>
+        <Link to="https://vtv.vn/video/ca-phe-khoi-nghiep-14-11-2018-334894.htm">
+          <div
+            className="brand-img"
+            style={{
+              backgroundImage:
+                'url(https://bioamicus.vn/wp-content/uploads/2020/05/skds-e1593683385355.png)',
+            }}
+          ></div>
         </Link>
       </div>
     </div>

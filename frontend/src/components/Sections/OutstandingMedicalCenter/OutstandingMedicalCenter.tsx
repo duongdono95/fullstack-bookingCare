@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './OutstandingMedicalCenter.scss';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -27,9 +27,11 @@ const OutstandingMedicalCenter = () => {
   const clinicDetails = GetClinics('ALL');
   const clinics =
     clinicDetails && clinicDetails.data && clinicDetails.data.data ? clinicDetails.data.data : [];
-  if (clinics) {
-    dispatch(saveAllClinics(clinics));
-  }
+  useEffect(() => {
+    if (clinics.length > 0) {
+      dispatch(saveAllClinics(clinics));
+    }
+  }, [dispatch, clinics]);
   return (
     <div className="home-section">
       <div className="outstanding-clinics">

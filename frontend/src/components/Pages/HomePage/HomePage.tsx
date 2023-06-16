@@ -9,6 +9,7 @@ import { saveAllCodes, saveAllDoctors, saveTranslationCodes } from '../../../red
 import { ConvertedAllCode } from '../../../redux/handyHelper';
 import { GetAllCodeQuery, GetDoctorQuery, GetSpecialties } from '../../../services/apiQuery';
 import BusinessOnMedia from '../../Sections/BusinessOnMedia/BusinessOnMedia';
+import DownloadApp from '../../Sections/DownloadApp/DownloadApp';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const HomePage = () => {
       <SpecialitiesSection />
       <OutstandingMedicalCenter />
       <BusinessOnMedia />
+      <DownloadApp />
     </div>
   );
 };
