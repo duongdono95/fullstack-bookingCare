@@ -2,21 +2,60 @@
   max-width: var(--default-layout-width);
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 5%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  .title {
+    font-size: 32px;
+    font-weight: 600;
+  }
   .content {
+    min-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5%;
     width: 100%;
-    height: 550px;
-    padding: 5% 0;
+    height: 100%;
     .left {
-      width: 350px;
-      height: 100%;
+      width: 300px;
+      height: 400px;
       background-position: top;
       background-repeat: no-repeat;
       background-size: cover;
     }
-    .left {
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      .benefits {
+        i {
+          color: var(--primary);
+          font-size: 32px;
+          padding-right: 10px;
+        }
+        p {
+          font-size: 24px;
+        }
+      }
+      .stores {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+      }
+      .store {
+        width: 150px;
+        height: 50px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
     }
   }
 }

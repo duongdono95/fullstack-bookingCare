@@ -3,6 +3,7 @@ import DoctorDetailPage from '../../Pages/DoctorDetailPage/DoctorDetailPage';
 import ClinicDetailPage from '../../Pages/ClinicDetailPage/ClinicDetailPage';
 import SpecialtyDetailPage from '../../Pages/SpecialtyDetailPage/SpecialtyDetailPage';
 import './DetailLayoutPage.scss';
+import BookingDoctorPage from '../../Pages/BookingDoctorPage';
 type CategoriesType = 'doctor' | 'clinic' | 'specialty';
 type TypeMap = {
   [K in CategoriesType]: React.FC;

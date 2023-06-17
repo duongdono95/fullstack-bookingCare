@@ -1,39 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './DoctorDetails.scss';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import {
   GetAllBookedScheduleQuery,
   GetDoctorInfor,
   GetUserDoctor,
 } from '../../../services/apiQuery';
-import { FilterCodeArray, useSelectorLanguage } from '../../../redux/handyHelper';
+import {
+  FilterAvailableSchedules,
+  FilterCodeArray,
+  useSelectorLanguage,
+} from '../../../redux/handyHelper';
 import DatePickerComponent from '../../../redux/DatePickerComponent/DatePickerComponent';
 import { formattedDate } from '../../../utils/formattedDate';
 import { FormattedMessage } from 'react-intl';
+import BookingDoctorPage from '../BookingDoctorPage';
+import { scheduler } from 'timers/promises';
+import { OriginalCode } from '../../../utils/types';
+import SchedulePickerComponent from '../../../redux/SchedulePickerComponent/SchedulePickerComponent';
 const DoctorDetailPage = () => {
   let { doctorId } = useParams();
+  const doctorInforQuery = GetDoctorInfor(doctorId ? parseInt(doctorId) : 0);
+  const doctorInfor = doctorInforQuery.data?.data;
   const language = useSelectorLanguage();
-  const timeArray = FilterCodeArray('time');
-  const [selectedDate, setSelectedDate] = useState<string>();
+
+  const [selectedDate, setSelectedDate] = useState<string>(new Date().toString());
+  const [selectedSchedule, setSelectedSchedule] = useState<OriginalCode>();
+  const [isBooking, setIsBooking] = useState(false);
+
   const { data } = GetUserDoctor(doctorId ? doctorId : '');
   const userDetails = data?.users;
 
-  const doctorInforQuery = GetDoctorInfor(doctorId ? parseInt(doctorId) : 0);
-  const doctorInfor = doctorInforQuery.data?.data;
-
-  const bookedScheduleQuery = GetAllBookedScheduleQuery({
-    date: selectedDate ? selectedDate : `${formattedDate(new Date())}`,
-    doctorId: parseInt(doctorId as string),
-  });
-  const availableSchedules = timeArray.filter((item) =>
-    bookedScheduleQuery.data?.allBookedSchedules.every(
-      (schedule) => item.keyMap !== schedule.timeType,
-    ),
-  );
-  const htmlMarkdown = doctorInfor?.contentHTML;
-  console.log(doctorInfor);
+  const availableSchedules = FilterAvailableSchedules(parseInt(doctorId as string), selectedDate);
+  useEffect(() => {
+    if (selectedSchedule) {
+      setIsBooking(true);
+    }
+  }, [selectedSchedule]);
   return (
     <div className="doctor-detail-page">
+      {isBooking && selectedDate && doctorId && selectedSchedule && (
+        <BookingDoctorPage
+          date={selectedDate}
+          doctorId={doctorId}
+          selectedSchedule={selectedSchedule}
+          setIsBooking={setIsBooking}
+        />
+      )}
       <div className="doctor-user">
         <div className="img" style={{ backgroundImage: `url(${userDetails?.image})` }}></div>
         <div className="user-details">
@@ -66,15 +79,10 @@ const DoctorDetailPage = () => {
           <p className="schedule-title">
             <FormattedMessage id="patient.detail-doctor.available-schedules" />
           </p>
-          <div className="schedules">
-            {availableSchedules.map((schedule, index) => {
-              return (
-                <div key={index} className="schedule">
-                  {language === 'vi' ? schedule.valueVi : schedule.valueEn}
-                </div>
-              );
-            })}
-          </div>
+          <SchedulePickerComponent
+            availableSchedules={availableSchedules}
+            setSelectedSchedule={setSelectedSchedule}
+          />
         </div>
         <div className="right">
           <div className="right-item">
@@ -107,7 +115,7 @@ const DoctorDetailPage = () => {
         </div>
       </div>
       <div className="markdown">
-        <div dangerouslySetInnerHTML={{ __html: htmlMarkdown as string }}></div>
+        <div dangerouslySetInnerHTML={{ __html: doctorInfor?.contentHTML as string }}></div>
       </div>
     </div>
   );

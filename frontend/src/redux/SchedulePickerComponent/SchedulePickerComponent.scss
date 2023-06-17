@@ -1,0 +1,21 @@
+.SchedulePickerComponent {
+  display: flex;
+  min-width: 400px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3%;
+  .schedule {
+    width: 180px;
+    padding: 5px 0;
+    margin: 5px 0;
+    border: 1px solid var(--black01);
+    border-radius: 50px;
+    text-align: center;
+    &:hover {
+      background-color: var(--primary05);
+      cursor: pointer;
+      border: 1px solid white;
+      transform: scale(1.1);
+    }
+  }
+}

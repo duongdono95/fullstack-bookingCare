@@ -197,3 +197,13 @@ export type GetClinics = {
   errMessage: string;
   data?: ClinicDetails[];
 };
+
+export type InitialBookingForm = {
+  doctorId: number;
+  date: string;
+  timeType: string;
+  patientFullName: string;
+  patientEmail: string;
+  patientPhoneNumber: string;
+  note?: string;
+};

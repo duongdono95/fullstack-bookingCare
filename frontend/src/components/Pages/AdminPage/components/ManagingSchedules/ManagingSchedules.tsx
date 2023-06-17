@@ -16,7 +16,7 @@ const ManagingSchedules = () => {
   const language = useSelectorLanguage();
   const timeArray = FilterCodeArray('time');
 
-  const [selectedDate, setSelectedDate] = useState<string>();
+  const [selectedDate, setSelectedDate] = useState<string>(new Date().toString());
   const [selectedTimeArray, setSelectedTimeArray] = useState<string[]>([]);
   const [selectedDoctor, setSelectedDoctor] = useState<number>(doctors[0].id as number);
 

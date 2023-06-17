@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { formattedDate } from '../../utils/formattedDate';
 import './DatePickerComponent.scss';
 interface Props {
-  setSelectedDate: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<string>>;
 }
 const DatePickerComponent: React.FC<Props> = ({ setSelectedDate }) => {
   const isWeekday = (date: Date) => {
