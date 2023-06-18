@@ -5,7 +5,7 @@ import { RootState } from '../../../redux/store';
 import { FormattedMessage } from 'react-intl';
 import LanguageOptions from './LanguageOptions';
 import { logOut } from '../../../redux/appSlice';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
@@ -14,7 +14,9 @@ const Header = () => {
     <div id="header">
       <LanguageOptions />
       <div className="header-navigator">
-        <div className="logo"></div>
+        <NavLink to="/">
+          <div className="logo"></div>
+        </NavLink>
         <div className="tags">
           <div className="tag">
             <div className="title">
@@ -38,14 +40,6 @@ const Header = () => {
             </div>
             <div className="des">
               <FormattedMessage id="homeheader.select-doctor" />
-            </div>
-          </div>
-          <div className="tag">
-            <div className="title">
-              <FormattedMessage id="homeheader.package" />
-            </div>
-            <div className="des">
-              <FormattedMessage id="homeheader.select-package" />
             </div>
           </div>
         </div>

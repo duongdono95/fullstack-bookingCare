@@ -17,7 +17,6 @@ const ManagingClinics = () => {
   const language = useSelectorLanguage();
   const doctors = useSelectorDoctor();
   const specialties = FilterCodeArray('CLINIC');
-  const [selectedClinic, setSelectedClinic] = useState<number[]>([]);
   const [clinicForm, setClinicForm] = useState<ClinicDetails>(initialInputClinic);
   const [selectedDoctors, setSelectedDoctors] = useState<number[]>([]);
   const handleEditorChange = (content: { text: string; html: string }) => {

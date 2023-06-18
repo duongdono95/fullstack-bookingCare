@@ -1,9 +1,12 @@
+import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { toast } from 'react-toastify';
 import DatePickerComponent from '../../redux/DatePickerComponent/DatePickerComponent';
 import { FilterAvailableSchedules, useSelectorLanguage } from '../../redux/handyHelper';
 import SchedulePickerComponent from '../../redux/SchedulePickerComponent/SchedulePickerComponent';
 import { GetDoctorInfor, GetUserDoctor } from '../../services/apiQuery';
+import { postBooking } from '../../services/userServices';
 import { InitialBookingForm, OriginalCode } from '../../utils/types';
 import './BookingDoctorPage.scss';
 
@@ -26,6 +29,7 @@ const BookingDoctorPage: React.FC<Props> = ({ doctorId, date, selectedSchedule, 
   const [isSelectOtherDate, setIsSelectOtherDate] = useState(false);
   const [isSelectOtherSchedule, setIsSelectOtherSchedule] = useState(false);
   const availableSchedules = FilterAvailableSchedules(parseInt(doctorId as string), selectedDate);
+
   const initialBookingForm = {
     doctorId: parseInt(doctorId),
     date: selectedDate,
@@ -36,8 +40,25 @@ const BookingDoctorPage: React.FC<Props> = ({ doctorId, date, selectedSchedule, 
     note: '',
   };
   const [bookingForm, setBookingForm] = useState<InitialBookingForm>(initialBookingForm);
-  console.log(bookingForm);
-  const handleSubmition = () => {};
+
+  const postBookingMutation = useMutation({
+    mutationFn: async (bookingForm: InitialBookingForm) => {
+      const response = await postBooking(bookingForm);
+      console.log(response);
+      if (response.errCode !== 0) {
+        toast.error(response.errMessage);
+      }
+      if (response.errCode === 0) {
+        console.log(response.errCode === 0);
+        toast.success(response.errMessage);
+        setBookingForm(initialBookingForm);
+      }
+    },
+  });
+  const handleSubmition = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    postBookingMutation.mutate(bookingForm);
+  };
   return (
     <div className="BookingDoctorPage">
       <div className="appointment">
@@ -128,7 +149,7 @@ const BookingDoctorPage: React.FC<Props> = ({ doctorId, date, selectedSchedule, 
             )}
           </div>
         </div>
-        <form className="patient-details" onSubmit={() => handleSubmition()}>
+        <form className="patient-details" onSubmit={(e) => handleSubmition(e)}>
           <p className="section-title">Patient Details:</p>
           <div className="form-item">
             <label htmlFor="">Full name:</label>
@@ -177,7 +198,9 @@ const BookingDoctorPage: React.FC<Props> = ({ doctorId, date, selectedSchedule, 
               }
             />
           </div>
-          <button type="submit">Book an Appointment</button>
+          <button className="submit-btn" type="submit">
+            Book an Appointment
+          </button>
         </form>
       </div>
     </div>

@@ -3,11 +3,9 @@ import './OutStandingDoctor.scss';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { User } from '../../../utils/types';
 import { useSelectorTranslationAllCode, useSelectorLanguage } from '../../../redux/handyHelper';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { GetDoctorQuery } from '../../../services/apiQuery';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 
@@ -21,13 +19,39 @@ const OutstandingDoctors = () => {
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   const currentLanguague = useSelectorLanguage();
   const allCodes = useSelectorTranslationAllCode();
 
   const doctors = useSelector((state: RootState) => state.allDoctors);
   return (
-    <div className="home-section">
+    <div id="featuredDoctor" className="home-section">
       <div className="outstanding-doctors">
         <div className="section-title">
           <FormattedMessage id="homepage.outstanding-doctor" />

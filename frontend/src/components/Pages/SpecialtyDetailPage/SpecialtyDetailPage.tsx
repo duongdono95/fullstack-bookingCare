@@ -54,7 +54,9 @@ const SpecialtyDetailPage = () => {
           return (
             <NavLink to={`/doctor/${doctor.id}`}>
               <div key={index} className="doctor">
-                <div style={{ backgroundImage: `url(${doctor.image})` }} className="image"></div>
+                <div className="img-container">
+                  <div style={{ backgroundImage: `url(${doctor.image})` }} className="image"></div>
+                </div>
                 <div className="doctor-details">
                   <div className="name">
                     <p className="role">

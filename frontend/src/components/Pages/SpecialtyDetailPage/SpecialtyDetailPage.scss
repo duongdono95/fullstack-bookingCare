@@ -1,11 +1,13 @@
 .specialty-details {
+  max-width: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding-bottom: 20px;
   .specialty-img {
-    width: var(--default-layout-width);
+    max-width: var(--default-layout-width);
+    width: 100%;
     height: 500px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -37,78 +39,8 @@
     }
   }
   .description {
-    width: var(--default-layout-width);
+    max-width: var(--default-layout-width);
     padding: 20px 0;
   }
-  .doctors {
-    display: flex;
-    flex-direction: column;
-    width: var(--default-layout-width);
-    gap: 10px;
-  }
-  .doctor {
-    width: 100%;
-    background-color: var(--black005);
-    padding: 10px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    border: 2px solid rgba(0, 0, 0, 0);
-    cursor: pointer;
-    &:hover {
-      border: 2px solid var(--primary);
-      box-shadow: 0 0 20px var(--black02);
-    }
-    .image {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      border: 4px solid var(--primary);
-    }
-    .doctor-details {
-      display: flex;
-      flex-direction: column;
-      width: calc(100% - 150px - 50%);
-      .name {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 20px;
-        .role {
-          font-size: 14px;
-          font-weight: 700;
-          opacity: 0.7;
-        }
-      }
-      .position {
-        font-size: 16px;
-        font-weight: 700;
-        opacity: 0.7;
-        text-transform: uppercase;
-      }
-      .description {
-        width: 100%;
-        font-size: 14px;
-      }
-    }
-    .booking-details {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      .detail-item {
-        display: flex;
-        align-items: flex-start;
-        .label {
-          width: 80px;
-          font-weight: 600;
-          opacity: 0.7;
-        }
-        .value {
-          width: calc(100% - 80px);
-        }
-      }
-    }
-  }
+
 }

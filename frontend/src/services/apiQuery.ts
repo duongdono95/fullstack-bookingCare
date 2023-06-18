@@ -59,7 +59,7 @@ export const GetSpecialties = (specialtyId: number | string) => {
 export const GetClinics = (id: string) => {
   const getClinicQuery = useQuery({
     queryKey: ['doctor', 'clinic'],
-    queryFn: () => getClinics(id)
-  })
-  return getClinicQuery
-}
+    queryFn: () => getClinics(id),
+  });
+  return getClinicQuery;
+};

@@ -1,5 +1,6 @@
 .outstanding-clinics {
-  width: var(--default-layout-width);
+  max-width: var(--default-layout-width);
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;

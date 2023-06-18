@@ -15,6 +15,7 @@ import {
   GetSpecialties,
   ClinicDetails,
   GetClinics,
+  InitialBookingForm,
 } from '../utils/types';
 import { http } from '../utils/http';
 import { responseFetchedUser, responseFetchAllCode } from './../utils/types';
@@ -102,5 +103,10 @@ export const postClinicDetails = async (clinicDetailsInput: ClinicDetails) => {
 
 export const getClinics = async (id: string) => {
   const response = http.get<GetClinics>(`/clinic/getClinics?id=${id}`);
+  return (await response).data;
+};
+
+export const postBooking = async (bookingDetails: InitialBookingForm) => {
+  const response = http.post<PostSpecialtyDetail>(`/booking/postNewBooking`, bookingDetails);
   return (await response).data;
 };
